@@ -1,0 +1,196 @@
+/*=====r css====*/
+.bg-rangle:after{
+	content:url('images/image.png');
+	display:inline-block;
+	position: absolute;
+}
+.small-heading{
+    margin-bottom: 0;
+    letter-spacing: 1px;
+    padding-top: 20px;
+}
+.bottom-heading {
+    font-size: 35px;
+}
+.pink-color{color:#ae0151;}
+.sale-div{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 70px;
+    background: #5b2813;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 2.9;
+    font-size: 25px;
+    color: #fff;
+    left: 0;
+}
+.green-t{color:#779c19;}
+.btn-pink, .btn-pink:active{background:#ae0151;
+    border: 0px;
+    color:#fff;
+    display: inline-block;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 0.5rem 2.5rem;
+    border-radius: 0.313rem;
+    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    -o-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+.cart-subtotal {
+    float: right;
+}
+ul {
+    list-style: none;
+    margin-bottom: 0;
+}
+.sub-total{line-height:2.7;}
+.minus{
+    float: left;
+    margin-right: 10px;
+    border: none;
+    font-size: 30px;
+}
+.plus{
+    float: left;
+    margin-left: 0;
+    border: none;
+    font-size: 25px;
+    line-height: 2;
+}
+.checkout-btn {
+    border: 1px solid #ae0151;
+    padding: 15px 20px!important;
+    border-radius: 10px;
+    margin-top: 15px;
+    color: #fff!important;
+    background: #ae0151;
+    display: inline-block;
+    width: 100%;
+    line-height: initial;
+}
+.item-qty {
+    width: 150px;
+    padding-left: 8px;
+}
+.item-info {
+    padding-left: 20px;
+}
+.input-fild{
+    padding: 10px 10px!important;
+    width: 35%;
+    float: left;
+}
+/*==== r css  end====*/
+
+body {
+    background-color: #eee
+}
+
+.t-products {
+    border-radius: 3px
+}
+
+.processor {
+    background-color: #fff;
+    margin-top: 5px;
+    border-bottom: 1px solid #eee
+}
+
+.brand {
+    background-color: #fff;
+    border-bottom: 1px solid #eee
+}
+
+.type {
+    background-color: #fff
+}
+
+.product {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    position: relative
+}
+
+.about span {
+    color: #ae0151;
+    font-size: 16px
+}
+
+.cart-button button, .cart-button a {
+    font-size: 12px;
+    color: #fff;
+    background-color: #ae0151;
+    height: 38px
+}
+
+.cart-button button:focus,
+button:active {
+    color: #fff;
+    background-color: #ae0151;
+    box-shadow: none
+}
+
+.product_fav i {
+    line-height: 40px;
+    color: #ae0151;
+    font-size: 15px
+}
+
+.product_fav {
+    display: inline-block;
+    width: 36px;
+    height: 39px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 11%;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 3px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease
+}
+
+.product_fav:hover {
+    background: #ae0151;
+}
+
+.product_fav:hover i {
+    color: #fff
+}
+
+.about {
+    margin-top: 12px
+}
+
+.off {
+    position: absolute;
+    left: 65%;
+    top: 6%;
+    width: 80px;
+    text-align: center;
+    height: 30px;
+    line-height: 8px;
+    border-radius: 5px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff
+}
+.bg-sale{background:#1d229f !important;}
