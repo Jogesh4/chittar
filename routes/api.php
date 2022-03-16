@@ -3,8 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,9 @@ use App\Http\Controllers\Api\ItemController;
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('items-by-category', [ItemController::class, 'itemsByCategory']);
 Route::get('item-by-id', [ItemController::class, 'itemByID']);
+
+
+Route::post('place-order', [OrderController::class, 'place']);
+Route::get('user-orders', [OrderController::class, 'userOrders']);
+Route::post('login', [AuthController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
