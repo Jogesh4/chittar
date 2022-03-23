@@ -39,7 +39,7 @@
           <div class="d-flex pt-4 p-3 ms-1 me-1 mt-5" style="background:#bfd066;">
             <div class="col-3"><img src="{{ asset('images/2.png') }}"></div>
             <div class="col-9">
-              <h5 class="text-light">WORLD WIDE SHIPPING</h5>
+              <h5 class="text-light">24 HOUR SERVICE</h5>
               <p class="text-light">We provide world wide shipping to almost all the main countries of the world.</p>
             </div>
           </div>
@@ -48,8 +48,8 @@
           <div class="d-flex pt-4 ms-1 me-1 mt-5  p-3" style="background:#f38fb5;">
             <div class="col-3"><img src="{{ asset('images/3.png') }}"></div>
             <div class="col-9">
-              <h5 class="text-light">WORLD WIDE SHIPPING</h5>
-              <p class="text-light">We provide world wide shipping to almost all the main countries of the world.</p>
+              <h5 class="text-light">EXCHANGES</h5>
+              <p class="text-light">Size not quite right? Tell us to exchange for a new size.</p>
             </div>
           </div>
         </div>
@@ -95,35 +95,46 @@
   <section class="pt-2 pb-7">
     <div class="container">
       <div class="row">
-        <div class="col-lg-7 mx-auto text-center mb-5" data-aos="fade-up">
-          <h5 class="fw-bold fs-3 fs-lg-5 lh-sm">Items</h5>
+        <div class="col-lg-12 mx-auto text-center mb-5" data-aos="fade-up">
+          <h5 class="fw-bold fs-3 fs-lg-5 lh-sm"> WOMEN CATEGORIES<span class="line-tt"></span> </h5>
         </div>
-        <div class="col-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="row align-items-center g-2">
             @if($items->count() > 0)
               @foreach($items as $item)
-              <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
+              <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
                 <div class="card card-span h-100">
-                  <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." />
+                  <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" max-height: 250px !important; "/>
                   <div class="card-img-overlay ps-0"> </div>
-                  <div class="card-body ps-0 bg-200 text-center">
-                    <p class="mb-0">{{ $item->name }}</p>
-                    <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">${{ $item->price }}</span><span class="pink-color">${{ $item->price }}</span></div>
+                  <div class="card-body ps-0  text-center">
+                    <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item->name }}</p>
+                    <div class="fw-bold"><span class="pink-color">INR {{ $item->price }}</span></div>
                   </div>
+                  <div class="d-flex"> 
+                  <div class="col-8 p-2 info-pt"><i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days</div>
+                  
+                  <div class="col-2 p-2 info-pt">
+                    <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1">
+                  </div>
+                  <div class="col-2 p-2">
                   <a class="stretched-link" href="{{ route('item.show', $item) }}"></a>
-                </div>
+                
                 @if(auth()->check())
                   @if(!\Cart::session(auth()->user()->id)->get($item->id))
                   <form method="POST" action="{{ route('add.to.cart', $item) }}">
                     @csrf
-                    <button class="btn btn-primary btn-block">Add to Cart</button>
+                    <button class="bttn" style=" border: 0; background: transparent; "><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
                   </form>
                   @else
-                    <button type="button" disabled class="btn btn-primary btn-block">Added to Cart</button>
+                    <button type="button" disabled class="bttn" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
                   @endif
                 @else
-                  <a href="{{ route('login') }}" class="btn btn-primary btn-block">Login</a>
+                  <a href="{{ route('login') }}" class="bttn"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></a>
                 @endif
+</div>
+
+</div>
+                </div>
               </div>
               @endforeach
             @endif
@@ -139,7 +150,7 @@
         <div class="col-md-6 position-relative" data-aos="fade-up">
           <div class="row  m-3">
             <div class="col-md-6 p-0">
-              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('images/7.jpg') }}" alt="..."><a class="stretched-link" href="#!"></a></div>
+              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('images/7.jpg') }}" alt="..."><a class="stretched-link" href="/category/women"></a></div>
               <div class="sale-div">Sale</div>
             </div>
             <div class="col-md-6 p-0">
@@ -157,13 +168,13 @@
         <div class="col-md-6 position-relative" data-aos="fade-up">
           <div class="row  m-3">
             <div class="col-md-6 p-0">
-              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('images/8.jpg') }}" alt="..."><a class="stretched-link" href="#!"></a></div>
+              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('images/8.jpg') }}" alt="..."><a class="stretched-link" href="/category/women"></a></div>
               <div class="sale-div">Sale</div>
             </div>
             <div class="col-md-6 p-0">
               <div class="bg-300 p-4 h-100 d-flex flex-column text-center justify-content-center">
                 <p class="mb-0">Mules</p>
-                <h4 class="fw-semi-bold ">Diamond Pearl </h4>
+                <h4 class="fw-semi-bold" >Diamond Pearl </h4>
                 <div class="fw-bold">
                   <h4 class="text-600 me-2 text-decoration-line-through">$200</h4>
                   <h4 class="pink-color">$175</h4>
@@ -180,7 +191,7 @@
     <div class="container">
       <div class="row h-100">
         <div class="col-lg-7 mx-auto text-center mb-6" data-aos="fade-up">
-          <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">Shop By Category</h5>
+          <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">Shop By Category <span class="line-tt"></span></h5>
         </div>
         <div class="col-12" data-aos="fade-up">
           <nav>
@@ -205,11 +216,49 @@
                             @foreach($categoryItems as $item)
                             <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
                               <div class="card card-span h-100 text-white">
-                                <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." />
-                                <div class="card-img-overlay ps-0"> </div>
-                                <div class="card-body ps-0 bg-200 text-center">
-                                  <h5 class="fw-bold text-1000 text-truncate">{{ $item->name }}</h5>
-                                  <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">${{ $item->price }}</span><span class="text-primary">${{ $item->price }}</span></div>
+                                <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" max-height: 300px !important; "/>
+                                <div class="card-img-overlay "> </div>
+                                <div class="card-body  bg-200  bttn">
+                                  <div class="d-flex">
+                                  <div class="col-9">
+                                    <h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">{{ $item->name }}</h5>
+                                  
+                                  </div>
+                                  <div class="col-3">
+                                    <div class="fw-bold">
+                                    <span class="pink-color">${{ $item->price }}</span>
+                                  </div>
+                                </div>
+                                </div>
+
+                                <div class="d-flex">
+                                
+                                <div class="col-8">
+                                <div class="ssw-stars ssw-stars-large">  
+                                <i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i>
+                                <span class="ssw-review-count">75 Reviews</span>
+                              </div>
+                                </div>
+                                <div class="col-4">
+                               <p class="ssw-review-count "><a href="#" class="text-dark"><i class="fas fa-ruler-horizontal"></i>  Size Guide</a></p>
+                                </div>
+                              </div>
+                              <div class="d-flex">
+                              <div class="col-2 text-left">
+                              <p class="ssw-review-count">Color</p></div>
+                              <div class="col-10 text-left">
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
+                            </div>
+                              </div>
+                              
+
+
+
+
                                 </div>
                                 <a class="stretched-link" href="{{ route('item.show', $item) }}"></a>
                               </div>
@@ -239,7 +288,7 @@
             <div class="card-img-overlay bg-dark-gradient">
               <div class="p-5 p-md-2 p-xl-5 d-flex flex-column flex-center align-items-baseline h-100">
                 <h1 class="fs-md-4 fs-lg-7 text-light">CHITTARR JUTTIES </h1>
-                <h5 class="fs-2 text-light">SHOP NOW</h5>
+                <h5 class="fs-2 text-light " style=" border: 2px dashed #ffffff; padding: 12px; ">SHOP NOW</h5>
               </div>
             </div>
             <a class="stretched-link" href="#!"></a>
@@ -251,7 +300,7 @@
             <div class="card-img-overlay bg-dark-gradient">
               <div class="p-5 p-md-2 p-xl-5 d-flex flex-column flex-center align-items-baseline h-100">
                 <h1 class="fs-md-4 fs-lg-7 text-light">CHITTARR JUTTIES </h1>
-                <h5 class="fs-2 text-light">SHOP NOW</h5>
+                <h5 class="fs-2 text-light" style=" border: 2px dashed #ffffff; padding: 12px; ">SHOP NOW</h5>
               </div>
             </div>
             <a class="stretched-link" href="#!"></a>

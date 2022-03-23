@@ -4,6 +4,7 @@
 	display:inline-block;
 	position: absolute;
 }
+
 .small-heading{
     margin-bottom: 0;
     letter-spacing: 1px;
@@ -12,7 +13,46 @@
 .bottom-heading {
     font-size: 35px;
 }
-.pink-color{color:#ae0151;}
+.bttn{
+    position: relative;
+    z-index: 99;
+}
+.home-bc{
+    color: #c15995;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+}
+.fassa{
+    color: #b00755;
+    font-size: 13px;
+}
+.color-vari{
+    border-radius: 50px;
+    border: 2px solid #37b456;
+}
+.ssw-review-count{
+    color: #212121;
+    font-size: 14px;
+}
+.info-pt{
+    font-size: 10px;
+    position: relative;
+    z-index: 99;
+}
+.majestic-tabs .nav-link.active, .majestic-tabs .nav-item.show .nav-link {
+    border-bottom-color: #c12978;
+}
+.line-tt {
+    content: "";
+    height: 5px;
+    background: linear-gradient(130deg,#44d099 11%,#d71477 41.07%,#751b9a 76.05%, #1b23a5);
+    display: inline-block;
+    width: 82px;
+    margin-left: 7px;
+}
+
+.pink-color{color:#ae0151; }
 .sale-div{
     width: 70px;
     height: 70px;

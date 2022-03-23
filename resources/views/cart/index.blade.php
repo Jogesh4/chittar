@@ -3,7 +3,7 @@
 $userID = auth()->user() ? auth()->user()->id : 1;
 @endphp
 @section('content')
-<section class="py-0">
+<section class="">
   <div class="container mt-5 mb-5">
     <div class="row">
       <div class="col-md-8">
