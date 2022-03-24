@@ -22,17 +22,25 @@ class OrderController extends Controller
       $cartCollection = \Cart::session($userID)->getContent();
       foreach($cartCollection as $row){
           $orderItem = new OrderItem;
+          $orderItem->name = $row->name;
+          $orderItem->image = $row->image;
+          $orderItem->size = $row->weight;
           $orderItem->price = $row->price;
           $orderItem->qty = $row->quantity;
           $orderItem->item_id = $row->id;
           $orderItem->order_id = $order->id;
           $orderItem->save();
       }
+      $order->items = $cartCollection->count();
+      $order->save();
     }
+
+    $order->order_no = 'ORD0000' . $order->id;
+    $order->save();
 
     \Cart::session($userID)->clear();
 
-    return redirect()->route('home');
+    return redirect()->route('user_dashboard');
   }
 
   public function cancel(Request $request, Order $order)

@@ -32,3 +32,4 @@ require __DIR__.'/search.php';
 require __DIR__.'/order.php';
 require __DIR__.'/item.php';
 require __DIR__.'/category.php';
+require __DIR__.'/user.php';
