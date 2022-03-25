@@ -33,9 +33,11 @@
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
           @php
+              use App\Models\CartItem;
+
             if(auth()->check()){
-            $cartCollection = \Cart::session(auth()->user()->id)->getContent();
-            echo $cartCollection->count() ?? 0;
+              $cartItems = CartItem::where(['user_id' => auth()->user()->id,'status' => 1])->get();
+            echo $cartItems->count() ?? 0;
             }
           @endphp
           </div>
