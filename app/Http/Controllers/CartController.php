@@ -32,27 +32,22 @@ class CartController extends Controller
     public function add_to_cart(Request $request, Item $item)
     {
         $userID = auth()->user()->id;
-        
-        $cartItem = new CartItem;
-        $cartItem->qty = 1;
-        $cartItem->name = $item->name;
-        $cartItem->image = $item->image;
-        $cartItem->price = $item->price;
-        $cartItem->total = $item->price;
-        $cartItem->item_id = $item->id;
-        $cartItem->user_id = $userID;
-        $cartItem->status = 1;
-        $cartItem->save();
 
-        // \Cart::session($userID)->add(array(
-        //     'id' => $cartItem->id,
-        //     'name' => $item->name,
-        //     'image' => $item->image,
-        //     'price' => $item->price,
-        //     'quantity' => 1,
-        //     'attributes' => array(),
-        //     'associatedModel' => $item
-        // ));
+        $cart = CartItem::where(['item_id'=>$item->id,'user_id'=>auth()->user()->id])->first();
+
+        if(!$cart){
+            $cartItem = new CartItem;
+            $cartItem->qty = 1;
+            $cartItem->name = $item->name;
+            $cartItem->image = $item->image;
+            $cartItem->price = $item->price;
+            $cartItem->total = $item->price;
+            $cartItem->item_id = $item->id;
+            $cartItem->user_id = $userID;
+            $cartItem->status = 1;
+            $cartItem->save();
+        }
+        
 
         return redirect()->back();
     }

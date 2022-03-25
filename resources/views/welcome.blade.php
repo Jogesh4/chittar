@@ -212,7 +212,8 @@
               @php $currentCategory; @endphp
               @foreach($categories as $category)
               @php if($category->id == $currentCategoryId) $currentCategory = $category; @endphp
-              <a href="?category_id={{ $category->id }}&category={{ $category->name }}" class="nav-link @if($category->id == $currentCategoryId) active @endif" id="nav-{{ \Str::slug($category->name, '-') }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ \Str::slug($category->name, '-') }}" type="button" role="tab" aria-controls="nav-{{ \Str::slug($category->name, '-') }}" aria-selected="true">{{ $category->name }}</a>
+              {{-- <a href="?category_id={{ $category->id }}&category={{ $category->name }}" class="nav-link @if($category->id == $currentCategoryId) active @endif" id="nav-{{ \Str::slug($category->name, '-') }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ \Str::slug($category->name, '-') }}" type="button" role="tab" aria-controls="nav-{{ \Str::slug($category->name, '-') }}" aria-selected="true">{{ $category->name }}</a> --}}
+              <a href="#!" class="nav-link" id="nav-{{ $category->id }}" onclick="select_category({{ $category->id }})" data-bs-toggle="tab" data-bs-target="#nav-{{ \Str::slug($category->name, '-') }}" type="button" role="tab" aria-controls="nav-{{ \Str::slug($category->name, '-') }}" aria-selected="true">{{ $category->name }}</a>
               @endforeach
               
               {{-- <button class="nav-link" id="nav-men-tab" data-bs-toggle="tab" data-bs-target="#nav-men" type="button" role="tab" aria-controls="nav-men" aria-selected="false">For Men</button> --}}
@@ -223,7 +224,7 @@
                     <div class="carousel slide" id="carouselCategoryWShoes" data-bs-touch="false" data-bs-interval="false">
                       <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="10000">
-                          <div class="row h-100 align-items-center g-2">
+                          <div class="row h-100 align-items-center g-2" id="category_div">
                             
                             @foreach($categoryItems as $item)
                             <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -232,13 +233,13 @@
                                 <div class="card-img-overlay "> </div>
                                 <div class="card-body  bg-200  bttn">
                                   <div class="d-flex">
-                                  <div class="col-9">
+                                  <div class="col-8">
                                     <h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">{{ $item->name }}</h5>
                                   
                                   </div>
-                                  <div class="col-3">
+                                  <div class="col-4">
                                     <div class="fw-bold">
-                                    <span class="pink-color">${{ $item->price }}</span>
+                                    <span class="pink-color">Rs.{{ $item->price }}</span>
                                   </div>
                                 </div>
                                 </div>
@@ -348,6 +349,10 @@
 
 <script>
 
+$( document ).ready(function() {
+      document.getElementById('nav-1').classList.add('active');
+});
+
 function add_favorite(id){
        
             $.ajax({
@@ -362,6 +367,34 @@ function add_favorite(id){
                          
                            document.getElementById('favorite_icon-'+id).classList.add('d-none');
                            document.getElementById('favorite_icon1-'+id).classList.remove('d-none');
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
+
+    function select_category(id){
+       
+            $.ajax({
+                    type: "Get",
+                    url: '{{route('welcome')}}',
+                    datatype: 'json',
+                    data: {
+                        'category_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                        $('.nav-link').removeClass('active');
+
+                         $.each(obj.new.items, function(key,value) {
+                                var $item = $('#category_div');
+                                $item.append().html('<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100"><div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="http://127.0.0.1:8000/storage/' + value.image +'" alt="..." style=" max-height: 300px !important; "/><div class="card-img-overlay "></div><div class="card-body  bg-200  bttn"><div class="d-flex"><div class="col-8"><h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">' + value.name + '</h5></div><div class="col-4"><div class="fw-bold"><span class="pink-color">Rs.' + value.price +'</span></div></div></div><div class="d-flex"><div class="col-8"><div class="ssw-stars ssw-stars-large"><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><span class="ssw-review-count">75 Reviews</span></div></div><div class="col-4"><p class="ssw-review-count "><a href="#" class="text-dark"><i class="fas fa-ruler-horizontal"></i>  Size Guide</a></p></div></div><div class="d-flex"><div class="col-2 text-left"><p class="ssw-review-count">Color</p></div><div class="col-10 text-left"><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a></div></div></div><a class="stretched-link" href="http://127.0.0.1:8000/item/'+ value.slug +'"></a></div></div>');
+                            });
+                           document.getElementById('nav-'+id).classList.add('active');
 
                       },
                     complete: function () {
