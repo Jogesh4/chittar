@@ -64,7 +64,7 @@
             <div class="t-products p-2">
                 <h6 class="text-uppercase">Jutti</h6>
                 <div class="p-lists">
-                    <div class="d-flex justify-content-between mt-2"> <span>Punjabi Jutti</span> <span>23</span> </div>
+                    <div class="d-flex justify-content-between mt-2"> <span>Punjabis Jutti</span> <span>23</span> </div>
                     <div class="d-flex justify-content-between mt-2"> <span>Flory</span> <span>46</span> </div>
                     <div class="d-flex justify-content-between mt-2"> <span>Pearl</span> <span>13</span> </div>
                 </div>
