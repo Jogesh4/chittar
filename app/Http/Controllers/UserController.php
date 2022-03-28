@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Favorite;
 
 
 class UserController extends Controller
@@ -77,4 +78,12 @@ class UserController extends Controller
     {
         return view('user.cart');
     }
+
+     public function favorite(Request $request){
+         
+        $favorites = Favorite::where('user_id',auth()->user()->id)->get();
+         
+        return view('user.favorite',compact('favorites'));
+     }
+
 }

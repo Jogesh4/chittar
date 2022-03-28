@@ -20,11 +20,12 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('style.css') }}" rel="stylesheet" />
 
 </head>
 
 <body id="page-top">
-
+    
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -64,6 +65,11 @@
                 <a class="nav-link" href="/user_dashboard">
                     <i class="fas fa-fw fa-heart"></i>
                     <span>Last Order</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/favorite_item">
+                    <i class="fas fa-fw fa-heart"></i>
+                    <span>Favorites</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/user_cart">
@@ -142,11 +148,22 @@
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-shopping-cart fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                            <a class="text-1000" style="color: #000;" href="{{ route('cart.index') }}">
+                                        <div class="mt-3">
+                                        <svg class="feather feather-shopping-cart" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="9" cy="21" r="1"></circle>
+                                            <circle cx="20" cy="21" r="1"></circle>
+                                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                        </svg>
+                                        @php
+                                            use App\Models\CartItem;
+
+                                            if(auth()->check()){
+                                            $cartItems = CartItem::where(['user_id' => auth()->user()->id,'status' => 1])->get();
+                                            echo $cartItems->count() ?? 0;
+                                            }
+                                        @endphp
+                                        </div>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -258,12 +275,12 @@
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
-
+                           
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Super Admin</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
                                 <img class="img-profile rounded-circle" src="{{ asset('images/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->

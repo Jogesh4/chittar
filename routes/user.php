@@ -9,3 +9,4 @@ Route::get('/user_order_detail/{id}', [UserController::class, 'order_detail'])->
 Route::get('/user_last_order', [UserController::class, 'last_order'])->name('user_last_order');
 Route::get('/user_cart', [UserController::class, 'cart'])->name('user_cart');
 Route::get('/user_profile', [UserController::class, 'profile'])->name('user_profile');
+Route::get('/favorite_item', [UserController::class, 'favorite'])->name('favorite_item');

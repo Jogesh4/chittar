@@ -104,20 +104,32 @@
               @foreach($items as $item)
               <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
                 <div class="card card-span h-100">
-                  <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" max-height: 250px !important; "/>
-                  <div class="card-img-overlay ps-0"> </div>
+                 
+                 <div style="max-height: 250px; overflow: hidden;width: 100%;position:relative;">
+                   <a class="" href="{{ route('item.show', $item) }}">
+                      <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></a>
+                    <div class="fw-bold favorite-icon">
+                      <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
+                      <span class="favorite-active d-none" id="favorite_icon1-{{ $item->id }}"><i class="fa fa-thin fa-heart"></i></span>
+
+                    </div>
+                  
+                </div> 
+                <a class="" href="{{ route('item.show', $item) }}">
                   <div class="card-body ps-0  text-center">
                     <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item->name }}</p>
                     <div class="fw-bold"><span class="pink-color">INR {{ $item->price }}</span></div>
                   </div>
+                  </a>
+
                   <div class="d-flex"> 
+                   
                   <div class="col-8 p-2 info-pt"><i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days</div>
                   
                   <div class="col-2 p-2 info-pt">
                     <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1">
                   </div>
                   <div class="col-2 p-2">
-                  <a class="stretched-link" href="{{ route('item.show', $item) }}"></a>
                 
                 @if(auth()->check())
                   @if(!\Cart::session(auth()->user()->id)->get($item->id))
@@ -200,7 +212,8 @@
               @php $currentCategory; @endphp
               @foreach($categories as $category)
               @php if($category->id == $currentCategoryId) $currentCategory = $category; @endphp
-              <a href="?category_id={{ $category->id }}&category={{ $category->name }}" class="nav-link @if($category->id == $currentCategoryId) active @endif" id="nav-{{ \Str::slug($category->name, '-') }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ \Str::slug($category->name, '-') }}" type="button" role="tab" aria-controls="nav-{{ \Str::slug($category->name, '-') }}" aria-selected="true">{{ $category->name }}</a>
+              {{-- <a href="?category_id={{ $category->id }}&category={{ $category->name }}" class="nav-link @if($category->id == $currentCategoryId) active @endif" id="nav-{{ \Str::slug($category->name, '-') }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ \Str::slug($category->name, '-') }}" type="button" role="tab" aria-controls="nav-{{ \Str::slug($category->name, '-') }}" aria-selected="true">{{ $category->name }}</a> --}}
+              <a href="#!" class="nav-link" id="nav-{{ $category->id }}" onclick="select_category({{ $category->id }})" data-bs-toggle="tab" data-bs-target="#nav-{{ \Str::slug($category->name, '-') }}" type="button" role="tab" aria-controls="nav-{{ \Str::slug($category->name, '-') }}" aria-selected="true">{{ $category->name }}</a>
               @endforeach
               
               {{-- <button class="nav-link" id="nav-men-tab" data-bs-toggle="tab" data-bs-target="#nav-men" type="button" role="tab" aria-controls="nav-men" aria-selected="false">For Men</button> --}}
@@ -211,7 +224,7 @@
                     <div class="carousel slide" id="carouselCategoryWShoes" data-bs-touch="false" data-bs-interval="false">
                       <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="10000">
-                          <div class="row h-100 align-items-center g-2">
+                          <div class="row h-100 align-items-center g-2" id="category_div">
                             
                             @foreach($categoryItems as $item)
                             <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -220,13 +233,13 @@
                                 <div class="card-img-overlay "> </div>
                                 <div class="card-body  bg-200  bttn">
                                   <div class="d-flex">
-                                  <div class="col-9">
+                                  <div class="col-8">
                                     <h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">{{ $item->name }}</h5>
                                   
                                   </div>
-                                  <div class="col-3">
+                                  <div class="col-4">
                                     <div class="fw-bold">
-                                    <span class="pink-color">${{ $item->price }}</span>
+                                    <span class="pink-color">Rs.{{ $item->price }}</span>
                                   </div>
                                 </div>
                                 </div>
@@ -332,3 +345,64 @@
     AOS.init();
   </script>
 @endsection
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+
+$( document ).ready(function() {
+      document.getElementById('nav-1').classList.add('active');
+});
+
+function add_favorite(id){
+       
+            $.ajax({
+                    type: "Get",
+                    url: '{{route('add_favorite')}}',
+                    datatype: 'json',
+                    data: {
+                        'item_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                         
+                           document.getElementById('favorite_icon-'+id).classList.add('d-none');
+                           document.getElementById('favorite_icon1-'+id).classList.remove('d-none');
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
+
+    function select_category(id){
+       
+            $.ajax({
+                    type: "Get",
+                    url: '{{route('welcome')}}',
+                    datatype: 'json',
+                    data: {
+                        'category_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                        $('.nav-link').removeClass('active');
+
+                         $.each(obj.new.items, function(key,value) {
+                                var $item = $('#category_div');
+                                $item.append().html('<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100"><div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="http://127.0.0.1:8000/storage/' + value.image +'" alt="..." style=" max-height: 300px !important; "/><div class="card-img-overlay "></div><div class="card-body  bg-200  bttn"><div class="d-flex"><div class="col-8"><h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">' + value.name + '</h5></div><div class="col-4"><div class="fw-bold"><span class="pink-color">Rs.' + value.price +'</span></div></div></div><div class="d-flex"><div class="col-8"><div class="ssw-stars ssw-stars-large"><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><span class="ssw-review-count">75 Reviews</span></div></div><div class="col-4"><p class="ssw-review-count "><a href="#" class="text-dark"><i class="fas fa-ruler-horizontal"></i>  Size Guide</a></p></div></div><div class="d-flex"><div class="col-2 text-left"><p class="ssw-review-count">Color</p></div><div class="col-10 text-left"><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a></div></div></div><a class="stretched-link" href="http://127.0.0.1:8000/item/'+ value.slug +'"></a></div></div>');
+                            });
+                           document.getElementById('nav-'+id).classList.add('active');
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
+
+</script>

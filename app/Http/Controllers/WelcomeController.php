@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\CartItem;
+
 
 class WelcomeController extends Controller
 {
@@ -22,9 +24,35 @@ class WelcomeController extends Controller
         $currentCategoryName=$categories[0]->name;
         if($request->category_id){
             $currentCategoryId=$request->category_id;
-            $currentCategoryName=$request->category;
+            // $currentCategoryName=$request->category;
+            $categoryItems = Item::where('category_id', $currentCategoryId)->get();
+
+             $data['new'] = [
+                         'code' => 1,
+                         'items' => $categoryItems,
+                     ];
+
+                return json_encode($data);
         }
         $categoryItems = Item::where('category_id', $currentCategoryId)->get();
+        
+         \Cart::clear();
+         \Cart::session(auth()->user()->id)->clear();
+
+    if(auth()->check()){
+        $carts = CartItem::where(['user_id'=>auth()->user()->id,'status' => 1])->get();
+          foreach($carts as $cart){
+            \Cart::session(auth()->user()->id)->add(array(
+                'id' => $cart->item_id,
+                'name' => "fvfdv",
+                'price' => 34,
+                'quantity' => 1,
+                'attributes' => array(),
+                'associatedModel' => array()
+            ));
+        }
+    }
+
         return view('welcome', compact('categories', 'items', 'currentCategoryId', 'currentCategoryName', 'categoryItems'));
     }
 }

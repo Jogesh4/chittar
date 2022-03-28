@@ -33,7 +33,7 @@
     <script src="{{ asset('vendors/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendors/feather-icons/feather.min.js') }}"></script>
     <script>
-      feather.replace();
+      // feather.replace();
     </script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     @yield('extras')

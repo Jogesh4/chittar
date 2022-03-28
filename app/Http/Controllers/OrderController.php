@@ -6,37 +6,51 @@ use Illuminate\Http\Request;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\CartItem;
+use App\Models\Item;
+
 
 class OrderController extends Controller
 {
   public function place(Request $request)
   {
     $userID = auth()->user()->id;
+     $total = 0;
+    $cartItems = CartItem::where(['user_id' => auth()->user()->id,'status' => 1])->get();
+  
+              foreach($cartItems as $cartitem){
+                      $total = $total + $cartitem->total;
+                }
+
     $order = new Order;
     $order->transaction = md5($userID.\Carbon\Carbon::now());
-    $order->amount = \Cart::session($userID)->getTotal();
+    $order->amount = $total;
     $order->user_id = $userID;
     $order->status = "PAID";
     
     if($order->save()){
-      $cartCollection = \Cart::session($userID)->getContent();
-      foreach($cartCollection as $row){
+      foreach($cartItems as $row){
+
+         $item = Item::where('id',$row->item_id)->first();
+
           $orderItem = new OrderItem;
           $orderItem->name = $row->name;
           $orderItem->image = $row->image;
-          $orderItem->size = $row->weight;
+          $orderItem->size = $item->weight;
           $orderItem->price = $row->price;
-          $orderItem->qty = $row->quantity;
-          $orderItem->item_id = $row->id;
+          $orderItem->qty = $row->qty;
+          $orderItem->item_id = $row->item_id;
           $orderItem->order_id = $order->id;
           $orderItem->save();
       }
-      $order->items = $cartCollection->count();
+      $order->items = $cartItems->count();
       $order->save();
     }
 
     $order->order_no = 'ORD0000' . $order->id;
     $order->save();
+
+    $cartItem = CartItem::where(['user_id' => auth()->user()->id])->update(["status" => 0]);
 
     \Cart::session($userID)->clear();
 
