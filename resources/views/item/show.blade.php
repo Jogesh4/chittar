@@ -15,25 +15,80 @@
                 <div class="thumbnail text-center"> <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image) }}" width="70"> <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image) }}" width="70"> </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="product p-4">
-                {{-- <div class="d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div>
-                  <i class="fa fa-shopping-cart text-muted"></i>
-                </div> --}}
+
+            <div class="col-md-6 brands">
+              <div class="product p-4">                
                 <div class="mt-4 mb-3">
-                  <span class="text-uppercase text-muted brand">{{ $item->model }}</span>
-                  <h5 class="text-uppercase">{{ $item->name }}</h5>
-                  <div class="price d-flex flex-row align-items-center">
-                    <span class="act-price">${{ $item->price }}</span>
-                    {{-- <div class="ml-2"> <small class="dis-price">${{ $item->price }}</small> <span>40% OFF</span> </div> --}}
+                 
+                  <h2 class="item-name-view">{{ $item->name }}</h2>
+
+                  <div class="text-uppercase text-muted  mt-3 mb-3">Model:  {{ $item->model }} <span class="fw-bold m-3"> | </span> <span class="text-uppercase text-muted brand">SKU:  {{ $item->sku }}</span> </div>
+                  <div class="ssw-stars ssw-stars-large brand">  
+                    <i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i>
+                    <!-- <span class="ssw-review-counts" >5 Star </span> -->
                   </div>
+
+                  <div class="price align-items-center mt-3">                    
+                    <p class="act-price mb-0" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "><span class="fassas">INR </span>{{ $item->price }}</p>                   
+                    <p class="mt-0">Price: Excluding of all taxes</p>
+                  </div>
+                  
                 </div>
-                <p class="about">{{ $item->description }}</p>
-                {{-- <div class="sizes mt-5">
-                  <h6 class="text-uppercase">Size</h6>
-                  <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span> </label>
-                </div> --}}
+                <div class="d-flex mt-3">
+
+                  <div class="col-lg-6 product-quantity">
+                   <p class="fw-bold">Size </p>
+                    <div class="quantity quantity-2 YK-quantity">  
+                        <input class="qty-input no-focus YK-qty" data-page="product-view" title="Available Quantity" type="text" name="size" max="1" min="15">
+                       </div>
+                  </div>
+
+                  <div class="col-lg-6 product-quantity">
+                  <p class="fw-bold">Quantity </p>
+                    <div class="quantity quantity-2 YK-quantity">                   
+                        <span class="decrease" onclick="decreaseQty(this, '75|3|83|')">
+                        <i class="fas fasu fa-minus"></i></span>
+                        <input class="qty-input no-focus YK-qty" data-page="product-view" title="Available Quantity" type="text" name="quantity" max="10" min="14" value="14" readonly="">
+                        <span class="increase" onclick="increaseQty(this, '75|3|83|')"> <i class="fas fasu fa-plus"></i></span>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+                <div class="d-flex mt-3">
+                              <div class="col-3 text-left">
+                              <p class="fw-bold">Variant</p>
+                            </div>
+                              <div class="col-3 text-left">
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  
+                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
+                            </div>
+                              </div>
+
+
+                
+	<!-- <div class="mt-3">
+  <a class="product-share fassas" href="">
+			<span class="product-share__icon">
+      <i class="fas fa-share-alt"></i>
+			</span>
+			<span class="product-share__lbl">Share</span>
+		</a>
+	</div> -->
+
+
+                
+
+
+
+                
                 <div class="cart mt-4 align-items-center">
                   @if(auth()->check())
                     @if(!\Cart::session(auth()->user()->id)->get($item->id))
@@ -48,7 +103,7 @@
                     <a href="{{ route('login') }}" class="btn-pink text-uppercase mr-2 px-4">Login to add</a>
                   @endif
                   
-                  {{-- <button class="btn-pink text-uppercase mr-2 px-4">Add to cart</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> --}}
+                  
                 </div>
               </div>
             </div>
@@ -56,15 +111,19 @@
         </div>
       </div>
     </div>
+
+
     <div class="row mb-5">
-      <h2 class="text-center">More Items</h2>
+      <h2 class="h2 titllee text-center ">Related Products</h2>
       @foreach($similar_items as $s)
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 col-lg-3 col-sm-6 mb-3">
         <div class="card">
           <div class="card-body">
-            <img class="img-fluid" style="height: 250px;" src="{{ asset('storage/'.$s->image) }}" alt="..." />
+            <img class="img-fluid" style="max-height: 250px;" src="{{ asset('storage/'.$s->image) }}" alt="..." />
             <p class="mb-0">{{ $s->name }}</p>
             <p class="mb-0">${{ $s->price }}</p>
+
+
             @if(auth()->check())
               @if(!\Cart::session(auth()->user()->id)->get($s->id))
               <form method="POST" action="{{ route('add.to.cart', $s) }}">
@@ -84,6 +143,14 @@
     </div>
   </div>
 </section>
+
+
+<section>
+<div class="container">
+<p class="h2 titllee text-center ">Description</p>                 
+<p class="about">{{ $item->description }}</p>
+</div>
+</section>                
 @endsection
 
 @section('extras')
