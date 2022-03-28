@@ -458,3 +458,16 @@ button:active {
 .bg-sale {
     background: #1d229f !important;
 }
+.banner-bg{
+    background-image: url(images/banner.jpg);
+    background-size: cover;
+}
+@media all and (max-width:767px){
+    .bg-rangle:after {
+       display: none;
+   }
+   .banner-bg{
+    background-image: url(images/banner-mb.jpg);
+    background-size: cover;
+}
+}

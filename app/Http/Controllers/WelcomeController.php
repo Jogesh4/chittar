@@ -35,11 +35,10 @@ class WelcomeController extends Controller
                 return json_encode($data);
         }
         $categoryItems = Item::where('category_id', $currentCategoryId)->get();
-        
-         \Cart::clear();
-         \Cart::session(auth()->user()->id)->clear();
 
     if(auth()->check()){
+        \Cart::clear();
+         \Cart::session(auth()->user()->id)->clear();
         $carts = CartItem::where(['user_id'=>auth()->user()->id,'status' => 1])->get();
           foreach($carts as $cart){
             \Cart::session(auth()->user()->id)->add(array(
