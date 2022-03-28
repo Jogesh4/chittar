@@ -1,44 +1,82 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'All Orders')
 @section('content')
-<div class="row">
-  <div class="col-xl-12 col-lg-12">
-    <div class="card shadow mb-4">
-      <!-- Card Header - Dropdown -->
-      <div class="card-body">
-        <div class=" pb-2">
-          <div class="inner-bg table-responsive">
-            <div class="element-title mb-2">
-              <h4 class="mb-4">All Users</h4>
-            </div>
-            <table class="cart-table table border" width="100%">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Date Created</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($users as $user)
-                <tr>
-                  <td>{{ $user->name }}</td>
-                  <td>{{ $user->created_at }}</td>
-                  <td>{{ $user->is_active ? 'Active' : 'Not Active' }}</td>
-                  <td>
-                    <a href="#" class="settings" title="" data-toggle="tooltip" data-original-title="Settings"><i class="fas fa-cog"></i></a>&nbsp;
-                    <a href="#" class="delete" title="" data-toggle="tooltip" data-original-title="Delete"><i class="fas fa-times"></i></a>
-                </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <!-- Area -->
-    </div>
-  </div>
-</div>
+<div class="container-fluid">         
+                    <?php
+                          $i = 1;
+                      ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            
+                            <div class="table-responsive bg-white p-3">
+                            <table class=" table table-justified" id="example">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                         <th>Name</th> 
+                                         <th>Email</th> 
+                                         <th>Phone</th> 
+                                         <th>Publish</th> 
+                                        <th></th>
+                                    </tr>
+                                 </thead>
+                                   @if(!empty($users))
+                                   @foreach($users as $user)
+                                      <tr>
+                                          <td scope="row">{{ $i++ }}</td>
+                                          <td>{{ $user->name }}</td>
+                                          <td>{{ $user->email }}</td> 
+                                          <td>9876768543</td> 
+                                          <td> <div class="form-check form-switch">
+                                              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>                                   
+                                            </div></td> 
+                                          
+                                          <td>
+                                              <div class="actions">
+                                              <a href="#" title="Delete"><i class="fas faslli fa-trash-alt"></i></a>
+                                              <span> <a href="#" title="Profile"><i class="fas faslli fa-user"></i></a> </span>
+                                              <span> <a href="#" title="Edit"><i class="fas faslli fa-pen"></i></a> </span>
+                                              <span> <a href="#" title="Mail"><i class="fas faslli fa-mail-bulk"></i></a> </span>
+                                              </div>
+                                              </td>
+                                      </tr>
+                                      @endforeach
+                                      @else
+                                         <div class="text-center">
+                                              <h3>No User Found</h3>
+                                         </div>
+                                      @endif
+                                
+                                        </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js" defer></script>
+
+<script>
+
+
+
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                 ''
+            ]
+        } );
+
+} );
+
+    
+</script>
