@@ -17,6 +17,13 @@
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
 
+  <li class="nav-item">
+    <a class="nav-link" href="/admin">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Dashboard</span>
+    </a>
+  </li>
+
   <!-- Nav Item - Dashboard -->
   <li class="nav-item">
     <a class="nav-link" href="{{ route('admin.users.index') }}">

@@ -20,6 +20,8 @@
     <!-- Custom styles for this template-->
    <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.css">
+
 </head>
 
 <body id="page-top">
@@ -96,6 +98,9 @@
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+	  <script src="js/demo/chart-pie-demo.js"></script>
+      <script src="js/demo/chart-bar-demo.js"></script>
+
 
     
 
