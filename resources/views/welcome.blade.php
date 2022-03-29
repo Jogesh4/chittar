@@ -92,6 +92,11 @@
       </div>
     </div>
   </section>
+
+<?php
+     use App\Models\Favorite;
+?>
+
   <section class="pt-2 pb-7">
     <div class="container">
       <div class="row">
@@ -109,8 +114,25 @@
                    <a class="" href="{{ route('item.show', $item) }}">
                       <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></a>
                     <div class="fw-bold favorite-icon">
-                      <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
-                      <span class="favorite-active d-none" id="favorite_icon1-{{ $item->id }}"><i class="fa fa-thin fa-heart"></i></span>
+
+                      @php
+
+                          $favorite = Favorite::where(['item_id' => $item->id,'user_id' => auth()->user()->id])->first();
+
+                      @endphp
+
+                      @if(!empty($favorite))
+
+                                 <span class="favorite-active" id="favorite_icon1"><i class="fa fa-thin fa-heart"></i></span>
+
+                      @else
+
+                                  <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
+                                 <span class="favorite-active d-none" id="favorite_icon1-{{ $item->id }}"><i class="fa fa-thin fa-heart"></i></span>
+
+                      @endif
+                      
+                      
 
                     </div>
                   

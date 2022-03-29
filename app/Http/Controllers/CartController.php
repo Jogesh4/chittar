@@ -29,11 +29,11 @@ class CartController extends Controller
             }
     }
 
-    public function add_to_cart(Request $request, Item $item)
+    public function add_to_cart(Item $item)
     {
         $userID = auth()->user()->id;
 
-        $cart = CartItem::where(['item_id'=>$item->id,'user_id'=>auth()->user()->id])->first();
+        $cart = CartItem::where(['item_id'=>$item->id,'user_id'=>auth()->user()->id,'status' => 1])->first();
 
         if(!$cart){
             $cartItem = new CartItem;
