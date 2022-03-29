@@ -15,7 +15,7 @@ class AuthController extends Controller
       $foundUser = User::where('email', $request->email)->first();
 
       if($foundUser){
-        if (Hash::check($request->password, $founcUser->password))
+        if (Hash::check($request->password, $foundUser->password))
         {
           return response()->json(['success' => true, 'user' => $foundUser]);
         }

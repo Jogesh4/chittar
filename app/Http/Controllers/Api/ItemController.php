@@ -22,7 +22,9 @@ class ItemController extends Controller
     public function itemByID(Request $request)
     {
         if($request->has('id')){
-            $item = Item::find($request->id);
+            // $item = Item::find($request->id);
+            $item = Item::where('id',$request->id)->get();
+
             if($item) {
                 return response()->json(['success' => true, 'item' => $item]);
             }
