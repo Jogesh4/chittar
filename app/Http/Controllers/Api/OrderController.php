@@ -40,6 +40,7 @@ class OrderController extends Controller
   public function userOrders(Request $request)
   {
     $user = User::find($request->user_id);
+    
     if($user){
       return response(['success' => true, 'orders' => $user->orders]);
     }
