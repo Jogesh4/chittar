@@ -25,7 +25,9 @@
     height: 34px;
     max-width: 108px;
     border-radius: 2px;
+    margin: 3px;
 }
+.far{color: #ae0151;}
 .quantity-2 span {
     width: 24px;
     -webkit-box-flex: 0;
@@ -214,6 +216,25 @@
     border-left: 1px solid #e8e8e8;
 }
 .fassas{
+    color: #b00755; 
+    font-size: 20px;
+}
+.fase{
+    font-size: 35px !important;
+}
+.fassas0{
+    color: #129bc5;
+    font-size: 20px;
+}
+.fassas1{
+    color: #5a68bd;
+    font-size: 20px;
+}
+.fassas2{
+    color: #5c0b71;
+    font-size: 20px;
+}
+.fassas3{
     color: #b00755;
     font-size: 20px;
 }
