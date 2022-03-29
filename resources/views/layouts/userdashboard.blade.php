@@ -33,7 +33,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-             <a class="d-flex align-items-center justify-content-center logo-div p-2" href="index.html">
+             <a class="d-flex align-items-center justify-content-center logo-div p-2" href="{{ url('/') }}">
                 <img class="img-fluid" src="{{ asset('images/logo3.png') }}">
             </a>
 

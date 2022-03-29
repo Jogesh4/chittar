@@ -37,10 +37,11 @@
                 <div class="cart mt-4 align-items-center">
                   @if(auth()->check())
                     @if(!\Cart::session(auth()->user()->id)->get($item->id))
-                    <form method="POST" action="{{ route('add.to.cart', $item) }}">
-                      @csrf
-                      <button class="btn-pink text-uppercase mr-2 px-4">Add to Cart</button>
-                    </form>
+                    
+                      <button id="add" class="btn-pink text-uppercase mr-2 px-4" onclick="add_cart({{ $item->id }},1)">Add to Cart</button>
+
+                      <button id="added" type="button" disabled class="btn-pink text-uppercase mr-2 px-4 d-none">Added to Cart</button>
+
                     @else
                       <button type="button" disabled class="btn-pink text-uppercase mr-2 px-4">Added to Cart</button>
                     @endif
@@ -67,10 +68,11 @@
             <p class="mb-0">${{ $s->price }}</p>
             @if(auth()->check())
               @if(!\Cart::session(auth()->user()->id)->get($s->id))
-              <form method="POST" action="{{ route('add.to.cart', $s) }}">
-                @csrf
-                <button class="btn btn-primary btn-block">Add to Cart</button>
-              </form>
+              
+                <button id="add-{{ $s->id }}" class="btn btn-primary btn-block" onclick="add_cart({{ $s->id }},2)">Add to Cart</button>
+
+                <button id="added-{{ $s->id }}" type="button" disabled class="btn btn-primary btn-block d-none">Added to Cart</button>
+
               @else
                 <button type="button" disabled class="btn btn-primary btn-block">Added to Cart</button>
               @endif
@@ -85,6 +87,7 @@
   </div>
 </section>
 @endsection
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 @section('extras')
   <script>
@@ -94,5 +97,41 @@
     }
     document.addEventListener("DOMContentLoaded", function(event) {
     });
+
+    function add_cart(id,$type){
+
+     var cart_no = document.getElementById('cart_no').textContent;
+
+            $.ajax({
+                    type: "Post",
+                    url: '{{route('add.to.cart')}}',
+                    datatype: 'json',
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                        'item_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                         
+                        if($type == 1){
+                             document.getElementById('add').classList.add('d-none');
+                           document.getElementById('added').classList.remove('d-none');
+                           document.getElementById('cart_no').textContent = parseInt(cart_no) + 1;
+                        }
+                        else{
+                            document.getElementById('add-'+id).classList.add('d-none');
+                           document.getElementById('added-'+id).classList.remove('d-none');
+                           document.getElementById('cart_no').textContent = parseInt(cart_no) + 1;
+                        }
+                           
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
   </script>
 @endsection

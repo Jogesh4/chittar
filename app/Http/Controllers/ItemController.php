@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Item;
 use App\Models\Favorite;
+use App\Models\CartItem;
+
 
 class ItemController extends Controller
 {
@@ -18,6 +20,23 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         $similar_items = Item::where('category_id', '!=', $item->category_id)->take(8)->get();
+
+    if(auth()->check()){
+        \Cart::clear();
+         \Cart::session(auth()->user()->id)->clear();
+        $carts = CartItem::where(['user_id'=>auth()->user()->id,'status' => 1])->get();
+          foreach($carts as $cart){
+            \Cart::session(auth()->user()->id)->add(array(
+                'id' => $cart->item_id,
+                'name' => "fvfdv",
+                'price' => 34,
+                'quantity' => 1,
+                'attributes' => array(),
+                'associatedModel' => array()
+            ));
+        }
+    }
+
         return view('item.show', compact('item', 'similar_items'));
     }
 
