@@ -26,7 +26,6 @@ class WelcomeController extends Controller
             $currentCategoryId=$request->category_id;
             // $currentCategoryName=$request->category;
             $categoryItems = Item::where('category_id', $currentCategoryId)->get();
-
              $data['new'] = [
                          'code' => 1,
                          'items' => $categoryItems,
@@ -34,7 +33,11 @@ class WelcomeController extends Controller
 
                 return json_encode($data);
         }
-        $categoryItems = Item::where('category_id', $currentCategoryId)->get();
+        else{
+          $categoryItems = Item::where('category_id', $currentCategoryId)->get();
+        }
+
+        // dd($categoryItems);
 
     if(auth()->check()){
         \Cart::clear();
