@@ -15,7 +15,6 @@
       </form>
       @php
               use App\Models\CartItem;
-
             if(auth()->check()){
               $cartItems = CartItem::where(['user_id' => auth()->user()->id,'status' => 1])->get();
             }
@@ -23,7 +22,7 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#categoryWomen">Home</a></li>
         <li class="nav-item px-2"><a class="nav-link fw-medium" href="{{ route('about') }}">About Us</a></li>
-        <li class="nav-item px-2"><a class="nav-link fw-medium" href="{{ route('category.index', \App\Models\Category::first()) }}">Categories</a></li>
+        <li class="nav-item px-2"><a class="nav-link fw-medium" href="/search">Categories</a></li>
         <li class="nav-item px-2"><a class="nav-link fw-medium" href="{{ route('contact') }}">Contact Us</a></li>
       </ul>
       {{-- <form class="d-flex"> --}}
@@ -39,7 +38,11 @@
             <circle cx="20" cy="21" r="1"></circle>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
-            <span id="cart_no">{{ $cartItems->count() }}</span>
+            @if(auth()->check())
+                <span id="cart_no">{{ $cartItems->count() }}</span>
+                @else
+                <span id="cart_no"></span>
+                @endif
           </div>
         </a>
         {{-- <a class="text-1000" href="#!">

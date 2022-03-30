@@ -114,10 +114,13 @@
                    <a class="" href="{{ route('item.show', $item) }}">
                       <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></a>
                     <div class="fw-bold favorite-icon">
-
+                       @if(auth()->check())
                                   <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
                                  <span class="favorite-active d-none" id="favorite_icon1-{{ $item->id }}"><i class="fa fa-thin fa-heart"></i></span>
+                        @else
+                                  <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><a href="{{ route('login') }}"><i class="fa fa-thin fa-heart"></i></a></span>
 
+                        @endif
                     </div>
                   
                 </div> 
