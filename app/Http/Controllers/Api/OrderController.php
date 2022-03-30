@@ -18,18 +18,22 @@ class OrderController extends Controller
     $order->transaction = md5($userID.\Carbon\Carbon::now());
     $order->amount = $request->amount;
     $order->user_id = $userID;
+    $order->items = count($request->cartCollection);
     $order->status = "PAID";
     
     if($order->save()){
       $cartCollection = $request->cartCollection;
       foreach($cartCollection as $row){
         $orderItem = new OrderItem;
-        $orderItem->price = $row->price;
-        $orderItem->qty = $row->quantity;
-        $orderItem->item_id = $row->id;
+        $orderItem->price = $row['price'];
+        $orderItem->qty = $row['quantity'];
+        $orderItem->item_id = $row['item_id'];
         $orderItem->order_id = $order->id;
         $orderItem->save();
       }
+
+      $order->order_no = 'ORD0000' . $order->id;
+      $order->save();
 
       return response()->json(['success' => true, 'order' => $order]);
     }
