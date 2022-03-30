@@ -244,7 +244,7 @@
                             <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
                               <div class="card card-span  text-white">
                                 <div class="img-style-low">
-                                <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" max-height: 250px !important; "/></div>
+                                <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..."/></div>
                                 <div class="card-img-overlay "> </div>
                                 <div class="card-body  bg-200  bttn">
                                   <div class="d-flex">
