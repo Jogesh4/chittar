@@ -229,6 +229,7 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  font-family: 'Font Awesome 5 Free';
 }
 
 button {
@@ -439,6 +440,49 @@ mark,
   background-color: #fcf8e3;
 }
 /*=========r css==========*/
+.btn-style-dum{
+  padding: 1em 3em !important;
+  background: #2f8cbc !important;
+  border: 0 !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+}
+.ptext {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400 !important;
+}
+.psmall{
+  color: #797474;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+.form-control1 {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 9px 13px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  font-family: 'Font Awesome 5 Free';
+  border: 1px solid #ccc;
+}
+.form-control2 {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 5px 13px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  font-family: 'Font Awesome 5 Free';
+  border: 1px solid #ccc;
+}
+.bg-shad{
+  background-color: #fff;
+  border-radius: 0.3em;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
+}
 .search-btn{
     background: #d72280!important;
     border: #d72280!important;

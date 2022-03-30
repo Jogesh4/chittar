@@ -18,40 +18,40 @@
                     
 <div class="row">
  
-    <div class="col-lg-2 col-md-4 p-2" id="general_click">
+    <div class="col-lg-2 col-md-4 p-3 bg-shad m-2" id="general_click">
     
-        <h5 class="pinkit"> <i class="fas fa-qrcode"></i> General Info.</h5>
-        <p>Setup Basic Product Details</p>
+        <h5 class="pinkit">General Info.</h5>
+        <p class="psmall">Setup Basic Product Details</p>
     </div>
 
-    <div class="col-lg-2 col-md-4 p-2" id="inventory_click">
+    <div class="col-lg-2 col-md-4 p-3 bg-shad m-2" id="inventory_click">
     
-        <h5> <i class="fas fa-qrcode"></i> Inventory  Details</h5>
-        <p>Stock & Pricing Options</p>
-    </div>
-
-
-    <div class="col-lg-2 col-md-4 p-2" id="variant_click">
-    
-        <h5> <i class="fas fa-qrcode"></i> Options & Variants</h5>
-        <p>Add Option details</p>
+        <h5>Inventory  Details</h5>
+        <p class="psmall">Stock & Pricing Options</p>
     </div>
 
 
-    <div class="col-lg-2 col-md-4 p-2" id="attribute_click">
+    <div class="col-lg-2 col-md-4 p-3 bg-shad m-2" id="variant_click">
     
-        <h5> <i class="fas fa-qrcode"></i> Product Attribute</h5>
-        <p>Product Specifications</p>
+        <h5>Options & Variants</h5>
+        <p class="psmall">Add Option details</p>
     </div>
 
-    <div class="col-lg-3 col-md-4 p-2" id="media_click">
+
+    <div class="col-lg-2 col-md-4 p-3 bg-shad m-2" id="attribute_click">
     
-        <h5> <i class="fas fa-qrcode"></i> Product Media</h5>
-        <p>Add Option Based Product Media</p>
+        <h5>Product Attribute</h5>
+        <p class="psmall">Product Specifications</p>
+    </div>
+
+    <div class="col-lg-2 col-md-4 p-3 bg-shad m-2" id="media_click">
+    
+        <h5>Product Media</h5>
+        <p class="psmall">Add Option Based Product Media</p>
     </div>
 
 </div>
-<div class="" id="general_div">
+<div class="mt-5 bg-white p-3" id="general_div">
 
 <div class="row">
 
@@ -142,7 +142,7 @@
 
     </div>
 <!-- --------------------------------Section 2--------------------------- -->
-  <div class="p-2 bg-white d-none" id="inventory_div">
+  <div class="p-3 bg-white d-none mt-5" id="inventory_div">
         <div class="row ">	
             
             <div class="col-md-12 col-lg-10">
@@ -268,18 +268,22 @@
 
 <div class="row mt-3">
     <div class="col-md-12 col-lg-3 form-outline p-2">
+    <label>Minimum Purchase Quantity<span style="color:red;">*</span></label>
         <input type="number" name="type-product" id="" placeholder="Minimum Purchase Quantity *" class="form-control2 ">
     </div>
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
+    <label>Maximum Purchase Quantity<span style="color:red;">*</span></label>
         <input type="number" name="type-product" id="" placeholder="Maximum Purchase Quantity *" class="form-control2 ">
     </div>
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
+    <label>Stock Alert Quantity<span style="color:red;">*</span></label>
         <input type="number" name="type-product" id="" placeholder="Stock Alert Quantity *" class="form-control2 ">
     </div>
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
+    <label>Cost Price <span style="color:red;">*</span></label>
         <input type="number" name="type-product" id="" placeholder="Cost Price *" class="form-control2 ">
     </div>
 
@@ -298,7 +302,7 @@
    </div>
 <!-- --------------------------------Section 3--------------------------- -->
 
-<div class="bg-white p-2 d-none" id="variant_div">
+<div class="bg-white p-3 mt-5 d-none" id="variant_div">
     <div class="row ">	
             
         <div class="col-md-12 col-lg-10">
@@ -419,7 +423,7 @@
 
 </div>
 <!-- ---------------------------------------------section4-------------------------- -->
-<div class="bg-white p-2 d-none" id="attribute_div">
+<div class="bg-white p-3 mt-5 d-none" id="attribute_div">
     <div class="row ">	
         <h5 >Attributes</h5>
     </div>
@@ -503,12 +507,54 @@
 
 <!-- ---------------------------------------------section5-------------------------- -->
 
-<div class="d-none" id="media_div">
-
-
-
+<div class="d-none bg-white mt-5 p-3 row" id="media_div">
+<div class="col-lg-3 col-md-12 col-sm-12">
+<p class="ptext h5"> Images</p>
+</div>
+<div class="col-lg-9">
+<button type="button" class="btn btn-secondary btn-style-dum ">Upload a file</button>
+<p class="text-secondary mt-2"><b> Image Disclaimer: </b>File type must be a .jpg, .gif or .png smaller than 2MB and at least 800x1067 in 3:4 aspect ratio</p>
 </div>
 
+<div class="col-md-12 col-lg-3 form-outline p-2">
+<p class="ptext h5"> Video</p>
+</div>
+
+<div class="col-md-12 col-lg-9 form-outline p-2">
+        <input type="text" name="model" id="" placeholder="Video Url" class="form-control2 ">
+</div>
+
+<div class="col-md-12 col-lg-3 form-outline p-2">
+<p class="ptext h5"> Product Published</p>
+</div>
+
+<div class="col-md-12 col-lg-9 form-outline p-2">
+<select class="selectpicker form-control1" id="type" name="type" required="">
+                <option value="" disabled="" >Product Published</option>
+                <option value="1" selected="" >Yes</option>
+                <option value="2">No</option>
+            </select> 
+</div>
+
+
+<div class="col-md-12 col-lg-3 form-outline p-2">
+<p class="ptext h5"> Product Published From</p>
+</div>
+
+<div class="col-md-12 col-lg-9 form-outline p-2">
+        <input type="date" name="model" id=""  class="form-control2 ">
+</div>
+
+
+
+<div class="row  mt-5">
+        <div class="d-flex justify-content-end">
+            <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a><span class="ml-3 mr-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target=""><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
+            <span class="ml-3 mr-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target="">SUBMIT <i class="fas text-white fa-arrow-right"></i> </a></span>
+        </div>
+    </div>
+
+</div>
 
 </div>
 
