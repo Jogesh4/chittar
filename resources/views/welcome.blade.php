@@ -136,7 +136,7 @@
                   <div class="col-8 p-2 info-pt"><i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days</div>
                   
                   <div class="col-2 p-2 info-pt">
-                    <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1">
+                    {{-- <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1"> --}}
                   </div>
                   <div class="col-2 p-2">
                 
@@ -172,16 +172,16 @@
         <div class="col-md-6 position-relative" data-aos="fade-up">
           <div class="row  m-3">
             <div class="col-md-6 p-0">
-              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('images/7.jpg') }}" alt="..."><a class="stretched-link" href="/category/women"></a></div>
+              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('storage/'.$items[2]->image) }}" alt="..."><a class="stretched-link" href="/search/?name={{ $items[2]->name }}"></a></div>
               <div class="sale-div">Sale</div>
             </div>
             <div class="col-md-6 p-0">
               <div class="bg-300 p-4 h-100 d-flex flex-column text-center justify-content-center">
-                <p class="mb-0">Mules</p>
-                <h4 class="fw-semi-bold ">Diamond Pearl </h4>
+                <p class="mb-0"></p>
+                <h4 class="fw-semi-bold ">{{ $items[2]->name }}</h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">$200</h4>
-                  <h4 class="pink-color">$175</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[2]->price }}</h4>
+                  <h4 class="pink-color">INR{{ $items[2]->price }}</h4>
                 </div>
               </div>
             </div>
@@ -190,16 +190,16 @@
         <div class="col-md-6 position-relative" data-aos="fade-up">
           <div class="row  m-3">
             <div class="col-md-6 p-0">
-              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('images/8.jpg') }}" alt="..."><a class="stretched-link" href="/category/women"></a></div>
+              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('storage/'.$items[1]->image) }}" alt="..."><a class="stretched-link" href="/search/?name={{ $items[1]->name }}"></a></div>
               <div class="sale-div">Sale</div>
             </div>
             <div class="col-md-6 p-0">
               <div class="bg-300 p-4 h-100 d-flex flex-column text-center justify-content-center">
                 <p class="mb-0">Mules</p>
-                <h4 class="fw-semi-bold" >Diamond Pearl </h4>
+                <h4 class="fw-semi-bold" >{{ $items[1]->name }}</h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">$200</h4>
-                  <h4 class="pink-color">$175</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[1]->price }}</h4>
+                  <h4 class="pink-color">INR{{ $items[1]->price }}</h4>
                 </div>
               </div>
             </div>
@@ -291,7 +291,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-12 d-flex justify-content-center mt-5"> <a class="btn btn-lg btn-dark" href="{{ route('category.index', $currentCategory) }}">View All </a></div>
+                    <div class="col-12 d-flex justify-content-center mt-5"> <a class="btn btn-lg btn-dark" href="/search">View All </a></div>
                   </div>
                 </div>
             @endif
