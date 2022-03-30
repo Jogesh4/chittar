@@ -274,13 +274,21 @@
 .pink-color {
     color: #ae0151;
 }
+.img-style-low{
+    height: 250px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
 .sale-div {
     width: 70px;
     height: 70px;
     position: absolute;
     top: 70px;
-    background: #5b2813;
+    background: #cc0868;
     border-radius: 50%;
     text-align: center;
     line-height: 2.9;

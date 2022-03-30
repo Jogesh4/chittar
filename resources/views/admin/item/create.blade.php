@@ -150,6 +150,19 @@
         <input type="number" name="return" id="return" placeholder="Return (Days)" class="form-control2 ">
     </div>
 
+
+
+
+    <div class="col-md-12 col-lg-3 form-outline p-2">
+         <textarea id="basic-example">
+  
+</textarea>
+    </div>
+
+
+
+
+
     </div>
         <div class="row mt-5">
             <div class="d-flex justify-content-end">
