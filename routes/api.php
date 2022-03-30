@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ use App\Http\Controllers\Api\OrderController;
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('items-by-category', [ItemController::class, 'itemsByCategory']);
 Route::get('item-by-id', [ItemController::class, 'itemByID']);
+
+
+Route::post('add-cart', [CartController::class, 'add_to_cart']);
 
 
 Route::post('place-order', [OrderController::class, 'place']);
