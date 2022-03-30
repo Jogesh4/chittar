@@ -110,9 +110,10 @@
               <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
                 <div class="card card-span h-100">
                  
-                 <div style="max-height: 250px; overflow: hidden;width: 100%;position:relative;">
+                 <div style="overflow: hidden;width: 100%;position:relative;">
                    <a class="" href="{{ route('item.show', $item) }}">
-                      <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></a>
+                   <div class="img-style-low">
+                      <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></div ></a>
                     <div class="fw-bold favorite-icon">
                        @if(auth()->check())
                                   <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
@@ -180,9 +181,11 @@
                 <p class="mb-0">Mules</p>
                 <h4 class="fw-semi-bold ">Diamond Pearl </h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">$200</h4>
-                  <h4 class="pink-color">$175</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through">INR 200</h4>
+                  <h4 class="pink-color">INR 175</h4>
                 </div>
+                <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
+
               </div>
             </div>
           </div>
@@ -198,9 +201,10 @@
                 <p class="mb-0">Mules</p>
                 <h4 class="fw-semi-bold" >Diamond Pearl </h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">$200</h4>
-                  <h4 class="pink-color">$175</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through">INR 400</h4>
+                  <h4 class="pink-color">INR 275</h4>
                 </div>
+                <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
               </div>
             </div>
           </div>
@@ -239,7 +243,8 @@
                             @foreach($categoryItems as $item)
                             <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
                               <div class="card card-span  text-white">
-                                <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" max-height: 300px !important; "/>
+                                <div class="img-style-low">
+                                <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" max-height: 250px !important; "/></div>
                                 <div class="card-img-overlay "> </div>
                                 <div class="card-body  bg-200  bttn">
                                   <div class="d-flex">
@@ -270,11 +275,11 @@
                               <div class="col-2 text-left">
                               <p class="ssw-review-count">Color</p></div>
                               <div class="col-10 text-left">
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
+                              <a href="#"> <img src="{{ asset('images/8.jpg') }}" width="20" height="20" class="color-vari"> </a>
+                              <a href="#"> <img src="{{ asset('images/7.jpg') }}" width="20" height="20" class="color-vari"> </a>  
+                              <a href="#"> <img src="{{ asset('images/6.jpg') }}" width="20" height="20" class="color-vari"> </a>
+                              <a href="#"> <img src="{{ asset('images/5.jpg') }}" width="20" height="20" class="color-vari"> </a>  
+                              <a href="#"> <img src="{{ asset('images/4.jpg') }}" width="20" height="20" class="color-vari"> </a>
                             </div>
                               </div>
                               
