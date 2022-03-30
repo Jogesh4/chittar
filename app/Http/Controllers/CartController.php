@@ -29,9 +29,11 @@ class CartController extends Controller
             }
     }
 
-    public function add_to_cart(Item $item)
+    public function add_to_cart(Request $request)
     {
         $userID = auth()->user()->id;
+
+        $item = Item::where('id',$request->item_id)->first();
 
         $cart = CartItem::where(['item_id'=>$item->id,'user_id'=>auth()->user()->id,'status' => 1])->first();
 
@@ -49,7 +51,7 @@ class CartController extends Controller
         }
         
 
-        return redirect()->back();
+        return 1;
     }
 
     public function remove_from_cart()

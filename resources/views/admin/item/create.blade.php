@@ -13,519 +13,564 @@
 
 
 @section('content')
-    <!-- Main content -->
-    <section class="py-0">
-      <div class="container-fluid">
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">{{ $title }}</h3>
-          </div>
-          <!-- /.card-header --> 
-          
-          @if($item->exists)
-            <form method="POST" action="{{ route('admin.items.update', $item) }}" enctype="multipart/form-data">
-            @method('put')
-          @else
-              <form method="POST" action="{{ route('admin.items.store') }}" enctype="multipart/form-data">
-          @endif
-          @csrf
-          <div class="card-body">
 
-            <div class="form-group @error('type') has-danger @enderror">
-              <label class="col-form-label" for="type">Type</label>
-              <select class="form-control @error('type') is-invalid @enderror" id="type" name="type">
-                {{-- @foreach($categories as $category) --}}
-                    {{-- <option @if(old('category', $item->category_id) == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option> --}}
-                {{-- @endforeach --}}
-                <option @if(old('type', 'physical') == 'physical') selected @endif value="physical">Physical</option>
-                <option @if(old('type', 'digital') == 'digital') selected @endif value="digital">Digital</option>
-              </select>
-              @error('type') <span class="invalid-feedback">{{ $message }}</span> @enderror
+<div class="container-fluid">         
+                    
+<div class="row">
+ 
+    <div class="col-lg-2 col-md-4 p-2" id="general_click">
+    
+        <h5 class="pinkit"> <i class="fas fa-qrcode"></i> General Info.</h5>
+        <p>Setup Basic Product Details</p>
+    </div>
+
+    <div class="col-lg-2 col-md-4 p-2" id="inventory_click">
+    
+        <h5> <i class="fas fa-qrcode"></i> Inventory  Details</h5>
+        <p>Stock & Pricing Options</p>
+    </div>
+
+
+    <div class="col-lg-2 col-md-4 p-2" id="variant_click">
+    
+        <h5> <i class="fas fa-qrcode"></i> Options & Variants</h5>
+        <p>Add Option details</p>
+    </div>
+
+
+    <div class="col-lg-2 col-md-4 p-2" id="attribute_click">
+    
+        <h5> <i class="fas fa-qrcode"></i> Product Attribute</h5>
+        <p>Product Specifications</p>
+    </div>
+
+    <div class="col-lg-3 col-md-4 p-2" id="media_click">
+    
+        <h5> <i class="fas fa-qrcode"></i> Product Media</h5>
+        <p>Add Option Based Product Media</p>
+    </div>
+
+</div>
+<div class="" id="general_div">
+
+<div class="row">
+
+    <div class="col-sm-12 col-md-12 col-lg-3 p-2">
+         <label>Product Type<span style="color:red;">*</span></label>
+        <select class="selectpicker form-control1" id="product_type" name="product_type" required="">
+            <option value="" disabled="" selected="" hidden="">Product Type</option>
+            <option value="physical">Physical</option>
+            <option value="digital">Digital</option>                                      
+        </select>
+
+    </div> 
+
+       <div class="col-md-12 col-lg-3 form-outline p-2">
+         <label>Product Title<span style="color:red;">*</span></label>
+        <input type="text" name="product_title" id="" placeholder="Product title" class="form-control2 ">
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-3 p-2">
+
+         <label>Brand</label>
+        <select class="selectpicker form-control1" id="brand" name="brand" required="">
+            <option value="" disabled="" selected="" hidden="">Brand</option>
+            <option value="1">ABCDEF</option>
+            <option value="2">GHIJKL</option>                                      
+        </select>
+
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-3 p-2">
+
+         <label>Category<span style="color:red;">*</span></label>
+        <select class="selectpicker form-control1" id="category" name="category" required="">
+            <option value="" disabled="" selected="" hidden="">Category</option>
+            <option value="1">ABCDEF</option>
+            <option value="2">GHIJKL</option>                                      
+        </select>
+  
+    </div>
+    
+    
+
+    <div class="col-md-12 col-lg-3 form-outline p-2">
+      <label>Model No.</label>
+        <input type="text" name="model" id="model" placeholder="Model No." class="form-control2">
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-3 p-2">
+
+         <label>Tax Category<span style="color:red;">*</span></label>
+        <select class="selectpicker form-control1" id="tax_category" name="tax_category" required="">
+            <option value="" disabled="" selected="" hidden="">Tax Category</option>
+            <option value="1">ABCDEF</option>
+            <option value="2">GHIJKL</option>                                      
+        </select>
+  
+    </div>
+
+    
+
+    <div class="col-sm-12 col-md-12 col-lg-3 p-2">
+
+         <label>Product Condition<span style="color:red;">*</span></label>
+        <select class="selectpicker form-control1" id="product_condition" name="product_condition" required="">
+            <option value="" disabled="" selected="" hidden="">Product Condition </option>
+            <option value="1">ABCDEF</option>
+            <option value="2">GHIJKL</option>                                      
+        </select>
+
+    </div>
+
+    <div class="col-md-12 col-lg-3 form-outline p-2">
+         <label>Warranty(Days)<span style="color:red;">*</span></label>
+        <input type="text" name="warranty" id="warranty" placeholder="Warranty" class="form-control2 ">
+    </div>
+
+    <div class="col-md-12 col-lg-3 form-outline p-2">
+         <label>Return(Days)<span style="color:red;">*</span></label>
+        <input type="text" name="return" id="return" placeholder="Return (Days)" class="form-control2 ">
+    </div>
+
+    </div>
+        <div class="row mt-5">
+            <div class="d-flex justify-content-end">
+                <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a><span class="ml-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target="">NEXT <i class="fas text-white fa-arrow-right"></i> </a></span>
+            </div>
+        </div>
+
+    </div>
+<!-- --------------------------------Section 2--------------------------- -->
+  <div class="p-2 bg-white d-none" id="inventory_div">
+        <div class="row ">	
+            
+            <div class="col-md-12 col-lg-10">
+              <p class="ptext">  Do you want to track inventory for this product?</p>
             </div>
 
-            <div class="form-group @error('name') has-danger @enderror">
-              <label class="col-form-label" for="name">Name</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $item->name) }}" placeholder="Name" required>
-              @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('brand') has-danger @enderror">
-              <label class="col-form-label" for="brand">Brand</label>
-              <select class="form-control @error('brand') is-invalid @enderror" id="brand" name="brand">
-              @foreach($brands as $brand)
-                  <option @if(old('brand', $item->brand_id) == $brand->id) selected @endif value="{{ $brand->id }}">{{ $brand->name }}</option>
-                  @endforeach
-              </select>
-              @error('brand') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('category') has-danger @enderror">
-              <label class="col-form-label" for="category">Category</label>
-              <select class="form-control @error('category') is-invalid @enderror" id="category" name="category">
-              @foreach($categories as $category)
-                  <option @if(old('category', $item->category_id) == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
-                  @endforeach
-              </select>
-              @error('category') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('description') has-danger @enderror">
-              <label class="col-form-label" for="description">Description</label>
-              <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description', $item->description) }}" placeholder="Description" required></textarea>
-              @error('description') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('model') has-danger @enderror">
-              <label class="col-form-label" for="model">Model No</label>
-              <input type="text" class="form-control @error('model') is-invalid @enderror" id="model" name="model" value="{{ old('model', $item->model) }}" placeholder="Model" required>
-              @error('model') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('tax_category') has-danger @enderror">
-              <label class="col-form-label" for="tax_category">Tax Category</label>
-              <select class="form-control @error('tax_category') is-invalid @enderror" id="tax_category" name="tax_category">
-              {{-- @foreach($tax_categories as $category)
-                  <option @if(old('category', $item->category_id) == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
-                  @endforeach
-              </select>
-              @endforeach --}}
-              <option @if(old('tax_category', '5') == '5') selected @endif value="5">5</option>
-              <option @if(old('tax_category', '10') == '10') selected @endif value="10">10</option>
-            </select>
-              @error('tax_category') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-
-            <div class="form-group @error('condition') has-danger @enderror">
-              <label class="col-form-label" for="condition">Condition</label>
-              <select class="form-control @error('condition') is-invalid @enderror" id="condition" name="condition">
-                <option @if(old('condition', 'old') == 'old') selected @endif value="old">Old</option>
-                <option @if(old('condition', 'new') == 'new') selected @endif value="new">New</option>
-                <option @if(old('condition', 'refurbished') == 'refurbished') selected @endif value="refurbished">Refurbished</option>
-              </select>
-              @error('condition') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('warranty') has-danger @enderror">
-              <label class="col-form-label" for="warranty">warranty</label>
-              <input type="text" class="form-control @error('warranty') is-invalid @enderror" id="warranty" name="warranty" value="{{ old('warranty', $item->warranty) }}" placeholder="warranty" required>
-              @error('warranty') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('return') has-danger @enderror">
-              <label class="col-form-label" for="return">return</label>
-              <input type="text" class="form-control @error('return') is-invalid @enderror" id="return" name="return" value="{{ old('return', $item->return) }}" placeholder="return" required>
-              @error('return') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group my-2">
-              <div class="row justify-content-between">
-                <div class="col">
-                  <label>Do you want to track inventory for this product?</label>
-                </div>
-                <div class="col-auto">
-                  <div class="radio-inline">
-                    <label class="radio">
-                      <input type="radio" name="track_inventory" value="1">Yes
+            <div class="col-md-12 col-lg-2 form-outline">
+                <span class="ml-3 mr-4">
+                    <input class="form-check-input" type="radio" name="Inventory" value="yes">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    Yes
                     </label>
-                    <label class="radio">
-                      <input type="radio" name="track_inventory" value="0">No
+                    </span>
+                    <span class="ml-3" >
+                    <input class="form-check-input" type="radio" name="Inventory" value="no">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    No
+                    </label>   
+                </span>           
+            </div>
+        </div>
+
+
+
+        <div class="row ">	
+            
+            <div class="col-md-12 col-lg-9">
+              <p class="ptext">  You want to sell this product as?</p>
+            </div>
+
+            <div class="col-md-12 col-lg-3 form-outline">
+                <span class="ml-3 mr-4">
+                    <input class="form-check-input" type="radio" name="Inventory" value="Shipping">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    Shipping
                     </label>
-                  </div>
-                </div>
-              </div>
+                    </span>
+                    <span class="ml-3 mr-4" >
+                    <input class="form-check-input" type="radio" name="Inventory" value="pickup">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    Pick Up
+                    </label>   
+                </span>   
+                <span class="ml-3" >
+                    <input class="form-check-input" type="radio" name="Inventory" value="Both">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    Both
+                    </label>   
+                </span>                   
+            </div>
+        </div>
+
+
+
+        <div class="row ">	
+            
+            <div class="col-md-12 col-lg-10">
+              <p class="ptext">  Continue selling when out of stock</p>
             </div>
 
-            <div class="form-group my-2">
-              <div class="row justify-content-between">
-                <div class="col">
-                  <label>You want to sell this product as?</label>
-                </div>
-                <div class="col-auto">
-                  <div class="radio-inline">
-                    <label class="radio">
-                      <input type="radio" name="selling_at" value="1">Shipping only
+            <div class="col-md-12 col-lg-2 form-outline">
+                <span class="ml-3 mr-4">
+                    <input class="form-check-input" type="radio" name="Inventory" value="yes">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    Yes
                     </label>
-                    <label class="radio">
-                      <input type="radio" name="selling_at" value="2">Pickup Only
+                    </span>
+                    <span class="ml-3" >
+                    <input class="form-check-input" type="radio" name="Inventory" value="no">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    No
+                    </label>   
+                </span>           
+            </div>
+        </div>
+
+
+
+        <div class="row ">	
+            
+            <div class="col-md-12 col-lg-10">
+              <p class="ptext">  Availabel for Cash on Delivery</p>
+            </div>
+
+            <div class="col-md-12 col-lg-2 form-outline">
+                <span class="ml-3 mr-4">
+                    <input class="form-check-input" type="radio" name="Inventory" value="yes">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    Yes
                     </label>
-                    <label class="radio">
-                      <input type="radio" name="selling_at" value="3">Both
+                    </span>
+                    <span class="ml-3" >
+                    <input class="form-check-input" type="radio" name="Inventory" value="no">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    No
+                    </label>   
+                </span>           
+            </div>
+        </div>
+
+
+        <div class="row ">	
+            
+            <div class="col-md-12 col-lg-10">
+              <p class="ptext">  Availabel for Gift Wrap</p>
+            </div>
+
+            <div class="col-md-12 col-lg-2 form-outline">
+                <span class="ml-3 mr-4">
+                    <input class="form-check-input" type="radio" name="Inventory" value="yes">
+                    <label class="form-check-label clabel" for="flexRadioDefault1">
+                    Yes
                     </label>
-                  </div>
-                </div>
-              </div>
+                    </span>
+                    <span class="ml-3" >
+                    <input class="form-check-input" type="radio" name="Inventory" value="no">
+                    <label class="form-check-label ptext" for="flexRadioDefault1">
+                    No
+                    </label>   
+                </span>           
             </div>
+        </div>
 
-            <div class="form-group my-2">
-              <div class="row justify-content-between">
-                <div class="col">
-                  <label>Continue selling when out of stock</label>
-                </div>
-                <div class="col-auto">
-                  <div class="radio-inline">
-                    <label class="radio">
-                      <input type="radio" name="continue_selling_when_stock_out" value="1">Yes
-                    </label>
-                    <label class="radio">
-                      <input type="radio" name="continue_selling_when_stock_out" value="0">No
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
+<div class="row mt-3">
+    <div class="col-md-12 col-lg-3 form-outline p-2">
+        <input type="number" name="type-product" id="" placeholder="Minimum Purchase Quantity *" class="form-control2 ">
+    </div>
 
-            <div class="form-group my-2">
-              <div class="row justify-content-between">
-                <div class="col">
-                  <label>Available for Cash on Delivery</label>
-                </div>
-                <div class="col-auto">
-                  <div class="radio-inline">
-                    <label class="radio">
-                      <input type="radio" name="cash_on_delivery" value="1">Yes
-                    </label>
-                    <label class="radio">
-                      <input type="radio" name="cash_on_delivery" value="0">No
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="col-md-12 col-lg-3 form-outline p-2">
+        <input type="number" name="type-product" id="" placeholder="Maximum Purchase Quantity *" class="form-control2 ">
+    </div>
 
-            <div class="form-group my-2">
-              <div class="row justify-content-between">
-                <div class="col">
-                  <label>Available for Gift Wrap</label>
-                </div>
-                <div class="col-auto">
-                  <div class="radio-inline">
-                    <label class="radio">
-                      <input type="radio" name="gift_wrap" value="1">Yes
-                    </label>
-                    <label class="radio">
-                      <input type="radio" name="gift_wrap" value="0">No
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="col-md-12 col-lg-3 form-outline p-2">
+        <input type="number" name="type-product" id="" placeholder="Stock Alert Quantity *" class="form-control2 ">
+    </div>
 
-            <div class="form-group @error('min_purchase_qty') has-danger @enderror">
-              <label class="col-form-label" for="min_purchase_qty">Minimum Purchase Qty</label>
-              <input type="text" class="form-control @error('min_purchase_qty') is-invalid @enderror" id="min_purchase_qty" name="min_purchase_qty" value="{{ old('min_purchase_qty', $item->min_purchase_qty) }}" placeholder="Min Purchase Qty" required>
-              @error('min_purchase_qty') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
+    <div class="col-md-12 col-lg-3 form-outline p-2">
+        <input type="number" name="type-product" id="" placeholder="Cost Price *" class="form-control2 ">
+    </div>
 
-            <div class="form-group @error('max_purchase_qty') has-danger @enderror">
-              <label class="col-form-label" for="max_purchase_qty">Maximum Purchase Qty</label>
-              <input type="text" class="form-control @error('max_purchase_qty') is-invalid @enderror" id="max_purchase_qty" name="max_purchase_qty" value="{{ old('max_purchase_qty', $item->max_purchase_qty) }}" placeholder="Max Purchase Qty" required>
-              @error('max_purchase_qty') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
+</div>
+        
 
-            <div class="form-group @error('price') has-danger @enderror">
-              <label class="col-form-label" for="price">Price</label>
-              <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $item->price) }}" placeholder="Price" required>
-              @error('price') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
+<div class="row  mt-5">
+    <div class="d-flex justify-content-end">
+        <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a><span class="ml-3 mr-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target=""><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
+        <span class="ml-3 mr-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target="">NEXT <i class="fas text-white fa-arrow-right"></i> </a></span>
+    </div>
+</div>
 
-            <div class="form-group @error('stock_alert_qty') has-danger @enderror">
-              <label class="col-form-label" for="stock_alert_qty">Stock Alert Quantity</label>
-              <input type="text" class="form-control @error('stock_alert_qty') is-invalid @enderror" id="stock_alert_qty" name="max_purchase_qty" value="{{ old('stock_alert_qty', $item->stock_alert_qty) }}" placeholder="Stock Alert Quantity" required>
-              @error('stock_alert_qty') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
 
-            <div class="form-group @error('has_multiple_options') has-danger @enderror">
-              <label class="col-form-label" for="has_multiple_options">This product has multiple options, like different sizes or colors</label>
-              <input type="text" class="form-control @error('has_multiple_options') is-invalid @enderror" id="has_multiple_options" name="has_multiple_options" value="{{ old('has_multiple_options', $item->has_multiple_options) }}" placeholder="Max Purchase Qty" required>
-              @error('has_multiple_options') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
 
-            <div class="form-group my-2">
-              <div class="row justify-content-between">
-                <div class="col">
-                  <label>This product has multiple options, like different sizes or colors</label>
-                </div>
-                <div class="col-auto">
-                  <div class="radio-inline">
-                    <label class="radio">
-                      <input type="radio" name="has_multiple_options" value="1">Yes
-                    </label>
-                    <label class="radio">
-                      <input type="radio" name="has_multiple_options" value="0">No
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
+   </div>
+<!-- --------------------------------Section 3--------------------------- -->
 
-            <div>
-              <div id="more-options">
-                <div class="row mb-2">
-                  <div class="col-4">
-                    <select class="form-control">
-                      <option value="size">Size</option>
-                      <option value="color">Color</option>
-                    </select>
-                  </div>
-                  <div class="col-6">
-                    <input class="form-control tags-input" type="text" />
-                  </div>
-                  <div class="col-2">
-                    <button type="button" class="btn btn-danger btn-sm btn-remove">x</button>
-                    <button type="button" class="btn btn-info btn-sm btn-add">+</button>
-                  </div>
-                </div>
-              </div>
+<div class="bg-white p-2 d-none" id="variant_div">
+    <div class="row ">	
+            
+        <div class="col-md-12 col-lg-10">
+          <p class="ptext">  This product has multiple options, like different sizes or colors</p>
+        </div>
 
-              <div class="row"><div class="col"><button type="button" class="btn btn-info btn-sm btn-add-row">Add Item</button></div></div>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Variant</th>
-                    <th>Price(excl. tax)</th>
-                    <th>Quantity</th>
-                    <th>SKU</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="tbody">
-                </tbody>
-              </table>
-            </div>
-
-            <div class="form-group @error('country_of_origin') has-danger @enderror">
-              <label class="col-form-label" for="country_of_origin">Country of Origin</label>
-              <select class="form-control @error('country_of_origin') is-invalid @enderror" id="country_of_origin" name="country_of_origin">
-                {{-- @foreach($categories as $category) --}}
-                    {{-- <option @if(old('category', $item->category_id) == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option> --}}
-                {{-- @endforeach --}}
-                <option @if(old('country_of_origin', 'india') == 'india') selected @endif value="india">India</option>
-                <option @if(old('country_of_origin', 'china') == 'china') selected @endif value="china">China</option>
-              </select>
-              @error('country_of_origin') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('weight_unit') has-danger @enderror">
-              <label class="col-form-label" for="weight_unit">Weight Unit</label>
-              <select class="form-control @error('weight_unit') is-invalid @enderror" id="weight_unit" name="weight_unit">
-                <option @if(old('weight_unit', 'kg') == 'kg') selected @endif value="kg">kg</option>
-                <option @if(old('weight_unit', 'gm') == 'gm') selected @endif value="gm">gm</option>
-              </select>
-              @error('weight_unit') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('weight') has-danger @enderror">
-              <label class="col-form-label" for="weight">weight</label>
-              <input type="text" class="form-control @error('weight') is-invalid @enderror" id="weight" name="weight" value="{{ old('weight', $item->weight) }}" placeholder="weight" required>
-              @error('weight') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('isbn') has-danger @enderror">
-              <label class="col-form-label" for="isbn">isbn</label>
-              <input type="text" class="form-control @error('isbn') is-invalid @enderror" id="isbn" name="isbn" value="{{ old('isbn', $item->isbn) }}" placeholder="isbn" required>
-              @error('isbn') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('hsn') has-danger @enderror">
-              <label class="col-form-label" for="hsn">hsn</label>
-              <input type="text" class="form-control @error('hsn') is-invalid @enderror" id="hsn" name="hsn" value="{{ old('hsn', $item->hsn) }}" placeholder="hsn" required>
-              @error('hsn') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('sac') has-danger @enderror">
-              <label class="col-form-label" for="hsn">sac</label>
-              <input type="text" class="form-control @error('sac') is-invalid @enderror" id="sac" name="sac" value="{{ old('sac', $item->sac) }}" placeholder="sac" required>
-              @error('sac') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('upc') has-danger @enderror">
-              <label class="col-form-label" for="upc">upc</label>
-              <input type="text" class="form-control @error('upc') is-invalid @enderror" id="upc" name="upc" value="{{ old('upc', $item->upc) }}" placeholder="upc" required>
-              @error('upc') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group @error('product_image') has-danger @enderror">
-              <label class="col-form-label" for="product_image">Product Image</label>
-              <input type="file" class="form-control @error('product_image') is-invalid @enderror" id="product_image" name="product_image" placeholder="product_image">
-              @error('product_image') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group py-2">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" id="is_active" name="is_active" value="1" @if(old('is_active', $item->is_active) == 1) checked @endif>
-                  Product Published
+        <div class="col-md-12 col-lg-2 form-outline">
+            <span class="ml-3 mr-4">
+                <input class="form-check-input" type="radio" name="Inventory" value="yes">
+                <label class="form-check-label ptext" for="flexRadioDefault1">
+                Yes
                 </label>
-              </div>
+                </span>
+                <span class="ml-3" >
+                <input class="form-check-input" type="radio" name="Inventory" value="no">
+                <label class="form-check-label ptext" for="flexRadioDefault1">
+                No
+                </label>   
+            </span>           
+        </div>
+    </div>
+
+    <div class="row ">	
+            
+        <div class="col-md-12 col-lg-3">
+          <p class="ptext mt-3">Option 1</p>
+        </div>
+
+
+        <div class="col-sm-12 col-md-12 col-lg-3 p-2">
+
+            <select class="selectpicker form-control1" id="type" name="type" required="">
+                <option value="" disabled="" >Select Option</option>
+                <option value="1" selected="" >Color</option>
+                <option value="2">Size</option>
+                <option value="3">Carat</option>                                      
+                <option value="4">Clarity</option>                                      
+                <option value="5">Strap</option>                                      
+            </select>
+    
+        </div>
+        <div class="col-md-12 col-lg-4 form-outline p-2">
+            <input type="number" name="type-product" id="" placeholder="Add Tag *" class="form-control2 ">
+        </div>
+
+        <div class="col-md-12 col-lg-2 form-outline p-2">
+            
+            
+            <div class="actions">
+                <a href="#" title="Delete"><i class="fas faslls fa-trash-alt ml-4"></i></a>
+                <span class="ml-4"> <a href="#" title="Add"><i class="fas faslls fa-plus"></i></a> </span>
+                </a>
             </div>
 
-          </div>
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">{{ $button_text }}</button>
-          </div>
-          <!-- /.card-footer -->
-          </form>
-         </div>
-      </div>
-    </section>
-    <!-- /.content -->
+        </div>
+    </div>
+
+
+    <div class="row p-5 ">
+        <div class="bor-uplo p-2">
+            
+            <table class=" table table-justified">
+                <thead >
+                    <tr>
+                        <th class="fw-bold text-dark">Variant</th>
+                        <th class="fw-bold text-dark">Price(excl.tax)</th>
+                         <th class="fw-bold text-dark">Quantity</th> 
+                         <th class="fw-bold text-dark">SKY</th> 
+                        
+                    </tr>
+                 </thead>
+                
+                
+                
+                <tbody>
+                <tr>
+                <td scope="row">6546</td>
+                 <td>11/04/2022</td>
+                 <td>Addan</td> 
+                 <td><i class="fas fa-rupee-sign"></i> 2565</td> 
+                 </tr>
+                 
+                
+                </tbody>
+            </table>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="row ">	
+            
+        <div class="col-md-12 col-lg-8">
+          <p class="ptext">  Select Default Product Variant  </p>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-3 p-2">
+
+            <select class="selectpicker form-control1" id="type" name="type" required="">
+                <option value="" disabled="" >Select Option</option>
+                                       
+            </select>
+    
+        </div>
+    </div>
+
+
+    <div class="row  mt-5">
+        <div class="d-flex justify-content-end">
+            <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a><span class="ml-3 mr-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target=""><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
+            <span class="ml-3 mr-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target="">NEXT <i class="fas text-white fa-arrow-right"></i> </a></span>
+        </div>
+    </div>
+
+
+</div>
+<!-- ---------------------------------------------section4-------------------------- -->
+<div class="bg-white p-2 d-none" id="attribute_div">
+    <div class="row ">	
+        <h5 >Attributes</h5>
+    </div>
+    <div class="row ">	
+            
+        <div class="col-md-12 col-lg-2">
+          <p class="ptext mt-3">  Country of origin *</p>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-4 p-2">
+
+            <select class="selectpicker form-control1" id="type" name="type" required="">
+                <option value="" disabled="" >Select Option</option>
+                                       
+            </select>
+    
+        </div>
+
+        <div class="col-md-12 col-lg-1">
+            <p class="ptext mt-3">  Weight *</p>
+        </div>
+  
+        <div class="col-sm-12 col-md-12 col-lg-2 p-2">  
+            <select class="selectpicker form-control1" id="type" name="type" required="">
+                <option value="" disabled="" >Select Weight</option>
+                <option value="1" selected="" >gm</option>
+                <option value="2">Kg</option>
+            </select>      
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-3 p-2">  
+            <input type="number" name="type-product" id="" placeholder="Weight " class="form-control2 ">    
+        </div>
+
+    </div>
+    <div class="row p-5">
+        <div class="bg-light p-4">
+            <div class="row ">
+                <div class="col-lg-6 col-md-12">
+                    <label class="txt-styel">ISBN </label>
+                    <input type="text" name="type-product" id="" placeholder="ISBN " class="form-control2 "> 
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="txt-styel">HSN </label>
+                    <input type="text" name="type-product" id="" placeholder="HSN " class="form-control2 "> 
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="txt-styel">SAC </label>
+                    <input type="text" name="type-product" id="" placeholder="SAC " class="form-control2 "> 
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="txt-styel">UPC </label>
+                    <input type="text" name="type-product" id="" placeholder="UPC " class="form-control2 "> 
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="txt-styel">File: </label>
+                    <input type="text" name="type-product" id="" placeholder="File: " class="form-control2 "> 
+                </div>
+
+
+                <div class="col-md-12 col-lg-6 form-outline  position-relative">
+                    <label class="txt-styel">UPLOAD</label>
+                    <input type="file" id="bussiness_licence" name="bussiness_licence" class="file-box">
+					         
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row  mt-5">
+        <div class="d-flex justify-content-end">
+            <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a><span class="ml-3 mr-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target=""><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
+            <span class="ml-3 mr-3"> <a href="#" class="btn-blu-login" data-bs-toggle="modal" data-bs-target="">NEXT <i class="fas text-white fa-arrow-right"></i> </a></span>
+        </div>
+    </div>
+
+</div>
+
+<!-- ---------------------------------------------section5-------------------------- -->
+
+<div class="d-none" id="media_div">
+
+
+
+</div>
+
+
+</div>
+
 @endsection
 
-@section('scripts')
-    <script>
-        $(document).ready(function(){
-          let optionsLen = 1;
-          $(document).on('click', '.btn-add', function() {
-            $(this).hide();
-            optionsLen++;
-            $("#more-options").append(`<div class="row mb-2">
-                <div class="col-4">
-                  <select class="form-control">
-                    <option value="size">Size</option>
-                    <option value="color">Color</option>
-                  </select>
-                </div>
-                <div class="col-6">
-                  <input class="form-control tags-input" type="text" />
-                </div>
-                <div class="col-2">
-                  <button type="button" class="btn btn-danger btn-sm btn-remove">x</button>
-                  <button type="button" class="btn btn-info btn-sm btn-add">+</button>
-                </div>
-              </div>`);
-          });
-          $(document).on("click", ".btn-remove", function(){
-            optionsLen--;
-            $(this).parent().parent().remove();
-          });
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-          function generateVariants() {
-            let variants = '';
-            const selects = $('#more-options').find('select');
-            for(let i=0;i<selects.length;i++) {
-              // fetching selects and setting select for each option
-              const optionsValue = $(selects[i]).find(":selected").val();
-              const input = $(selects[i]).closest('.row').find('input[type="text"]');
-              variants += `<select name="type[]" class="form-control ${optionsValue}"></select>`;
-              generateOption(input)
-            }
+<script>
 
-            return variants;
-          }
+ $( document ).ready(function() {
 
-          $(document).on('click', '.btn-add-row', function() {
-            // $(this).hide();
-            $("#tbody").append(`<tr>
-                <td class="variant">
-                  ${generateVariants()}
-                </td>
-                <td><input type="text" name="price[]" class="form-control" /></td>
-                <td><input type="text" name="qty[]" class="form-control" /></td>
-                <td><input type="text" name="sku[]" class="form-control" /></td>
-                <td>
-                  <button type="button" class="btn btn-danger btn-sm btn-remove-row">x</button>
-                </td>
-              </tr>`);
-          });
-          $(document).on("click", ".btn-remove-row", function(){
-            $(this).parent().parent().remove();
-          });
+     $("#general_click").click(function(){
 
-          
+         document.getElementById('general_div').classList.remove('d-none');
+         document.getElementById('inventory_div').classList.add('d-none');
+         document.getElementById('variant_div').classList.add('d-none');
+         document.getElementById('attribute_div').classList.add('d-none');
+         document.getElementById('media_div').classList.add('d-none');
 
-          // $(".tags-input").keypress(function(e) {
-          //   console.log('pressed')
-          //   var code = e.keyCode || e.which;
-          //   if(code == 32) {
-          //     //Enter keycode
-          //     generateOption($(this));
-              
+    });
 
-          //   }
-          // });
+    $("#inventory_click").click(function(){
 
-          function generateOption(ele) {
-            const values = ele.val();
-            const arr = values.split(" ")
-            const selectedOption = $(ele).closest('.row').find('select option:selected').val();
-            // const foundValues = $(`select option[value="${selectedOption}"]`).closest('.row').find('input[type="text"]').val();
-              // console.log(foundValues);
-            let options = '';
-            for(let i=0;i<arr.length; i++){
-              options+= `<option value="${arr[i]}">${arr[i]}</option>`;
-            }
+         document.getElementById('general_div').classList.add('d-none');
+         document.getElementById('inventory_div').classList.remove('d-none');
+         document.getElementById('variant_div').classList.add('d-none');
+         document.getElementById('attribute_div').classList.add('d-none');
+         document.getElementById('media_div').classList.add('d-none');
 
-            $(".size").append(options)
-            // console.log($(document).find("select .size"))
-            // $(document).find("."+selectedOption).append(options);
-          }
-          
-        });
-    </script>
-@endsection
+    });
 
-{{--  $("#btn-add-more-service").on("click", function(){
-                $("#more-services").append(`
-                    <div style="margin-bottom: 15px;">
-                        <hr/>
-                        <div class="form-group{{ $errors->has('services[]') ? ' has-error' : '' }}">
-                            <label for="service" class="col-md-4 control-label">Service</label>
+    $("#variant_click").click(function(){
 
-                            <div class="col-md-6" id="service">
-                                <select class="form-control" name="services[]" required>
-                                    <option disabled selected>Select Service</option>
-                                    @foreach($services as $service)
-                                        <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+         document.getElementById('general_div').classList.add('d-none');
+         document.getElementById('inventory_div').classList.add('d-none');
+         document.getElementById('variant_div').classList.remove('d-none');
+         document.getElementById('attribute_div').classList.add('d-none');
+         document.getElementById('media_div').classList.add('d-none');
 
-                            @if ($errors->has('services[]'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('services[]') }}</strong>
-                                </span>
-                            @endif
-                        </div>
+    });
 
-                        <div class="form-group{{ $errors->has('prices[]') ? ' has-error' : '' }}">
-                            <label for="price" class="col-md-4 control-label">Price</label>
+    $("#attribute_click").click(function(){
 
-                            <div class="col-md-6" id="price">
-                                <input type="number" class="form-control" name="prices[]" required>
-                            </div>
+         document.getElementById('general_div').classList.add('d-none');
+         document.getElementById('inventory_div').classList.add('d-none');
+         document.getElementById('variant_div').classList.add('d-none');
+         document.getElementById('attribute_div').classList.remove('d-none');
+         document.getElementById('media_div').classList.add('d-none');
 
-                            @if ($errors->has('prices[]'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('prices[]') }}</strong>
-                                </span>
-                            @endif
-                        </div>
+    });
 
-                        <div class="form-group{{ $errors->has('discounts[]') ? ' has-error' : '' }}">
-                            <label for="discount" class="col-md-4 control-label">Discount %</label>
+    $("#media_click").click(function(){
 
-                            <div class="col-md-6" id="discount">
-                                <input type="number" class="form-control" name="discounts[]" value="0">
-                            </div>
+         document.getElementById('general_div').classList.add('d-none');
+         document.getElementById('inventory_div').classList.add('d-none');
+         document.getElementById('variant_div').classList.add('d-none');
+         document.getElementById('attribute_div').classList.add('d-none');
+         document.getElementById('media_div').classList.remove('d-none');
 
-                            @if ($errors->has('discounts[]'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('discounts[]') }}</strong>
-                                </span>
-                            @endif
-                        </div>
+    });
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="button" class="btn btn-danger pull-right" id="remove_service">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-                `);
-            });
 
-            $(document).on("click", "#remove_service", function(){
-                $(this).parent().parent().parent().remove();
-            }); --}}
+});
+
+</script>

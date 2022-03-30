@@ -92,10 +92,11 @@
                 <div class="cart mt-4 align-items-center">
                   @if(auth()->check())
                     @if(!\Cart::session(auth()->user()->id)->get($item->id))
-                    <form method="POST" action="{{ route('add.to.cart', $item) }}">
-                      @csrf
-                      <button class="btn-pink text-uppercase mr-2 px-4">Add to Cart</button>
-                    </form>
+                    
+                      <button id="add" class="btn-pink text-uppercase mr-2 px-4" onclick="add_cart({{ $item->id }},1)">Add to Cart</button>
+
+                      <button id="added" type="button" disabled class="btn-pink text-uppercase mr-2 px-4 d-none">Added to Cart</button>
+
                     @else
                       <button type="button" disabled class="btn-pink text-uppercase mr-2 px-4">Added to Cart</button>
                     @endif
@@ -122,32 +123,6 @@
 
     <div class="row mb-5">
       <h2 class="h2 titllee text-center fw-bold mb-3">Related Products</h2>
-      <!-- @foreach($similar_items as $s)
-      <div class="col-md-3 col-lg-3 col-sm-6 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <img class="img-fluid" style="max-height: 250px;" src="{{ asset('storage/'.$s->image) }}" alt="..." />
-            <p class="mb-0">{{ $s->name }}</p>
-            <p class="mb-0">${{ $s->price }}</p>
-
-
-            @if(auth()->check())
-              @if(!\Cart::session(auth()->user()->id)->get($s->id))
-              <form method="POST" action="{{ route('add.to.cart', $s) }}">
-                @csrf
-                <button class="bttn" style=" border: 0; background: transparent; "><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
-              </form>
-              @else
-              <button type="button" disabled class="bttn" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
-              @endif
-            @else
-            <a href="{{ route('login') }}" class="bttn"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></a>
-            @endif
-          </div>
-        </div>
-      </div>
-      @endforeach -->
-
       
               @foreach($similar_items as $s)
               <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
@@ -181,11 +156,12 @@
                 
                 @if(auth()->check())
                   @if(!\Cart::session(auth()->user()->id)->get($s->id))
-                  <form method="POST" action="{{ route('add.to.cart', $s) }}">
-                    @csrf
-                    <button class="bttn" style=" border: 0; background: transparent; "><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
-                  </form>
-                  @else
+                  
+                    <button id="add-{{ $s->id }}" class="bttn" style=" border: 0; background: transparent; " onclick="add_cart({{ $s->id }},2)"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
+                    
+                    <button id="added-{{ $s->id }}" type="button" disabled class="bttn d-none" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
+                  
+                    @else
                     <button type="button" disabled class="bttn" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
                   @endif
                 @else
@@ -267,6 +243,7 @@
 </div>
 </section>                
 @endsection
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 @section('extras')
   <script>
@@ -276,5 +253,41 @@
     }
     document.addEventListener("DOMContentLoaded", function(event) {
     });
+
+    function add_cart(id,$type){
+
+     var cart_no = document.getElementById('cart_no').textContent;
+
+            $.ajax({
+                    type: "Post",
+                    url: '{{route('add.to.cart')}}',
+                    datatype: 'json',
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                        'item_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                         
+                        if($type == 1){
+                             document.getElementById('add').classList.add('d-none');
+                           document.getElementById('added').classList.remove('d-none');
+                           document.getElementById('cart_no').textContent = parseInt(cart_no) + 1;
+                        }
+                        else{
+                            document.getElementById('add-'+id).classList.add('d-none');
+                           document.getElementById('added-'+id).classList.remove('d-none');
+                           document.getElementById('cart_no').textContent = parseInt(cart_no) + 1;
+                        }
+                           
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
   </script>
 @endsection

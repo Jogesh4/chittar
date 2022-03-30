@@ -114,11 +114,13 @@
                    <a class="" href="{{ route('item.show', $item) }}">
                       <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></a>
                     <div class="fw-bold favorite-icon">
-
-
+                       @if(auth()->check())
                                   <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
                                  <span class="favorite-active d-none" id="favorite_icon1-{{ $item->id }}"><i class="fa fa-thin fa-heart"></i></span>
+                        @else
+                                  <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><a href="{{ route('login') }}"><i class="fa fa-thin fa-heart"></i></a></span>
 
+                        @endif
                     </div>
                   
                 </div> 
@@ -140,11 +142,12 @@
                 
                 @if(auth()->check())
                   @if(!\Cart::session(auth()->user()->id)->get($item->id))
-                  <form method="POST" action="{{ route('add.to.cart', $item) }}">
-                    @csrf
-                    <button class="bttn" style=" border: 0; background: transparent; "><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
-                  </form>
-                  @else
+                  
+                    <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
+                    
+                    <button id="added-{{ $item->id }}" type="button" disabled class="bttn d-none" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
+                    
+                @else
                     <button type="button" disabled class="bttn" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
                   @endif
                 @else
@@ -359,6 +362,34 @@
 $( document ).ready(function() {
       document.getElementById('nav-1').classList.add('active');
 });
+
+function add_cart(id){
+
+     var cart_no = document.getElementById('cart_no').textContent;
+
+            $.ajax({
+                    type: "Post",
+                    url: '{{route('add.to.cart')}}',
+                    datatype: 'json',
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                        'item_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                         
+                           document.getElementById('add-'+id).classList.add('d-none');
+                           document.getElementById('added-'+id).classList.remove('d-none');
+                           document.getElementById('cart_no').textContent = parseInt(cart_no) + 1;
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
 
 function add_favorite(id){
        
