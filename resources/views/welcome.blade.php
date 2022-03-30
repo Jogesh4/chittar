@@ -115,24 +115,9 @@
                       <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></a>
                     <div class="fw-bold favorite-icon">
 
-                      @php
-
-                          $favorite = Favorite::where(['item_id' => $item->id,'user_id' => auth()->user()->id])->first();
-
-                      @endphp
-
-                      @if(!empty($favorite))
-
-                                 <span class="favorite-active" id="favorite_icon1"><i class="fa fa-thin fa-heart"></i></span>
-
-                      @else
 
                                   <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
                                  <span class="favorite-active d-none" id="favorite_icon1-{{ $item->id }}"><i class="fa fa-thin fa-heart"></i></span>
-
-                      @endif
-                      
-                      
 
                     </div>
                   
