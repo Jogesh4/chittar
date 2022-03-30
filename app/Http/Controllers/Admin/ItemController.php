@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemRequest;
+use Illuminate\Http\Request;
 
 use App\Models\Brand;
 use App\Models\Category;
@@ -49,7 +50,7 @@ class ItemController extends Controller
      * @param  App\Http\Requests\ItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemRequest $request)
+    public function store(Request $request)
     {
         return $this->update($request, new Item());
     }
@@ -74,31 +75,32 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemRequest $request, Item $item)
+    public function update(Request $request, Item $item)
     {
-        $item->type = $request->type;
-        $item->name = $request->name;
-        $item->slug = $request->name;
+        // dd($request);
+        $item->type = $request->product_type;
+        $item->name = $request->product_title;
+        $item->slug = $request->product_title;
         $item->brand_id = $request->brand;
         $item->category_id = $request->category;
-        $item->description = $request->description;
+        // $item->description = $request->description;
         $item->model = $request->model;
         $item->tax_category = $request->tax_category;
-        $item->condition = $request->condition;
+        $item->condition = $request->product_condition;
         $item->warranty = $request->warranty;
         $item->return = $request->return;
         $item->track_inventory = $request->track_inventory;
-        $item->selling_at = $request->selling_at;
-        $item->continue_selling_when_stock_out = $request->continue_selling_when_stock_out;
+        $item->selling_at = $request->want_sell;
+        $item->continue_selling_when_stock_out = $request->continue_selling;
         $item->cash_on_delivery = $request->cash_on_delivery;
         $item->gift_wrap = $request->gift_wrap;
-        $item->min_purchase_qty = $request->min_purchase_qty;
-        $item->max_purchase_qty = $request->max_purchase_qty;
-        $item->price = $request->price;
-        $item->stock_alert_qty = $request->stock_alert_qty;
-        $item->has_multiple_options = $request->has_multiple_options;
-        $item->country_of_origin = $request->country_of_origin;
-        $item->weight_unit = $request->weight_unit;
+        $item->min_purchase_qty = $request->min_purchase;
+        $item->max_purchase_qty = $request->max_purchase;
+        $item->price = $request->cost_price;
+        $item->stock_alert_qty = $request->stock_alert;
+        // $item->has_multiple_options = $request->has_multiple_options;
+        $item->country_of_origin = $request->country;
+        $item->weight_unit = $request->weight_type;
         $item->weight = $request->weight;
         $item->isbn = $request->isbn;
         $item->hsn = $request->hsn;
@@ -108,26 +110,27 @@ class ItemController extends Controller
         $imagePath = $request->file('product_image')->store('product_image', 'public');
 
         $item->image = $imagePath;
+        $item->video = $request->video_url;
 
-        $item->is_active = $request->is_active ?? 0;
+        $item->is_active = $request->publish ?? 0;
         
         if($item->save()) {
 
-            if(is_array($request->type)) {
-                $types = $request->type ?? [];
-                $prices = $request->price;
-                $qties = $request->qty;
-                $skus = $request->sku;
-                for($i=0; $i<count($types);$i++){
-                    $variant = new Variant;
-                    $variant->type=$types[$i];
-                    $variant->price=$prices[$i];
-                    $variant->qty=$qties[$i];
-                    $variant->sku=$skus[$i];
-                    $variant->item_id=$item->id;
-                    $variant->save();
-                }
-            }
+            // if(is_array($request->type)) {
+            //     $types = $request->type ?? [];
+            //     $prices = $request->price;
+            //     $qties = $request->qty;
+            //     $skus = $request->sku;
+            //     for($i=0; $i<count($types);$i++){
+            //         $variant = new Variant;
+            //         $variant->type=$types[$i];
+            //         $variant->price=$prices[$i];
+            //         $variant->qty=$qties[$i];
+            //         $variant->sku=$skus[$i];
+            //         $variant->item_id=$item->id;
+            //         $variant->save();
+            //     }
+            // }
 
             return redirect()->back()->with('success', 'Item update successfully');
         } else {
