@@ -1,5 +1,19 @@
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
 /*=====r css====*/
-
+.form-control2 {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 5px 13px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    font-family: 'Font Awesome 5 Free';
+    border: 1px solid #ccc;
+}
 .list-cart-page .product-quantity {
     -webkit-box-flex: 0;
     flex: 0 0 15%;
