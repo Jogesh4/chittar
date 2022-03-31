@@ -33,7 +33,7 @@
                 <h4 class="text-uppercase">Category</h4>
                 <div class="p-lists">
                    @foreach($categories as $category)
-                    <div class="d-flex justify-content-between mt-2">
+                    <div class="d-flex justify-content-between mt-2 text-uppercase" style=" border-bottom: 1px dashed #ccc;">
                       @if($category_name == $category->name)
                         <a href="/search/?category={{ $category->name }}"><span style="color:#ae0151;">{{ $category->name }}</span></a>
                       @else
@@ -74,7 +74,7 @@
           <div class="row align-items-center g-2">
             @if($items->count() > 0)
               @foreach($items as $item)
-              <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
+              <div class="col-sm-6 col-md-3 col-lg-4 mb-3 mb-md-0 h-100" data-aos="fade-up">
                 <div class="card card-span h-100">
                  
                  <div style="overflow: hidden;width: 100%;position:relative;">
@@ -140,7 +140,7 @@
 <!-- ------------------------------------2nd--------------------------- -->
 <section class="mt-0 p-1">
   <div class="container">
-<div class="h2 titllee text-center ">Recently Viewed</div>
+<div class="h2 titllee text-center ">Recently Viewed <span class="line-tt"></span></div>
 
 <div class="row m-4">
 
@@ -211,6 +211,7 @@
         </div>
 </div>
 </section>
+
 
 @endsection
 
