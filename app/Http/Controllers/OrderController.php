@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\CartItem;
 use App\Models\Item;
-
+use App\Models\Address;
 
 class OrderController extends Controller
 {
@@ -67,7 +67,24 @@ class OrderController extends Controller
 
   public function address(Request $request){
        
-      return view('cart.address');
+      $user_id = auth()->user()->id;
+
+      $addresses = Address::where('user_id',$user_id)->get();
+
+      return view('cart.address',compact('addresses'));
+  }
+
+  public function save_address(Request $request){
+       
+      $user_id = auth()->user()->id;
+
+      $address = new Address;
+      $address->user_id = $user_id;
+      $address->save();
+
+      $addresses = Address::where('user_id',$user_id)->get();
+
+      return view('cart.address',compact('addresses'));
   }
 
 }
