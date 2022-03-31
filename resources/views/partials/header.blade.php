@@ -41,7 +41,7 @@
             @if(auth()->check())
                 <span id="cart_no">{{ $cartItems->count() }}</span>
                 @else
-                <span id="cart_no"></span>
+                   <span id="cart_no"></span>
                 @endif
           </div>
         </a>

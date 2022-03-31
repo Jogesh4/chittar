@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\CartItem;
 use App\Models\Item;
-
+use App\Models\Address;
 
 class OrderController extends Controller
 {
@@ -67,7 +67,75 @@ class OrderController extends Controller
 
   public function address(Request $request){
        
-      return view('cart.address');
+      $user_id = auth()->user()->id;
+
+      $addresses = Address::where('user_id',$user_id)->get();
+
+      if(auth()->check()){
+        \Cart::clear();
+         \Cart::session(auth()->user()->id)->clear();
+        $carts = CartItem::where(['user_id'=>auth()->user()->id,'status' => 1])->get();
+          foreach($carts as $cart){
+            \Cart::session(auth()->user()->id)->add(array(
+                'id' => $cart->item_id,
+                'name' => $cart->name,
+                'price' => $cart->price,
+                'quantity' => $cart->qty,
+                'attributes' => array(),
+                'associatedModel' => $cart
+            ));
+        }
+    }
+
+      return view('cart.address',compact('addresses'));
+  }
+
+  public function save_address(Request $request){
+       
+      $user_id = auth()->user()->id;
+
+      $address = new Address;
+      $address->user_id = $user_id;
+      $address->phone = $request->phone;
+      $address->firstname = $request->first_name;
+      $address->lastname = $request->last_name;
+      $address->address = $request->address;
+      $address->city = $request->city;
+      $address->state = $request->state;
+      $address->country = $request->country;
+      $address->pincode = $request->pincode;
+      $address->locality = $request->locality;
+      $address->save();
+
+      $addresses = Address::where('user_id',$user_id)->get();
+
+
+      return redirect()->route('select.address');
+  }
+
+  public function payment($id){
+       
+      $user_id = auth()->user()->id;
+
+      $address = Address::where('id',$id)->first();
+
+      if(auth()->check()){
+        \Cart::clear();
+         \Cart::session(auth()->user()->id)->clear();
+        $carts = CartItem::where(['user_id'=>auth()->user()->id,'status' => 1])->get();
+          foreach($carts as $cart){
+            \Cart::session(auth()->user()->id)->add(array(
+                'id' => $cart->item_id,
+                'name' => $cart->name,
+                'price' => $cart->price,
+                'quantity' => $cart->qty,
+                'attributes' => array(),
+                'associatedModel' => $cart
+            ));
+        }
+    }
+
+      return view('cart.payment',compact('address'));
   }
 
 }
