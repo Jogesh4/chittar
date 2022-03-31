@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Favorite;
+use App\Models\CartItem;
 
 
 class UserController extends Controller
@@ -82,6 +83,22 @@ class UserController extends Controller
      public function favorite(Request $request){
          
         $favorites = Favorite::where('user_id',auth()->user()->id)->get();
+
+        if(auth()->check()){
+        \Cart::clear();
+         \Cart::session(auth()->user()->id)->clear();
+        $carts = CartItem::where(['user_id'=>auth()->user()->id,'status' => 1])->get();
+          foreach($carts as $cart){
+            \Cart::session(auth()->user()->id)->add(array(
+                'id' => $cart->item_id,
+                'name' => "fvfdv",
+                'price' => 34,
+                'quantity' => 1,
+                'attributes' => array(),
+                'associatedModel' => array()
+            ));
+        }
+    }
          
         return view('user.favorite',compact('favorites'));
      }

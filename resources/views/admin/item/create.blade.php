@@ -345,13 +345,23 @@
     </div>
 
     <div class="row ">	
+
+        <div class="col-md-12 col-lg-2 mt-3">
+            <label>Option 1</label>
+        </div>
             
         <div class="col-md-12 col-lg-3">
-          <p class="ptext mt-3">Option 1</p>
+            <label>Color</label>
+           <input type="text" name="color" id="color" placeholder="Enter Color" class="form-control2">
+        </div>
+
+        <div class="col-md-12 col-lg-3">
+            <label>Size</label>
+           <input type="text" name="size" id="size" placeholder="Enter Size" class="form-control2">
         </div>
 
 
-        <div class="col-sm-12 col-md-12 col-lg-3 p-2">
+        {{-- <div class="col-sm-12 col-md-12 col-lg-3 p-2">
 
             <select class="selectpicker form-control1" id="type" name="type">
                 <option value="" disabled="" >Select Option</option>
@@ -362,15 +372,15 @@
                 <option value="5">Strap</option>                                      
             </select>
     
-        </div>
-        <div class="col-md-12 col-lg-4 form-outline p-2">
+        </div> --}}
+        {{-- <div class="col-md-12 col-lg-4 form-outline p-2">
             <input type="number" name="type-product" id="" placeholder="Add Tag *" class="form-control2 ">
-        </div>
+        </div> --}}
 
         <div class="col-md-12 col-lg-2 form-outline p-2">
             
             
-            <div class="actions">
+            <div class="actions mt-3">
                 <a href="#" title="Delete"><i class="fas faslls fa-trash-alt ml-4"></i></a>
                 <span class="ml-4"> <a href="#" title="Add"><i class="fas faslls fa-plus"></i></a> </span>
                 </a>

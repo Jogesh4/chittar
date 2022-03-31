@@ -34,10 +34,19 @@
                               <td>Rs.{{ $favorite->item->price }}</td>
                               <td><a href="{{ route('item.show', $favorite->item) }}" class="btn btn-warning">View Details</a></td>
                                <td>
-                                 <form method="POST" action="{{ route('add.to.cart', $favorite->item) }}">
-                                  @csrf
-                                  <button class="bttn" style=" border: 0; background: transparent; "><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
-                                </form>
+                                  @if(auth()->check())
+                                    @if(!\Cart::session(auth()->user()->id)->get($favorite->item->id))
+                                    
+                                      <button id="add-{{ $favorite->item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $favorite->item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
+                                      
+                                      <button id="added-{{ $favorite->item->id }}" type="button" disabled class="bttn d-none" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
+                                      
+                                  @else
+                                      <button type="button" disabled class="bttn" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
+                                    @endif
+                                  @else
+                                    <a href="{{ route('login') }}" class="bttn"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></a>
+                                  @endif
                                </td>
                             
                             </tr>
@@ -60,3 +69,37 @@
                 </div>
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+
+function add_cart(id){
+
+     var cart_no = document.getElementById('cart_no').textContent;
+
+            $.ajax({
+                    type: "Post",
+                    url: '{{route('add.to.cart')}}',
+                    datatype: 'json',
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                        'item_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                         
+                           document.getElementById('add-'+id).classList.add('d-none');
+                           document.getElementById('added-'+id).classList.remove('d-none');
+                           document.getElementById('cart_no').textContent = parseInt(cart_no) + 1;
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
+
+</script>
