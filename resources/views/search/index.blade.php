@@ -8,12 +8,28 @@
       <div class="row ">
 
       <div class="col-md-12 bg-light text-center mb-3 p p-3" data-aos="fade-up">
-      <div style="text-transform: uppercase;color: #454545;font-weight: 500;margin-left: 9px;" class="h3">{{ request()->name }}</div>
-         <div class="m-2"><a href="/" title="Home" class="home-bc">Home</a> <span aria-hidden="true">›</span><span style="text-transform: uppercase;color: #454545;font-weight: 300;margin-left: 9px;">{{ request()->name }}</span> </div>
+      <div style="text-transform: uppercase;color: #454545;font-weight: 500;margin-left: 9px;" class="h3">
+            @if(!empty(request()->name)) 
+               {{ request()->name }}
+            @elseif($category_name != "") 
+               {{ $category_name }}
+            @else
+               All Products
+            @endif
+      </div>
+         <div class="m-2"><a href="/" title="Home" class="home-bc">Home</a> <span aria-hidden="true">›</span><span style="text-transform: uppercase;color: #454545;font-weight: 300;margin-left: 9px;">
+               @if(!empty(request()->name)) 
+               {{ request()->name }}
+            @elseif($category_name != "")
+               {{ $category_name }}
+            @else
+               All Products
+            @endif
+        </span> </div>
         </div>
 
       <div class="col-md-3">
-            <div class="t-products p-2">
+            <div class="t-products brand p-2">
                 <h4 class="text-uppercase">Category</h4>
                 <div class="p-lists">
                    @foreach($categories as $category)
