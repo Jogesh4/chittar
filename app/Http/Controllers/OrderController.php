@@ -64,4 +64,10 @@ class OrderController extends Controller
 
     return redirect()->back();
   }
+
+  public function address(Request $request){
+       
+      return view('cart.address');
+  }
+
 }

@@ -315,7 +315,7 @@
                 <h5 class="fs-2 text-light " style=" border: 2px dashed #ffffff; padding: 12px; ">SHOP NOW</h5>
               </div>
             </div>
-            <a class="stretched-link" href="#!"></a>
+            <a class="stretched-link" href="/search"></a>
           </div>
         </div>
         <div class="col-md-6" data-aos="fade-up">
@@ -327,7 +327,7 @@
                 <h5 class="fs-2 text-light" style=" border: 2px dashed #ffffff; padding: 12px; ">SHOP NOW</h5>
               </div>
             </div>
-            <a class="stretched-link" href="#!"></a>
+            <a class="stretched-link" href="/search"></a>
           </div>
         </div>
       </div>
