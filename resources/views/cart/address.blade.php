@@ -12,8 +12,8 @@ $userID = auth()->user() ? auth()->user()->id : 1;
              <h3>Select Address</h3>
         </div>
 
-        <div class="mt-3 mb-4  p-3">
-          <div class="row justify-content-between mt-2">
+        <div class="p-3">
+          <div class="row justify-content-between">
             Saved Address
         @if(!empty($addresses))
         @foreach($addresses as $address)
@@ -93,10 +93,10 @@ $userID = auth()->user() ? auth()->user()->id : 1;
           </div>         
 
         </div>
-        <div class="form-check col-12 mt-3"> 
+        {{-- <div class="form-check col-12 mt-3"> 
           <input class="form-check-input" type="checkbox" value="1" name="same" id="flexCheckChecked" checked> 
           <label class="form-check-label" for="flexCheckChecked"> Billing Address Same as Shipping Address</label> 
-        </div>
+        </div> --}}
 
 
         <button class="btn btn-pink mt-3">SUBMIT</button>

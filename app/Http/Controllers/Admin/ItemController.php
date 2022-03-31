@@ -83,7 +83,7 @@ class ItemController extends Controller
         $item->slug = $request->product_title;
         $item->brand_id = $request->brand;
         $item->category_id = $request->category;
-        // $item->description = $request->description;
+        $item->description = $request->description;
         $item->model = $request->model;
         $item->tax_category = $request->tax_category;
         $item->condition = $request->product_condition;
@@ -106,15 +106,18 @@ class ItemController extends Controller
         $item->hsn = $request->hsn;
         $item->sac = $request->sac;
         $item->upc = $request->upc;
+        $item->save();
 
-             if($request->hasfile('product_image'))
-                {
+        $i = 1;
+             if($request->hasfile('product_image')){
                      foreach($request->file('product_image') as $img){
 
                             $file= $img;
-                            $imagePath = $request->file('product_image')->store('product_image', 'public');
-
-                            if(empty($item->image1)){
+                            $imagePath = $img->store('product_image', 'public');
+                            if(empty($item->image)){
+                                  $item->image = $imagePath;
+                            }
+                            else if(empty($item->image1)){
                                   $item->image1 = $imagePath;
                             }
                             else if(empty($item->image2)){
@@ -123,18 +126,13 @@ class ItemController extends Controller
                             else if(empty($item->image3)){
                                   $item->image3 = $imagePath;
                             }
-                            else if(empty($item->image4)){
-                                  $item->image4 = $imagePath;
-                            }
-                            
                            
                             $i++;
                      }
-                }
+         }
 
-        $imagePath = $request->file('product_image')->store('product_image', 'public');
+        // $imagePath = $request->file('product_image')->store('product_image', 'public');
 
-        $item->image = $imagePath;
         $item->video = $request->video_url;
 
         $item->is_active = $request->publish ?? 0;
