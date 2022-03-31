@@ -89,11 +89,12 @@ $userID = auth()->user() ? auth()->user()->id : 1;
               {{-- <a href="#" class="checkout-btn text-center">
               Go to checkout
               </a> --}}
-              <form method="post" action="{{ route('order.place') }}">
+              {{-- <form method="post" action="{{ route('order.place') }}">
                 @csrf
                    <button class="checkout-btn text-center">Go to checkout</button>
                 
-              </form>
+              </form> --}}
+                 <a href="/select-address" class="checkout-btn text-center">Go to checkout</a>
             </li>
             <li class="d-inline-block w-100 text-center mt-2">
               <div class="small">
