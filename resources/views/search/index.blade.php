@@ -59,7 +59,7 @@
               @foreach($items as $item)
               <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
                 <div class="card card-span h-100">
-                  <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" max-height: 250px !important; "/>
+                  <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style="height: 250px !important; "/>
                   <div class="card-img-overlay ps-0"> </div>
                   <div class="card-body ps-0  text-center">
                     <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item->name }}</p>
@@ -101,7 +101,7 @@
 <!-- ------------------------------------2nd--------------------------- -->
 <section class="mt-0 p-1">
   <div class="container">
-<div class="h2 titllee text-center ">Recently Viewed</div>
+<div class="h2 titllee text-center ">Recently Viewed <span class="line-tt"></span></div>
 
 <div class="row m-4">
 
@@ -109,9 +109,9 @@
           <div class="row align-items-center">
             @if($items->count() > 0)
               @foreach($items as $item)
-              <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
+              <div class="col-sm-6 col-md-3 col-lg-3 mb-3  h-100" data-aos="fade-up">
                 <div class="card card-span h-100">
-                  <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" max-height: 250px !important; "/>
+                  <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..." style=" height: 250px !important; "/>
                   <div class="card-img-overlay ps-0"> </div>
                   <div class="card-body ps-0  text-center">
                     <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item->name }}</p>
