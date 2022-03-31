@@ -107,6 +107,31 @@ class ItemController extends Controller
         $item->sac = $request->sac;
         $item->upc = $request->upc;
 
+             if($request->hasfile('product_image'))
+                {
+                     foreach($request->file('product_image') as $img){
+
+                            $file= $img;
+                            $imagePath = $request->file('product_image')->store('product_image', 'public');
+
+                            if(empty($item->image1)){
+                                  $item->image1 = $imagePath;
+                            }
+                            else if(empty($item->image2)){
+                                  $item->image2 = $imagePath;
+                            }
+                            else if(empty($item->image3)){
+                                  $item->image3 = $imagePath;
+                            }
+                            else if(empty($item->image4)){
+                                  $item->image4 = $imagePath;
+                            }
+                            
+                           
+                            $i++;
+                     }
+                }
+
         $imagePath = $request->file('product_image')->store('product_image', 'public');
 
         $item->image = $imagePath;
