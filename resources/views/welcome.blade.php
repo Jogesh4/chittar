@@ -198,7 +198,7 @@
             </div>
             <div class="col-md-6 p-0">
               <div class="bg-300 p-4 h-100 d-flex flex-column text-center justify-content-center">
-                <p class="mb-0">Mules</p>
+                <!-- <p class="mb-0">Mules</p> -->
                 <h4 class="fw-semi-bold" >{{ $items[1]->name }}</h4>
                 <div class="fw-bold">
                   <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[1]->price }}</h4>
@@ -244,7 +244,7 @@
                             <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
                               <div class="card card-span  text-white">
                                 <div class="img-style-low">
-                                <img class="img-fluid h-100" src="{{ asset('storage/'.$item->image) }}" alt="..."/></div>
+                                <img class="img-fluid " src="{{ asset('storage/'.$item->image) }}" alt="..."/></div>
                                 <div class="card-img-overlay "> </div>
                                 <div class="card-body  bg-200  bttn">
                                   <div class="d-flex">
