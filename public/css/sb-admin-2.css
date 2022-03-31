@@ -7435,6 +7435,16 @@ div[data-role="editor-toolbar"] {
     user-select: none;
 }
 
+.cross-icon {
+    position: absolute;
+    right: 0;
+    color: #000;
+    background-color: #ccc;
+    font-size: 20px;
+    padding: 2px;
+    border-radius: 50%;
+}
+
 .dropdown-menu a {
     cursor: pointer;
 }

@@ -3,6 +3,8 @@ label {
     margin-bottom: 0.5rem;
   }
 /*=====r css====*/
+.outl-bsg{position: absolute;
+    bottom: 0 !important;}
 .form-control2 {
     display: block;
     width: 100%;

@@ -542,9 +542,26 @@
 <p class="ptext h5"> Images</p>
 </div>
 <div class="col-lg-9">
-   <input type="file" id="product_image" name="product_image" class="file-box">
+<input type="file" name="product_image[]" id="imgInp" accept="image/*" class="file-box" onchange="image_upload()" multiple/>
 <p class="text-secondary mt-2"><b> Image Disclaimer: </b>File type must be a .jpg, .gif or .png smaller than 2MB and at least 800x1067 in 3:4 aspect ratio</p>
 </div>
+
+            <div class="row">
+                 <div class="col-md-12 col-lg-12 form-outline mb-2">
+                     <div class="position-relative d-inline p-1">
+                      <img class="d-none" id="blah0" src="#" alt="your image" width="20%" height="100%"/><i id="icon0" class="far fa-times-circle cross-icon d-none"></i>
+                    </div>
+                     <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah1" src="#" alt="your image" width="20%" height="100%"/><i id="icon1" class="far fa-times-circle cross-icon d-none"></i>
+                     </div>
+                     <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah2" src="#" alt="your image" width="20%" height="100%"/><i id="icon2" class="far fa-times-circle cross-icon d-none"></i>
+                      </div>
+                      <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah3" src="#" alt="your image" width="20%" height="100%"/><i id="icon3" class="far fa-times-circle cross-icon d-none"></i>
+                      </div>
+                  </div>
+            </div>
 
 <div class="col-md-12 col-lg-3 form-outline p-2">
 <p class="ptext h5"> Video</p>
@@ -598,10 +615,66 @@
 
 <script>
 
+  function image_upload(){
+      const fileInput = document.getElementById('imgInp');
+      var files = [...fileInput.files];
+      var i = 0;
+      for (const f of files) { 
+        document.getElementById('blah'+i).classList.remove('d-none');
+        document.getElementById('icon'+i).classList.remove('d-none');
+         document.getElementById('blah'+i).src = URL.createObjectURL(f);
+
+         i++;
+      }
+      
+}
+
 
 
 
  $( document ).ready(function() {
+
+    $("#icon0").click(function(){
+  const fileInput = document.getElementById('imgInp');
+  console.log(fileInput)
+      var files = [...fileInput.files];
+      console.log(files);
+            files.splice(0, 1);
+        document.getElementById('blah0').classList.add('d-none');
+        document.getElementById('icon0').classList.add('d-none');
+});
+
+$("#icon1").click(function(){
+  const fileInput = document.getElementById('imgInp');
+  console.log(fileInput)
+      var files = [...fileInput.files];
+      console.log(files);
+            files.splice(1, 1);
+        document.getElementById('blah1').classList.add('d-none');
+        document.getElementById('icon1').classList.add('d-none');
+});
+
+$("#icon2").click(function(){
+  const fileInput = document.getElementById('imgInp');
+  console.log(fileInput)
+      var files = [...fileInput.files];
+      console.log(files);
+            files.splice(2, 1);
+        document.getElementById('blah2').classList.add('d-none');
+        document.getElementById('icon2').classList.add('d-none');
+
+});
+
+$("#icon3").click(function(){
+  const fileInput = document.getElementById('imgInp');
+  console.log(fileInput)
+      var files = [...fileInput.files];
+      console.log(files);
+            files.splice(2, 1);
+        document.getElementById('blah3').classList.add('d-none');
+        document.getElementById('icon3').classList.add('d-none');
+
+});
 
      $("#general_click").click(function(){
 
