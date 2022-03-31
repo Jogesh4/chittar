@@ -131,10 +131,30 @@ $userID = auth()->user() ? auth()->user()->id : 1;
 </div>
 
 
+<div class="row p-1 outl-bg">
+  <div class="col-12"><p class="item-title text-white info-pt">  * Easy Return * Quality Gurantee * Secured Checkout</p></div>
+  <!-- <div class="col-4 "> <p class="item-title text-white info-pt">  </p></div> 
+  <div class="col-4 "> <p class="item-title text-white info-pt"> </p></div>  -->
+</div>
 
+<div class="row p-1  mt-4 mb-4 ">
+  <div class=" p-2 text-center" >
+  <div class="col-12"><p class="item-title text-white text-uppercase h6">  Express checkout</p></div>
+  <div class="col-12 bg-white ">  
+    <img src="{{ asset('images/paytm.png') }}" width="60" height="60" >
+    <img src="{{ asset('images/mastercard.png') }}" width="60" height="60" >  
+    <img src="{{ asset('images/paypal.png') }}" width="60" height="60" >
+    <img src="{{ asset('images/visa.png') }}" width="60" height="60" >  
+    <img src="{{ asset('images/applepay.png') }}" width="60" height="60" >
+  
+    </div> 
+  </div> 
+  </div> 
+  
+</div>
 
-        </div>
-    </div>
+  </div>
+  </div>
 </div>
 </section>
 @endsection
