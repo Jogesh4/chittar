@@ -150,7 +150,7 @@
                   <div class="col-8 p-2 info-pt"><i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days</div>
                   
                   <div class="col-2 p-2 info-pt">
-                    <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1">
+                    {{-- <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1"> --}}
                   </div>
                   <div class="col-2 p-2">
                 
