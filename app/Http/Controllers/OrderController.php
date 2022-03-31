@@ -26,6 +26,8 @@ class OrderController extends Controller
     $order->transaction = md5($userID.\Carbon\Carbon::now());
     $order->amount = $total;
     $order->user_id = $userID;
+    $order->shipping_address = session()->get('shipping_id');
+    $order->billing_address = session()->get('shipping_id');
     $order->status = "PAID";
     
     if($order->save()){
@@ -116,6 +118,8 @@ class OrderController extends Controller
   public function payment($id){
        
       $user_id = auth()->user()->id;
+
+      $request->session()->put('shipping_id',$id);
 
       $address = Address::where('id',$id)->first();
 
