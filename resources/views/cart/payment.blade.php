@@ -6,6 +6,7 @@
               
   <section class="">
     <div class="container mt-2 mb-2">
+      <p>Product >> Jutti >> </p>
   <div class="row">
   <!-------------- section left  ---------------------> 
   <div class="col-lg-8 col-sm-12 bg-white p-5">

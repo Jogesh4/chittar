@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use App\Models\CartItem;
 use App\Models\Item;
 use App\Models\Address;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class OrderController extends Controller
 {
@@ -119,7 +120,7 @@ class OrderController extends Controller
        
       $user_id = auth()->user()->id;
 
-      $request->session()->put('shipping_id',$id);
+      session()->put('shipping_id',$id);
 
       $address = Address::where('id',$id)->first();
 
