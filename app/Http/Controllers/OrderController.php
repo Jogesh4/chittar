@@ -9,12 +9,29 @@ use App\Models\OrderItem;
 use App\Models\CartItem;
 use App\Models\Item;
 use App\Models\Address;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class OrderController extends Controller
 {
   public function place(Request $request)
   {
     $userID = auth()->user()->id;
+
+    if($request->address_radio == '2'){
+        $address = new Address;
+        $address->user_id = $userID;
+        $address->phone = $request->phone;
+        $address->firstname = $request->first_name;
+        $address->lastname = $request->last_name;
+        $address->address = $request->address;
+        $address->city = $request->city;
+        $address->state = $request->state;
+        $address->country = $request->country;
+        $address->pincode = $request->pincode;
+        $address->locality = $request->locality;
+        $address->save();
+    }
+
      $total = 0;
     $cartItems = CartItem::where(['user_id' => auth()->user()->id,'status' => 1])->get();
   
@@ -27,7 +44,12 @@ class OrderController extends Controller
     $order->amount = $total;
     $order->user_id = $userID;
     $order->shipping_address = session()->get('shipping_id');
+  if($request->address_radio == '2'){
+    $order->billing_address = $address->id;
+  }
+  else{
     $order->billing_address = session()->get('shipping_id');
+  }
     $order->status = "PAID";
     
     if($order->save()){
@@ -119,7 +141,7 @@ class OrderController extends Controller
        
       $user_id = auth()->user()->id;
 
-      $request->session()->put('shipping_id',$id);
+      session()->put('shipping_id',$id);
 
       $address = Address::where('id',$id)->first();
 
