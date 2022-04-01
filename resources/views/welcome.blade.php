@@ -173,16 +173,16 @@
         <div class="col-md-6 position-relative" data-aos="fade-up">
           <div class="row  m-3">
             <div class="col-md-6 p-0">
-              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('storage/'.$items[2]->image) }}" alt="..."><a class="stretched-link" href="/search/?name={{ $items[2]->name }}"></a></div>
+              <div class="card card-span h-100 text-white"><img class="card-img h-100" src="{{ asset('storage/'.$items[0]->image) }}" alt="..."><a class="stretched-link" href="/search/?name={{ $items[0]->name }}"></a></div>
               <div class="sale-div">Sale</div>
             </div>
             <div class="col-md-6 p-0">
               <div class="bg-300 p-4 h-100 d-flex flex-column text-center justify-content-center">
                 <p class="mb-0"></p>
-                <h4 class="fw-semi-bold ">{{ $items[2]->name }}</h4>
+                <h4 class="fw-semi-bold ">{{ $items[0]->name }}</h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[2]->price }}</h4>
-                  <h4 class="pink-color">INR{{ $items[2]->price }}</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[0]->price }}</h4>
+                  <h4 class="pink-color">INR{{ $items[0]->price }}</h4>
                 </div>
                 <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
 

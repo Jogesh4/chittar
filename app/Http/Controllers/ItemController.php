@@ -19,7 +19,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        $similar_items = Item::where('category_id', '!=', $item->category_id)->take(8)->get();
+        $similar_items = Item::where('category_id', '!=', $item->category_id)->where('is_active',1)->take(8)->get();
 
     if(auth()->check()){
         \Cart::clear();

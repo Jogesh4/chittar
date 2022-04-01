@@ -16,16 +16,16 @@ class SearchController extends Controller
         if(!empty($request->category)){
             $category = Category::where('name', 'like', $request->category.'%')->first();
             $category_name = $category->name;
-           $items = Item::where('category_id',$category->id)->take(10)->get();
+           $items = Item::where('category_id',$category->id)->where('is_active',1)->take(10)->get();
         }
         else if(!empty($request->name)){
-            $items = Item::where('name', 'like', $request->name.'%')->take(10)->get();
+            $items = Item::where('name', 'like', $request->name.'%')->where('is_active',1)->take(10)->get();
         }
         else{
-            $items = Item::take(10)->get();
+            $items = Item::where('is_active',1)->take(10)->get();
         }
         $categories = Category::where('is_active', 1)->get();
-        $recent_items = Item::take(5)->get();
+        $recent_items = Item::where('is_active',1)->take(5)->get();
         if(auth()->check()){
         \Cart::clear();
          \Cart::session(auth()->user()->id)->clear();

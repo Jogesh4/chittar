@@ -35,3 +35,5 @@ Route::resource('/brands', 'BrandController');
 Route::resource('/orders', 'OrderController');
 Route::resource('/users', 'UserController');
 
+
+

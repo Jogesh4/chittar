@@ -61,8 +61,9 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit($id)
     {
+        $item = Item::where('id',$id)->first();
         $categories = Category::where('is_active', 1)->get();
         $brands = Brand::where('is_active', 1)->get();
         return view('admin.item.create', compact('brands', 'categories'))->with('item',$item);
@@ -77,6 +78,12 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
+        if(!empty($item->id)){
+            $url = 'update';
+        }
+        else{
+            $url = 'save';
+        }
         // dd($request);
         $item->type = $request->product_type;
         $item->name = $request->product_title;
@@ -155,7 +162,13 @@ class ItemController extends Controller
             //     }
             // }
 
-            return redirect()->back()->with('success', 'Item update successfully');
+            if($url == 'save'){
+                  return redirect()->back()->with('success', 'Item update successfully');
+            }
+            else{
+                  return redirect()->route('admin.items.index');
+            }
+            
         } else {
             return redirect()->back()->with('failure', 'Failed to update item');
         }
@@ -170,6 +183,17 @@ class ItemController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function change_status($type,$id,$status){
+         
+        if($type == 'item'){
+             $item = Item::where('id',$id)->first();
+             $item->is_active = $status;
+             $item->save();
+        }
+
+        return back();
     }
 
     /**

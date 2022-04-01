@@ -26,6 +26,7 @@ Route::get('/contact', function() {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('change_status/{type}{id}{status}', [App\Http\Controllers\Admin\ItemController::class, 'change_status'])->name('change_status');
 
 require __DIR__.'/cart.php';
 require __DIR__.'/search.php';

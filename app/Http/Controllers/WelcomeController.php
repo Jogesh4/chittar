@@ -25,7 +25,7 @@ class WelcomeController extends Controller
         if($request->category_id){
             $currentCategoryId=$request->category_id;
             // $currentCategoryName=$request->category;
-            $categoryItems = Item::where('category_id', $currentCategoryId)->get();
+            $categoryItems = Item::where('category_id', $currentCategoryId)->where('is_active',1)->get();
              $data['new'] = [
                          'code' => 1,
                          'items' => $categoryItems,
@@ -34,7 +34,7 @@ class WelcomeController extends Controller
                 return json_encode($data);
         }
         else{
-          $categoryItems = Item::where('category_id', $currentCategoryId)->get();
+          $categoryItems = Item::where('category_id', $currentCategoryId)->where('is_active',1)->get();
         }
 
         // dd($categoryItems);

@@ -2,10 +2,10 @@
 
 @php
   $title = "Add Item";
-  $button_text = "Add Item";
-  if($item->exists) {
+  $button_text = "Submit";
+  if(!empty($item)) {
     $title = "Edit Item";
-    $button_text = "Update Item";
+    $button_text = "Update";
   }
 @endphp
 
@@ -14,11 +14,11 @@
 
 @section('content')
 
- @if($item->exists)
-    <form method="POST" action="{{ route('admin.items.update', $item) }}" enctype="multipart/form-data">
+ @if(!empty($item))
+    <form method="POST" action="{{ route('admin.items.update', $item) }}" enctype="multipart/form-data" onsubmit="loader(true)">
 @method('put')
 @else
-  <form method="POST" action="{{ route('admin.items.store') }}" enctype="multipart/form-data">
+  <form method="POST" action="{{ route('admin.items.store') }}" enctype="multipart/form-data" onsubmit="loader(true)">
 @endif
     @csrf
 
@@ -65,26 +65,26 @@
 
     <div class="col-sm-12 col-md-12 col-lg-3 p-2">
          <label>Product Type<span style="color:red;">*</span></label>
-        <select class="selectpicker form-control1" id="product_type" name="product_type" required="">
-            <option value="" disabled="" selected="" hidden="">Product Type</option>
-            <option value="physical">Physical</option>
-            <option value="digital">Digital</option>                                      
+        <select class="selectpicker form-control1" id="product_type" name="product_type" value="{{ !empty($item->type) ? $item->type : "" }}" required="">
+            <option value="" disabled="" hidden="">Product Type</option>
+            <option value="physical" @if(old('type', 'physical') == 'physical') selected @endif>Physical</option>
+            <option value="digital" @if(old('type', 'digital') == 'digital') selected @endif>Digital</option>                                      
         </select>
 
     </div> 
 
        <div class="col-md-12 col-lg-3 form-outline p-2">
          <label>Product Title<span style="color:red;">*</span></label>
-        <input type="text" name="product_title" id="" placeholder="Product title" class="form-control2 ">
+        <input type="text" name="product_title" id="" placeholder="Product title" class="form-control2" value="{{ !empty($item->name) ? $item->name : "" }}">
     </div>
 
     <div class="col-sm-12 col-md-12 col-lg-3 p-2">
 
          <label>Brand</label>
-        <select class="selectpicker form-control1" id="brand" name="brand" required="">
-            <option value="" disabled="" selected="" hidden="">Brand</option>
+        <select class="selectpicker form-control1" id="brand" name="brand" value="{{ !empty($item->brand) ? $item->brand : "" }}" required="">
+            <option value="" disabled="" hidden="">Brand</option>
             @foreach($brands as $brand)
-               <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+               <option value="{{ $brand->id }}" @if(old('brand', $item->brand_id) == $brand->id) selected @endif>{{ $brand->name }}</option>
             @endforeach                                      
         </select>
 
@@ -93,10 +93,10 @@
     <div class="col-sm-12 col-md-12 col-lg-3 p-2">
 
          <label>Category<span style="color:red;">*</span></label>
-        <select class="selectpicker form-control1" id="category" name="category" required="">
-            <option value="" disabled="" selected="" hidden="">Category</option>
+        <select class="selectpicker form-control1" id="category" name="category" value="{{ !empty($item->category_id) ? $item->category_id : "" }}" required="">
+            <option value="" disabled="" hidden="">Category</option>
             @foreach($categories as $category)
-               <option value="{{ $category->id }}">{{ $category->name }}</option>
+               <option value="{{ $category->id }}" @if(old('category', $item->category_id) == $category->id) selected @endif>{{ $category->name }}</option>
             @endforeach
                                                   
         </select>
@@ -106,7 +106,7 @@
     <div class="col-sm-12 col-md-12 col-lg-12 p-2">
 
         <label>Description</label>
-         <textarea id="description" name="description" class="form-control2"></textarea>
+         <textarea id="description" name="description" class="form-control2" value="">{{ !empty($item->description) ? $item->description : "" }}</textarea>
 
     </div>   
     
@@ -114,15 +114,15 @@
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
       <label>Model No.</label>
-        <input type="text" name="model" id="model" placeholder="Model No." class="form-control2">
+        <input type="text" name="model" id="model" placeholder="Model No." class="form-control2" value="{{ !empty($item->model) ? $item->model : "" }}">
     </div>
 
     <div class="col-sm-12 col-md-12 col-lg-3 p-2">
 
          <label>Tax Category<span style="color:red;">*</span></label>
-        <select class="selectpicker form-control1" id="tax_category" name="tax_category" required="">
-            <option value="" disabled="" selected="" hidden="">Tax Category</option>
-            <option value="tax">Tax</option>
+        <select class="selectpicker form-control1" id="tax_category" name="tax_category" value="{{ !empty($item->tax_category) ? $item->tax_category : "" }}" required="">
+            <option value="" disabled="" hidden="">Tax Category</option>
+            <option value="tax" @if(old('tax_category', 'tax') == 'tax') selected @endif>Tax</option>
         </select>
   
     </div>
@@ -132,23 +132,23 @@
     <div class="col-sm-12 col-md-12 col-lg-3 p-2">
 
          <label>Product Condition<span style="color:red;">*</span></label>
-        <select class="selectpicker form-control1" id="product_condition" name="product_condition" required="">
-            <option value="" disabled="" selected="" hidden="">Product Condition </option>
-            <option value="old">Old</option>
-            <option value="new">New</option>
-            <option value="refurbished">Refurbished</option>                                      
+        <select class="selectpicker form-control1" id="product_condition" name="product_condition" value="{{ !empty($item->condition) ? $item->condition : "" }}" required="">
+            <option value="" disabled="" hidden="">Product Condition </option>
+            <option value="old" @if(old('condition', 'old') == 'old') selected @endif>Old</option>
+            <option value="new" @if(old('condition', 'new') == 'new') selected @endif>New</option>
+            <option value="refurbished" @if(old('condition', 'refurbished') == 'refurbished') selected @endif>Refurbished</option>                                      
         </select>
 
     </div>
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
          <label>Warranty(Days)<span style="color:red;">*</span></label>
-        <input type="number" name="warranty" id="warranty" placeholder="Warranty" class="form-control2 ">
+        <input type="number" name="warranty" id="warranty" placeholder="Warranty" class="form-control2 " value="{{ !empty($item->warranty) ? $item->warranty : "" }}">
     </div>
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
          <label>Return(Days)<span style="color:red;">*</span></label>
-        <input type="number" name="return" id="return" placeholder="Return (Days)" class="form-control2 ">
+        <input type="number" name="return" id="return" placeholder="Return (Days)" class="form-control2" value="{{ !empty($item->return) ? $item->return : "" }}">
     </div>
 
     </div>
@@ -288,22 +288,22 @@
 <div class="row mt-3">
     <div class="col-md-12 col-lg-3 form-outline p-2">
     <label>Minimum Purchase Quantity<span style="color:red;">*</span></label>
-        <input type="number" name="min_purchase" id="" placeholder="Minimum Purchase Quantity *" class="form-control2 ">
+        <input type="number" name="min_purchase" id="" placeholder="Minimum Purchase Quantity *" class="form-control2" value="{{ !empty($item->min_purchase_qty) ? $item->min_purchase_qty : "" }}">
     </div>
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
     <label>Maximum Purchase Quantity<span style="color:red;">*</span></label>
-        <input type="number" name="max_purchase" id="" placeholder="Maximum Purchase Quantity *" class="form-control2 ">
+        <input type="number" name="max_purchase" id="" placeholder="Maximum Purchase Quantity *" class="form-control2" value="{{ !empty($item->max_purchase_qty) ? $item->max_purchase_qty : "" }}">
     </div>
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
     <label>Stock Alert Quantity<span style="color:red;">*</span></label>
-        <input type="number" name="stock_alert" id="" placeholder="Stock Alert Quantity *" class="form-control2 ">
+        <input type="number" name="stock_alert" id="" placeholder="Stock Alert Quantity *" class="form-control2" value="{{ !empty($item->stock_alert_qty) ? $item->stock_alert_qty : "" }}">
     </div>
 
     <div class="col-md-12 col-lg-3 form-outline p-2">
     <label>Cost Price <span style="color:red;">*</span></label>
-        <input type="number" name="cost_price" id="" placeholder="Cost Price *" class="form-control2 ">
+        <input type="number" name="cost_price" id="" placeholder="Cost Price *" class="form-control2" value="{{ !empty($item->price) ? $item->price : "" }}">
     </div>
 
 </div>
@@ -465,9 +465,9 @@
         </div>
 
         <div class="col-md-12 col-lg-8">
-          <select class="selectpicker form-control1" id="country" name="country" required="">
-                <option value="" disabled selected hidden>Select Option</option>
-                <option value="india">India</option>
+          <select class="selectpicker form-control1" id="country" name="country" value="{{ !empty($item->country_of_origin) ? $item->country_of_origin : "" }}" required="">
+                <option value="" disabled hidden>Select Option</option>
+                <option value="india" @if(old('country_of_origin', 'india') == 'india') selected @endif>India</option>
             </select>
         </div>
 
@@ -477,15 +477,15 @@
         </div>
   
         <div class="col-sm-12 col-md-12 col-lg-4 p-2">  
-            <select class="selectpicker form-control1" id="weight_type" name="weight_type" required="">
-                <option value="" disabled="" hidden selected>Select Weight</option>
+            <select class="selectpicker form-control1" id="weight_type" name="weight_type" value="{{ !empty($item->weight_unit) ? $item->weight_unit : "" }}" required="">
+                <option value="" disabled="" hidden>Select Weight</option>
                 <option value="1">gm</option>
                 <option value="2">Kg</option>
             </select>      
         </div>
 
         <div class="col-sm-12 col-md-12 col-lg-4 p-2">  
-            <input type="number" name="weight" id="weight" placeholder="Weight " class="form-control2 ">    
+            <input type="number" name="weight" id="weight" placeholder="Weight " class="form-control2" value="{{ !empty($item->weight) ? $item->weight : "" }}">    
         </div>
 
     </div>
@@ -494,23 +494,23 @@
             <div class="row ">
                 <div class="col-lg-6 col-md-12">
                     <label class="txt-styel">ISBN </label>
-                    <input type="text" name="isbn" id="" placeholder="ISBN " class="form-control2 "> 
+                    <input type="text" name="isbn" id="" placeholder="ISBN " class="form-control2" value="{{ !empty($item->isbn) ? $item->isbn : "" }}"> 
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <label class="txt-styel">HSN </label>
-                    <input type="text" name="hsn" id="" placeholder="HSN " class="form-control2 "> 
+                    <input type="text" name="hsn" id="" placeholder="HSN " class="form-control2" value="{{ !empty($item->hsn) ? $item->hsn : "" }}"> 
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <label class="txt-styel">SAC </label>
-                    <input type="text" name="sac" id="" placeholder="SAC " class="form-control2 "> 
+                    <input type="text" name="sac" id="" placeholder="SAC " class="form-control2" value="{{ !empty($item->sac) ? $item->sac : "" }}"> 
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <label class="txt-styel">UPC </label>
-                    <input type="text" name="upc" id="" placeholder="UPC " class="form-control2 "> 
+                    <input type="text" name="upc" id="" placeholder="UPC " class="form-control2" value="{{ !empty($item->upc) ? $item->upc : "" }}"> 
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <label class="txt-styel">File: </label>
-                    <input type="text" name="file_size" id="" placeholder="File: " class="form-control2 "> 
+                    <input type="text" name="file_size" id="" placeholder="File: " class="form-control2"> 
                 </div>
 
 
@@ -547,7 +547,51 @@
 <p class="text-secondary mt-2"><b> Image Disclaimer: </b>File type must be a .jpg, .gif or .png smaller than 2MB and at least 800x1067 in 3:4 aspect ratio</p>
 </div>
 
+@if(!empty($item))
             <div class="row">
+                 <div class="col-md-12 col-lg-12 form-outline mb-2">
+                @if(!empty($item->image))
+                     <div class="position-relative d-inline p-1">
+                      <img class="" id="blah0" src="{{ !empty($item->image) ? asset('storage/'.$item->image) : '#' }}" alt="your image" width="20%" height="100%"/><i id="icon0" class="far fa-times-circle cross-icon "></i>
+                    </div>
+                @else
+                      <div class="position-relative d-inline p-1">
+                      <img class="d-none" id="blah0" src="#" alt="your image" width="20%" height="100%"/><i id="icon0" class="far fa-times-circle cross-icon d-none"></i>
+                    </div>
+                @endif
+                @if(!empty($item->image1))
+                     <div class="position-relative d-inline p-1">
+                       <img class="" id="blah1" src="{{ !empty($item->image1) ? asset('storage/'.$item->image1) : '#' }}" alt="your image" width="20%" height="100%"/><i id="icon1" class="far fa-times-circle cross-icon "></i>
+                     </div>
+                @else
+                      <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah1" src="#" alt="your image" width="20%" height="100%"/><i id="icon1" class="far fa-times-circle cross-icon d-none"></i>
+                     </div>
+                @endif
+                @if(!empty($item->image2))
+                     <div class="position-relative d-inline p-1">
+                       <img class="" id="blah2" src="{{ !empty($item->image2) ? asset('storage/'.$item->image2) : '#' }}" alt="your image" width="20%" height="100%"/><i id="icon2" class="far fa-times-circle cross-icon "></i>
+                      </div>
+                @else
+                      <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah2" src="#" alt="your image" width="20%" height="100%"/><i id="icon2" class="far fa-times-circle cross-icon d-none"></i>
+                      </div>
+                @endif
+
+                @if(!empty($item->image3))
+                      <div class="position-relative d-inline p-1">
+                       <img class="" id="blah3" src="{{ !empty($item->image3) ? asset('storage/'.$item->image3) : '#' }}" alt="your image" width="20%" height="100%"/><i id="icon3" class="far fa-times-circle cross-icon "></i>
+                      </div>
+                  </div>
+                @else
+                      <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah3" src="#" alt="your image" width="20%" height="100%"/><i id="icon3" class="far fa-times-circle cross-icon d-none"></i>
+                      </div>
+                @endif
+            </div>
+@else
+
+         <div class="row">
                  <div class="col-md-12 col-lg-12 form-outline mb-2">
                      <div class="position-relative d-inline p-1">
                       <img class="d-none" id="blah0" src="#" alt="your image" width="20%" height="100%"/><i id="icon0" class="far fa-times-circle cross-icon d-none"></i>
@@ -564,12 +608,14 @@
                   </div>
             </div>
 
+@endif
+
 <div class="col-md-12 col-lg-3 form-outline p-2">
 <p class="ptext h5"> Video</p>
 </div>
 
 <div class="col-md-12 col-lg-9 form-outline p-2">
-        <input type="text" name="video_url" id="video_url" placeholder="Video Url" class="form-control2 ">
+        <input type="text" name="video_url" id="video_url" placeholder="Video Url" class="form-control2"  value="{{ !empty($item->video) ? $item->video : "" }}">
 </div>
 
 <div class="col-md-12 col-lg-3 form-outline p-2">
@@ -577,10 +623,10 @@
 </div>
 
 <div class="col-md-12 col-lg-9 form-outline p-2">
-<select class="selectpicker form-control1" id="publish" name="publish" required="">
+<select class="selectpicker form-control1" id="publish" name="publish" required=""  value="{{ !empty($item->is_active) ? $item->is_active : "" }}">
                 <option value="" disabled="" >Product Published</option>
                 <option value="1" selected="" >Yes</option>
-                <option value="2">No</option>
+                <option value="0">No</option>
             </select> 
 </div>
 
@@ -599,12 +645,14 @@
         <div class="d-flex justify-content-end">
             <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
             <span class="ml-3 mr-3" id="media_previous"> <a href="#" class="btn-blu-login"><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
-         <button class="btn-blu-login">SUBMIT </button>
+         <button class="btn-blu-login">{{ $button_text }} </button>
         </div>
     </div>
 
 </div>
-
+              <button class="buttonload d-none" id="loading">
+                         <i class="fa fa-spinner fa-spin"></i>
+                      </button>
 </div>
   </form>
 
@@ -630,11 +678,23 @@
       
 }
 
+function loader(iRun){
+        var loader = document.getElementById('loading').classList;
+
+            if (iRun) {
+                loader.remove('d-none');
+            }
+            else {
+                loader.add('d-none');
+            }
+      }
+
 
 
 
  $( document ).ready(function() {
-
+ loader(false);
+   
     $("#icon0").click(function(){
   const fileInput = document.getElementById('imgInp');
   console.log(fileInput)

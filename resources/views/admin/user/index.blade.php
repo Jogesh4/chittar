@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('title', 'All Orders')
+@section('title', 'All Users')
 @section('content')
 <div class="container-fluid">         
                     <?php
