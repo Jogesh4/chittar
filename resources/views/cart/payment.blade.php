@@ -47,7 +47,7 @@
     <div class="col-12 border mt-2">
     <div class="row mt-3">
           <div class="col-2">
-          <input class="form-check-input " type="checkbox" value="{{ $address->id }}" checked name="address_radio" id="flexCheckChecked" onclick="radio_click(this)"> 
+          <input class="form-check-input " type="checkbox" value="{{ $address->id }}" checked name="address_radio" id="flexCheckChecked"> 
           </div>
           <div class="col-7">        
             <p>Standard Shipping(8-12 business days)</p>
@@ -85,7 +85,8 @@
 
 
 
-
+<form method="post" action="{{ route('order.place') }}">
+     @csrf
   <h5 class="">Billing address</h5>
   <div class="row border p-2">
   
@@ -93,7 +94,7 @@
         
         <div class="row mt-2">
           <div class="col-2">
-          <input class="form-check-input " type="radio" value="{{ $address->id }}" checked name="address_radio" id="flexCheckChecked" onclick="radio_click(this)">
+          <input class="form-check-input " type="radio" value="1" checked name="address_radio" id="flexCheckChecked" onclick="radio_click(this)">
           </div>
           <div class="col-10">        
             <p>Same as shipping address</p>
@@ -103,7 +104,7 @@
        
         <div class="row ">
           <div class="col-2">
-          <input class="form-check-input " type="radio" value="{{ $address->id }}" checked name="address_radio" id="flexCheckChecked" onclick="radio_click(this)">
+          <input class="form-check-input " type="radio" value="2" name="address_radio" id="flexCheckChecked" onclick="radio_click(this)">
           </div>
           <div class="col-10">        
             <p>Use a different billing address</p>
@@ -112,13 +113,69 @@
       </div>
     </div>
 
+
+ <div class="d-none" id="address_div">
+  
+     <div class="">
+        <div class="row">
+          <h5>Contact information</h5>
+          <div class="col-md-12 col-lg-12 form-outline p-2">
+          <label>Mobile No.<span style="color:red;">*</span></label>
+            <input type="tel" name="phone" id="phone" placeholder="Mobile No." class="form-control2">
+          </div>  
+        </div>
+
+        <div class="row mt-3">
+          <h5>BillinA Address</h5>
+          <div class="col-md-12 col-lg-6 form-outline p-2">
+          <label>First Name<span style="color:red;">*</span></label>
+            <input type="text" name="first_name" id="first_name" placeholder="First Name" class="form-control2">
+          </div>
+
+          <div class="col-md-12 col-lg-6 form-outline p-2">
+          <label>Last Name<span style="color:red;">*</span></label>
+            <input type="text" name="last_name" id="last_name" placeholder="Last Name" class="form-control2">
+          </div>
+
+          <div class="col-md-12 col-lg-12 form-outline p-2">
+          <label>Address<span style="color:red;">*</span></label>
+            <input type="text" name="address" id="address" placeholder="Address" class="form-control2">
+          </div>
+
+          <div class="col-md-12 col-lg-6 form-outline p-2">
+          <label>Locality</label>
+            <input type="text" name="locality" id="locality" placeholder="Apartment, suite, etc. (optional)" class="form-control2">
+          </div>
+
+          <div class="col-md-12 col-lg-6 form-outline p-2">
+          <label>City<span style="color:red;">*</span></label>
+            <input type="text" name="city" id="city" placeholder="City" class="form-control2">
+          </div>
+
+          <div class="col-md-12 col-lg-4 form-outline p-2">
+          <label>State<span style="color:red;">*</span></label>
+            <input type="text" name="state" id="state" placeholder="State" class="form-control2">
+          </div>
+
+          <div class="col-md-12 col-lg-4 form-outline p-2">
+          <label>Country<span style="color:red;">*</span></label>
+            <input type="text" name="country" id="country" placeholder="Country" class="form-control2">
+          </div>
+
+          <div class="col-md-12 col-lg-4 form-outline p-2">
+          <label>Zip<span style="color:red;">*</span></label>
+            <input type="text" name="pincode" id="pincode" placeholder="Zip" class="form-control2">
+          </div>         
+
+        </div>
+
+    </div>
+  </div>
+
               <div class="col-3 text-end">
-               <form method="post" action="{{ route('order.place') }}">
-                @csrf
                    <button class="checkout-btn text-center">PAY NOW</button>
-                
-              </form>
-</div>
+           </div>
+</form>
 
 
   </div> 
@@ -186,5 +243,19 @@
           document.getElementById('add_address').classList.add('d-none');
     });
   });
+
+  function radio_click(element){
+      
+    if(element.value == 1){
+        if(element.checked){
+              document.getElementById('address_div').classList.add('d-none');
+        }
+    }
+    if(element.value == 2){
+        if(element.checked){
+              document.getElementById('address_div').classList.remove('d-none');
+        }
+    }
+  }
 
   </script>

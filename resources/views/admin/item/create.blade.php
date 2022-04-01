@@ -83,8 +83,9 @@
          <label>Brand</label>
         <select class="selectpicker form-control1" id="brand" name="brand" required="">
             <option value="" disabled="" selected="" hidden="">Brand</option>
-            <option value="1">ABCDEF</option>
-            <option value="2">GHIJKL</option>                                      
+            @foreach($brands as $brand)
+               <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+            @endforeach                                      
         </select>
 
     </div>
