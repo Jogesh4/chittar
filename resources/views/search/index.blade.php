@@ -29,7 +29,7 @@
         </div>
 
       <div class="col-md-3">
-            <div class="t-products brand p-2">
+            <div class="t-products brand p-2 mb-2">
                 <h4 class="text-uppercase">Category</h4>
                 <div class="p-lists">
                    @foreach($categories as $category)
@@ -43,8 +43,9 @@
                   @endforeach
                 </div>
             </div>
+
           
-            <div class="brand p-2">
+            <div class="brand p-2 mb-2">
                 <div class="heading d-flex justify-content-between align-items-center">
                     <h6 class="text-uppercase">Brand</h6> <span>--</span>
                 </div>
@@ -68,6 +69,50 @@
                 </div>
                 
             </div>
+
+
+
+            <div class="type p-2 mb-2">
+                <div class="heading d-flex justify-content-between align-items-center">
+                    <h6 class="text-uppercase">Product Condition</h6> <span>--</span>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Name </label> </div> <span>23</span>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked=""> <label class="form-check-label" for="flexCheckChecked"> Name </label> </div> <span>24</span>
+                </div>
+                
+            </div>
+
+
+
+            <div class="type p-2 mb-2">
+                <div class="heading d-flex justify-content-between align-items-center">
+                    <h6 class="text-uppercase">Price Range</h6> <span>--</span>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault">INR 400 -  600 </label> </div>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked=""> <label class="form-check-label" for="flexCheckChecked">INR 600 -  1000</label> </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" > <label class="form-check-label" for="flexCheckChecked">INR 1000 -  1500</label> </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" > <label class="form-check-label" for="flexCheckChecked">INR 1500 -  3000</label> </div>
+                </div>
+                
+
+            </div>
+
+
+
+
+
         </div>
        
         <div class="col-lg-9 col-md-9 col-sm-12">
@@ -216,6 +261,11 @@
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+
+
+
 
 <script>
 

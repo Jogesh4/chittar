@@ -7,6 +7,7 @@ $userID = auth()->user() ? auth()->user()->id : 1;
 <section class="">
   <div class="container mt-2 mb-2">
 <div class="row">
+<div class="bg-white p-3 mb-3 text-uppercase fw-bolder text-center"> <span class="pink-color h5 ">Cart > Shipping Detail </span> >> Payment Method </div>
   <div class="col-lg-8 bg-white p-5">
         <div class="text-center">
              <h3>Select Address</h3>

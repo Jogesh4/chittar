@@ -5,10 +5,13 @@ $userID = auth()->user() ? auth()->user()->id : 1;
 @section('content')
             
 <section class="">
-  <div class="container mt-5 mb-5">
+  <div class="container mt-2 mb-5">
+    
 @if($cartItems->count() > 0)
     <div class="row">
+    <div class="bg-white p-3 mb-3 text-uppercase fw-bolder text-center"> <span class="pink-color h5 ">Cart</span> > Shipping Detail >> Payment Method </div>
       <div class="col-md-8">
+      
         <table class="mb-2 w-100">
           <tbody class="items">
             @if($cartItems->count() > 0)
