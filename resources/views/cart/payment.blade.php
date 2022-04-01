@@ -172,10 +172,14 @@
 
     </div>
   </div>
-
+         <div class="row">
               <div class="col-3 text-end">
                    <button class="checkout-btn text-center">PAY NOW</button>
-           </div>
+              </div>
+              <div class="col-3 text-end">
+                   <a href="{{ route('cart.index') }}" class="checkout-btn text-center" style="background: #a9788e;">Cancel</a>
+              </div>
+          </div>
 </form>
 
 
