@@ -81,10 +81,10 @@
     <div class="col-sm-12 col-md-12 col-lg-3 p-2">
 
          <label>Brand</label>
-        <select class="selectpicker form-control1" id="brand" name="brand" value="{{ !empty($item->brand) ? $item->brand : "" }}" required="">
+        <select class="selectpicker form-control1" id="brand" name="brand" value="{{ !empty($item->brand_id) ? $item->brand_id : "" }}" required="">
             <option value="" disabled="" hidden="">Brand</option>
             @foreach($brands as $brand)
-               <option value="{{ $brand->id }}" @if(old('brand', $item->brand_id) == $brand->id) selected @endif>{{ $brand->name }}</option>
+               <option value="{{ $brand->id }}">{{ $brand->name }}</option>
             @endforeach                                      
         </select>
 
