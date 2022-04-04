@@ -35,7 +35,7 @@
                                               <div class="actions">
                                               <a href="#" title="Delete"><i class="fas faslli fa-trash-alt"></i></a>
                                               <span> <a href="#" title="Profile"><i class="fas faslli fa-user"></i></a> </span>
-                                              <span> <a href="#" title="Edit"><i class="fas faslli fa-pen"></i></a> </span>
+                                              <span> <a href="{{ route('admin.users.edit', $user->id) }}" title="Edit"><i class="fas faslli fa-pen"></i></a> </span>
                                               <span> <a href="#" title="Mail"><i class="fas faslli fa-mail-bulk"></i></a> </span>
                                               </div>
                                               </td>

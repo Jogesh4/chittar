@@ -96,7 +96,7 @@
         <select class="selectpicker form-control1" id="category" name="category" value="{{ !empty($item->category_id) ? $item->category_id : "" }}" required="">
             <option value="" disabled="" hidden="">Category</option>
             @foreach($categories as $category)
-               <option value="{{ $category->id }}" @if(old('category', $item->category_id) == $category->id) selected @endif>{{ $category->name }}</option>
+               <option value="{{ $category->id }}" >{{ $category->name }}</option>
             @endforeach
                                                   
         </select>
@@ -122,7 +122,7 @@
          <label>Tax Category<span style="color:red;">*</span></label>
         <select class="selectpicker form-control1" id="tax_category" name="tax_category" value="{{ !empty($item->tax_category) ? $item->tax_category : "" }}" required="">
             <option value="" disabled="" hidden="">Tax Category</option>
-            <option value="tax" @if(old('tax_category', 'tax') == 'tax') selected @endif>Tax</option>
+            <option value="tax" >Tax</option>
         </select>
   
     </div>
@@ -134,9 +134,9 @@
          <label>Product Condition<span style="color:red;">*</span></label>
         <select class="selectpicker form-control1" id="product_condition" name="product_condition" value="{{ !empty($item->condition) ? $item->condition : "" }}" required="">
             <option value="" disabled="" hidden="">Product Condition </option>
-            <option value="old" @if(old('condition', 'old') == 'old') selected @endif>Old</option>
-            <option value="new" @if(old('condition', 'new') == 'new') selected @endif>New</option>
-            <option value="refurbished" @if(old('condition', 'refurbished') == 'refurbished') selected @endif>Refurbished</option>                                      
+            <option value="old" >Old</option>
+            <option value="new" >New</option>
+            <option value="refurbished" >Refurbished</option>                                      
         </select>
 
     </div>
@@ -467,7 +467,7 @@
         <div class="col-md-12 col-lg-8">
           <select class="selectpicker form-control1" id="country" name="country" value="{{ !empty($item->country_of_origin) ? $item->country_of_origin : "" }}" required="">
                 <option value="" disabled hidden>Select Option</option>
-                <option value="india" @if(old('country_of_origin', 'india') == 'india') selected @endif>India</option>
+                <option value="india" >India</option>
             </select>
         </div>
 
