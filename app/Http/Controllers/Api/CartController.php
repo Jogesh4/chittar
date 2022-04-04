@@ -16,6 +16,7 @@ class CartController extends Controller
   
   public function add_to_cart(Request $request)
     {
+        $final_out = array();
         $userID = $request->user_id;
 
         $item = Item::where('id',$request->item_id)->first();
@@ -34,10 +35,13 @@ class CartController extends Controller
             $cartItem->status = 1;
             $cartItem->save();
 
-            return response()->json(['success' => true,'message' => 'added to cart','cart' => $cartItem]);
+            $final_out[] = $cartItem;
+
+            return response()->json(['success' => true,'message' => 'added to cart','cart' => $final_out]);
         }
         else{
-            return response()->json(['success' => false,'message' => 'already added to cart','cart' => $cart]);
+            $final_out[] = $cart;
+            return response()->json(['success' => false,'message' => 'already added to cart','cart' => $final_out]);
         }
 
     }
