@@ -57,8 +57,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
+        $category = Category::where('id', $id)->first();
+
         return view('admin.category.create')->with('category',$category);
     }
 
@@ -74,6 +76,12 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = $request->name;
         $category->is_active = $request->is_active ?? 0;
+
+        if($request->hasfile('image')){
+              $imagePath = $request->file('image')->store('category_image', 'public');
+         }
+
+         $category->image = $imagePath;
         
         if($category->save()) {
             return redirect()->back()->with('success', 'Category update successfully');

@@ -193,6 +193,12 @@ class ItemController extends Controller
              $item->save();
         }
 
+        else if($type == 'category'){
+             $item = Category::where('id',$id)->first();
+             $item->is_active = $status;
+             $item->save();
+        }
+
         return back();
     }
 
