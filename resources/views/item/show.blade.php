@@ -119,7 +119,12 @@
         </div>
       </div>
     </div>
-
+    <section class="bg-light p-3 mb-3">
+<div class="container  text-justify">
+<p class="h3 titllee text-center fw-bold ">PRODUCTS Description</p>                 
+<p class="about">{{ $item->description }}</p>
+</div>
+</section>
 
     <div class="row mb-5">
       <h2 class="h2 titllee text-center fw-bold mb-3">Related Products</h2>
@@ -236,12 +241,7 @@
 </section> 
 
 <!-- ------------------------------------------------------ -->
-<section class="bg-light p-5">
-<div class="container  text-justify">
-<p class="h3 titllee text-center fw-bold ">PRODUCTS Description</p>                 
-<p class="about">{{ $item->description }}</p>
-</div>
-</section>                
+                
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
