@@ -13,6 +13,12 @@
                {{ request()->name }}
             @elseif($category_name != "") 
                {{ $category_name }}
+            @elseif($brand_name != "") 
+               {{ $brand_name }}
+            @elseif(!empty(request()->type)) 
+               {{ request()->type }}
+            @elseif(!empty(request()->condition)) 
+               {{ request()->condition }}
             @else
                All Products
             @endif
@@ -22,6 +28,12 @@
                {{ request()->name }}
             @elseif($category_name != "")
                {{ $category_name }}
+            @elseif($brand_name != "") 
+               {{ $brand_name }}
+            @elseif(!empty(request()->type)) 
+               {{ request()->type }}
+            @elseif(!empty(request()->condition)) 
+               {{ request()->condition }}
             @else
                All Products
             @endif
@@ -49,23 +61,31 @@
                 <div class="heading d-flex justify-content-between align-items-center">
                     <h6 class="text-uppercase">Brand</h6> <span>--</span>
                 </div>
+            @foreach($brands as $brand)
                 <div class="d-flex justify-content-between mt-2">
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Name </label> </div> <span>13</span>
+                     
+                      @if($brand_name == $brand->name)
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="brand" value="{{ $brand->id }}" id="flexCheckDefault" checked onclick="brand_click(this)"> <label class="form-check-label" for="flexCheckDefault"> {{ $brand->name }} </label>
+                        </div>
+                      @else
+                          <div class="form-check">
+                          <input class="form-check-input" type="radio" name="brand" value="{{ $brand->id }}" id="flexCheckDefault" onclick="brand_click(this)"> <label class="form-check-label" for="flexCheckDefault"> {{ $brand->name }} </label>
+                        </div>
+                      @endif
+                    
                 </div>
-                <div class="d-flex justify-content-between mt-2">
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked=""> <label class="form-check-label" for="flexCheckChecked"> Name </label> </div> <span>4</span>
-                </div>
-                
+            @endforeach
             </div>
             <div class="type p-2 mb-2">
                 <div class="heading d-flex justify-content-between align-items-center">
                     <h6 class="text-uppercase">Type</h6> <span>--</span>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Name </label> </div> <span>23</span>
+                    <div class="form-check"> <input class="form-check-input" type="radio" name="type" value="digital" id="flexCheckDefault" onclick="type_click(this)"  @if(!empty(request()->type)) @if(request()->type == 'digital') checked @endif @endif> <label class="form-check-label" for="flexCheckDefault"> Digital </label> </div> <span></span>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked=""> <label class="form-check-label" for="flexCheckChecked"> Name </label> </div> <span>24</span>
+                    <div class="form-check"> <input class="form-check-input" type="radio" name="type" value="physical" id="flexCheckChecked" onclick="type_click(this)"  @if(!empty(request()->type)) @if(request()->type == 'physical') checked @endif @endif> <label class="form-check-label" for="flexCheckChecked"> Physical </label> </div> <span></span>
                 </div>
                 
             </div>
@@ -77,12 +97,14 @@
                     <h6 class="text-uppercase">Product Condition</h6> <span>--</span>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault"> Name </label> </div> <span>23</span>
+                    <div class="form-check"> <input class="form-check-input" type="radio" name="condition" value="new" id="flexCheckDefault" onclick="condition_click(this)"  @if(!empty(request()->condition)) @if(request()->condition == 'new') checked @endif @endif> <label class="form-check-label" for="flexCheckDefault"> New </label> </div> <span></span>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked=""> <label class="form-check-label" for="flexCheckChecked"> Name </label> </div> <span>24</span>
+                    <div class="form-check"> <input class="form-check-input" type="radio" name="condition" value="old" id="flexCheckChecked" onclick="condition_click(this)"  @if(!empty(request()->condition)) @if(request()->condition == 'old') checked @endif @endif> <label class="form-check-label" for="flexCheckChecked"> Old </label> </div> <span></span>
                 </div>
-                
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="form-check"> <input class="form-check-input" type="radio" name="condition" value="refurbished" id="flexCheckChecked" onclick="condition_click(this)"  @if(!empty(request()->condition)) @if(request()->condition == 'refurbished') checked @endif @endif> <label class="form-check-label" for="flexCheckChecked"> Refurbished </label> </div> <span></span>
+                </div>
             </div>
 
 
@@ -95,7 +117,7 @@
                     <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> <label class="form-check-label" for="flexCheckDefault">INR 400 -  600 </label> </div>
                 </div>
                 <div class="d-flex justify-content-between mt-2">
-                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked=""> <label class="form-check-label" for="flexCheckChecked">INR 600 -  1000</label> </div>
+                    <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"> <label class="form-check-label" for="flexCheckChecked">INR 600 -  1000</label> </div>
                 </div>
 
                 <div class="d-flex justify-content-between mt-2">
@@ -268,6 +290,18 @@
 
 
 <script>
+
+  function brand_click(element){
+      window.location.replace(window.location.origin + '/search/?brand='+element.value);
+  }
+
+  function type_click(element){
+      window.location.replace(window.location.origin + '/search/?type='+element.value);
+  }
+
+  function condition_click(element){
+      window.location.replace(window.location.origin + '/search/?condition='+element.value);
+  }
 
    function add_cart(id){
 
