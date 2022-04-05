@@ -121,7 +121,7 @@ $userID = auth()->user() ? auth()->user()->id : 1;
 
           <div class="text-center">
               <h2>Your Shopping Cart is Empty!!!</h2>
-              <a class="btn btn-lg btn-dark mt-3" href="/category/women">View Products</a>
+              <a class="btn btn-lg btn-dark mt-3" href="/search">View Products</a>
           </div>
 
 
