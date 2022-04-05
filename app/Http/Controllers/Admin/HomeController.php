@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
@@ -22,6 +24,9 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view('admin.home');
+        $users = User::orderBy('id', 'desc')->take(5)->get();
+        $orders = Order::orderBy('id', 'desc')->take(5)->get();
+
+        return view('admin.home',compact('users','orders'));
     }
 }

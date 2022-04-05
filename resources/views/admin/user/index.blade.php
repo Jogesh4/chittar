@@ -2,9 +2,8 @@
 @section('title', 'All Users')
 @section('content')
 <div class="container-fluid">         
-                    <?php
-                          $i = 1;
-                      ?>
+                                          <h3 class="mb-2 main-heading">Costumers</h3>
+
                     <div class="row">
                         <div class="col-lg-12">
                             
@@ -23,7 +22,7 @@
                                    @if(!empty($users))
                                    @foreach($users as $user)
                                       <tr>
-                                          <td scope="row">{{ $i++ }}</td>
+                                          <td scope="row">{{ $loop->iteration }}</td>
                                           <td>{{ $user->name }}</td>
                                           <td>{{ $user->email }}</td> 
                                           <td>9876768543</td> 

@@ -184,7 +184,7 @@
                   <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[0]->price }}</h4>
                   <h4 class="pink-color">INR{{ $items[0]->price }}</h4>
                 </div>
-                <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
+                {{-- <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button> --}}
 
               </div>
             </div>
@@ -204,7 +204,7 @@
                   <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[1]->price }}</h4>
                   <h4 class="pink-color">INR{{ $items[1]->price }}</h4>
                 </div>
-                <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
+                {{-- <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button> --}}
               </div>
             </div>
           </div>

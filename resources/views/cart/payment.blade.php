@@ -88,8 +88,35 @@
 
 <form method="post" action="{{ route('order.place') }}">
      @csrf
-  <h5 class="">Billing address</h5>
+
+     <h5 class="">Payment Method</h5>
   <div class="row border p-2">
+  
+      <div class="col-12">
+        
+        <div class="row mt-2">
+          <div class="col-2">
+          <input class="form-check-input " type="radio" value="PAID" checked name="payment_type" id="flexCheckChecked">
+          </div>
+          <div class="col-10">        
+            <p>Online</p>
+          </div>          
+          <hr>
+        </div>
+       
+        <div class="row ">
+          <div class="col-2">
+          <input class="form-check-input " type="radio" value="COD" name="payment_type" id="flexCheckChecked">
+          </div>
+          <div class="col-10">        
+            <p>Cash On Delivery</p>
+          </div>          
+        </div>      
+      </div>
+    </div>
+
+  <h5 class="">Billing address</h5>
+  <div class="row border p-2 mt-2">
   
       <div class="col-12">
         
