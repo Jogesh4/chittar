@@ -15,4 +15,9 @@ class Address extends Model
      * @var string
      */
     protected $table = 'addresses';
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

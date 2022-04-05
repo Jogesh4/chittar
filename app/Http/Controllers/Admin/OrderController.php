@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
@@ -49,7 +50,13 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $type = 'item';
+        $order = Order::where('id',$id)->first();
+
+        $details = OrderItem::where('order_id',$id)->get();
+
+        return view('admin.order.view_order',compact('order','details','type'));
+
     }
 
     /**
@@ -60,7 +67,11 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Order::where('id',$id)->first();
+
+        $details = OrderItem::where('order_id',$id)->get();
+
+        return view('admin.order.edit_order',compact('order','details'));
     }
 
     /**
@@ -72,7 +83,12 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::where('id',$id)->first();
+        $order->status = $request->payment_status;
+        $order->order_status = $request->order_status;
+        $order->save();
+
+        return redirect()->back()->with('success', 'Order Updated Successfully'); 
     }
 
     /**

@@ -50,7 +50,8 @@ class OrderController extends Controller
   else{
     $order->billing_address = session()->get('shipping_id');
   }
-    $order->status = "PAID";
+    $order->status = $request->payment_type;
+    $order->order_status = 0;
     
     if($order->save()){
       foreach($cartItems as $row){

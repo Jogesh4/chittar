@@ -5,7 +5,7 @@
     
                       <h3 class="mb-2 main-heading">Orders</h3>
 
-                    {{-- <div class="row p-1"> 
+                    <div class="row p-1"> 
                         <div class="card">
                       <p class="text-attive">
                         <span class="text-acttive"> All </span> 
@@ -18,7 +18,7 @@
 
                         </div>
 
-                    </div>      --}}
+                    </div>     
                     
                     {{-- <div class="row p-1">
                         
@@ -77,7 +77,21 @@
                                             <td>{{ $order->user->name }}</td>
                                             <td>{{ $order->items }}</td> 
                                             <td><i class="fas fa-rupee-sign"></i>{{ $order->amount }}</td> 
-                                            <td class="text-success"> <i class="fas fa-credit-card"></i>  Paid </td> 
+                                            <td>
+                                                @if($order->status == 'PAID')
+                                                <span class="text-success"> <i class="fas fa-credit-card"></i>  Paid </span>
+                                                @endif 
+                                                @if($order->status == 'UNPAID')
+                                                <span class="text-danger"> <i class="fas fa-credit-card"></i>  UnPaid </span>
+                                                @endif
+                                                @if($order->status == 'COD')
+                                                <span class="text-success"> <i class="fas fa-money-bill"></i>  Cash </span>
+                                                @endif
+                                                @if($order->status == 'FAILED')
+                                                <span class="text-danger"> <i class="fas fa-credit-card"></i>  Failed </span>
+                                                @endif
+                                            </td>
+                                            
                                             {{-- <td> <select class="selectpicker form-control1" id="type" name="type" required="">
                                                 <option value=" packing" selected="">Packing</option>
                                                 <option value="reviewing">Reviewing</option>
@@ -87,8 +101,8 @@
                                             
                                             <td>
                                                 <div class="actions">
-                                                <a href="#" title="View"><i class="fas faslls fa-eye"></i></a>
-                                                <a href="#" title="View"><i class="fas faslls fa-pen"></i></a>
+                                                <a href="/admin/orders/{{ $order->id }}" title="View"><i class="fas faslls fa-eye"></i></a>
+                                                <a href="/admin/orders/{{ $order->id }}/edit" title="View"><i class="fas faslls fa-pen"></i></a>
                                                 {{-- <span> <a href="#" title="Share"><i class="fas faslls fa-share-alt"></i></a> </span>
                                                 <span> <a href="#" title="Slip"><i class="fas faslls fa-clipboard"></i></a> </span>
                                                 <span> <a href="#" title="Cancel Order"><i class="fas faslls fa-window-close"></i></a> </span>
