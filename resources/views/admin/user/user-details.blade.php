@@ -9,18 +9,20 @@
   
 
                         <div class="row p-4 "> 
-                        <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold"><a href="#"> <i class="fas pink-color fa-fw fa-user "></i> Details </a></div> 
-                         <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold"><a href="#"> <i class="fas pink-color fa-box"></i> Reward Point History</a></div> 
-                          <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold"><a href="#"> <i class="fas pink-color fa-money-bill"></i> Redeemed Coupons</a></div> 
-                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold"><a href="#"> <i class="fas pink-color fa-list"></i> Orders</a></div>  
-                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold"><a href="#"> <i class="fas pink-color fa-ban"></i> Cancellation Requests</a></div>
-                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold"><a href="#"> <i class="fas pink-color fa-exchange-alt"></i> Return Requests</a></div>
-                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold"><a href="#"> <i class="fas pink-color fa-keyboard"></i>Product Reviews</a></div>
+                        <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold text-dark"><a href="#"> <i class="fas pink-color fa-fw fa-user "></i> Details </a></div> 
+                         <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold text-dark"><a href="#"> <i class="fas pink-color fa-box"></i> Reward Point History</a></div> 
+                          <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold text-dark"><a href="#"> <i class="fas pink-color fa-money-bill"></i> Redeemed Coupons</a></div> 
+                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold text-dark"><a href="#"> <i class="fas pink-color fa-list"></i> Orders</a></div>  
+                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold text-dark"><a href="#"> <i class="fas pink-color fa-ban"></i> Cancellation Requests</a></div>
+                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold text-dark"><a href="#"> <i class="fas pink-color fa-exchange-alt"></i> Return Requests</a></div>
+                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold text-dark"><a href="#"> <i class="fas pink-color fa-keyboard"></i> Product Reviews</a></div>
+                           <div class="col-12 bg-white shadow p-3 m-2 pink-color border  fw-bold text-dark"><a href="#"> <i class="fas pink-color fa-fw fa-user"></i> Addresses</a></div>
                         </div>  
                         </div>  
                         <div class="col-8">
                         <div class="row p-2 ">
                             <input data-v-a0e87de4="" type="search" placeholder="Bhanu@justconsult.us X " aria-label="Search Email" autocomplete="off" class="form-control ">
+                        <div class="col-3 email-show-user mt-2"> Bhanu@justconsult.us <span><a href="#" class="text-white fw-bold m-2 ">X</a></span></div>
                         </div>
 <div class="row p-3 bg-white mt-3 ">
     <h3>Personal Detail</h3>
@@ -94,7 +96,30 @@
     </ul>
        <!----></div>
 </div>
+<div class="row bg-white mt-3">
+<h3 class="bg-white mt-3"> Product Reviews</h3>
+<div>
+<img class="img-fluid text-center" src="/images/empty-state-cart.jpg" style=" max-width: 80%; ">
+</div> 
+</div>
+
+
+<div class="row bg-white mt-3">
+<h3 class="bg-white mt-3"> Return Requests</h3>
+<div>
+<img class="img-fluid text-center" src="/images/empty-state-cart.jpg" style=" max-width: 80%; ">
+</div> 
+</div>
+
+<div class="row bg-white mt-3">
+<h3 class="bg-white mt-3"> Cancellation Requests</h3>
+<div>
+<img class="img-fluid text-center" src="/images/empty-state-cart.jpg" style=" max-width: 80%; ">
+</div> 
+</div>
+
   </div>
+  
   </div>
 </section>
 

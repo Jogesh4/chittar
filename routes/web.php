@@ -27,6 +27,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('change_status/{type}{id}{status}', [App\Http\Controllers\Admin\ItemController::class, 'change_status'])->name('change_status');
+Route::view('/report', 'admin.report.sale-report');
+Route::view('/customer-report', 'admin.report.customer-report');
+Route::view('/special-price', 'admin.price.special-price');
 
 require __DIR__.'/cart.php';
 require __DIR__.'/search.php';
@@ -34,3 +37,6 @@ require __DIR__.'/order.php';
 require __DIR__.'/item.php';
 require __DIR__.'/category.php';
 require __DIR__.'/user.php';
+
+
+
