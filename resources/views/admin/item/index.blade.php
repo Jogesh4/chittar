@@ -2,9 +2,8 @@
 @section('title', 'All Items')
 @section('content')
 <div class="container-fluid">         
-                    <?php
-                          $i = 1;
-                      ?>
+                                                              <h3 class="mb-2 main-heading">Products</h3>
+
                     <div class="row">
                         <div class="col-lg-12">
                             

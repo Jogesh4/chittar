@@ -4,6 +4,8 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
+                                          <h3 class="mb-2 main-heading">Categories</h3>
+
     <div class="row">
                         <div class="col-lg-12">
                             

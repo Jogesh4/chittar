@@ -1,8 +1,11 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'All Orders')
 @section('content')
-<div class="container-fluid">    
-                    <div class="row p-1"> 
+<div class="container-fluid"> 
+    
+                      <h3 class="mb-2 main-heading">Orders</h3>
+
+                    {{-- <div class="row p-1"> 
                         <div class="card">
                       <p class="text-attive">
                         <span class="text-acttive"> All </span> 
@@ -15,9 +18,9 @@
 
                         </div>
 
-                    </div>     
+                    </div>      --}}
                     
-                    <div class="row p-1">
+                    {{-- <div class="row p-1">
                         
                         <div class="col-lg-8 p-0">
                             
@@ -46,7 +49,7 @@
                             
                        </div>
                       
-                   </div>
+                   </div> --}}
 
 
                    <div class="row">
@@ -62,8 +65,8 @@
                                          <th>Items</th> 
                                          <th>Amount</th> 
                                          <th>Payment Status</th> 
-                                         <th>Fulfillment status</th> 
-                                        <th></th>
+                                         {{-- <th>Fulfillment status</th>  --}}
+                                        <th>Action</th>
                                     </tr>
                                  </thead>
                                 @if(!empty($orders))  
@@ -75,20 +78,21 @@
                                             <td>{{ $order->items }}</td> 
                                             <td><i class="fas fa-rupee-sign"></i>{{ $order->amount }}</td> 
                                             <td class="text-success"> <i class="fas fa-credit-card"></i>  Paid </td> 
-                                            <td> <select class="selectpicker form-control1" id="type" name="type" required="">
+                                            {{-- <td> <select class="selectpicker form-control1" id="type" name="type" required="">
                                                 <option value=" packing" selected="">Packing</option>
                                                 <option value="reviewing">Reviewing</option>
                                                 <option value="ready-for-pick">Ready for pickup</option>                                      
                                                 <option value="picked">Picked up</option>                                      
-                                            </select></td>
+                                            </select></td> --}}
                                             
                                             <td>
                                                 <div class="actions">
                                                 <a href="#" title="View"><i class="fas faslls fa-eye"></i></a>
-                                                <span> <a href="#" title="Share"><i class="fas faslls fa-share-alt"></i></a> </span>
+                                                <a href="#" title="View"><i class="fas faslls fa-pen"></i></a>
+                                                {{-- <span> <a href="#" title="Share"><i class="fas faslls fa-share-alt"></i></a> </span>
                                                 <span> <a href="#" title="Slip"><i class="fas faslls fa-clipboard"></i></a> </span>
                                                 <span> <a href="#" title="Cancel Order"><i class="fas faslls fa-window-close"></i></a> </span>
-                                                <span> <a href="#" title="Complete Order"><i class="fas faslls fa-check-square"></i> </span>
+                                                <span> <a href="#" title="Complete Order"><i class="fas faslls fa-check-square"></i> </span> --}}
                                                 </div>
                                                 </td>
                                       </tr>

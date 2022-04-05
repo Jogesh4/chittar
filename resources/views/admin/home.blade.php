@@ -49,7 +49,7 @@
                                  <div class="d-flex flex-column">
                                     <h6 class="m-0 font-weight-bold ">Recent Orders</h6>
                                  </div>
-                                 <div class=""><a href="file:///C:/Users/just/Desktop/chittarr/view-orders.html" class="btn btn-outline-secondary btn-sm">
+                                 <div class=""><a href="/admin/orders" class="btn btn-outline-secondary btn-sm">
                                     View All Orders
                                 </a></div>
                                  <!--end::User-->
@@ -60,23 +60,30 @@
                               <div class=" pb-2">
                                  <table class="table table-borderless datatable dataTable-table">
                                     <thead>
-                                       <tr>
-                                          <th scope="col">Order ID</th>
-                                          <th scope="col">Customer Name	</th>
-                                          <th scope="col">Order Amount </th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       
-                                       <tr><td>444555345 </td><td>Pawan Kumar</td> <td>RS 5262</td> </tr>
-
-                                       <tr><td>444232325 </td><td>Misha Hesson</td> <td>RS 5262</td> </tr>
-
-                                       <tr><td>4444565 </td><td>Sharjeel Al Masood</td> <td>RS 5262</td> </tr>
-
-                                       <tr><td>444232325 </td><td>Misha Hesson</td> <td>RS 5262</td> </tr>
-                                      
-                                    </tbody>
+                                    <tr>
+                                        <th>Order No</th>
+                                         <th>Date</th>
+                                         <th>Name</th>
+                                         <th>Items</th> 
+                                         <th>Amount</th> 
+                                         
+                                    </tr>
+                                 </thead>
+                                @if(!empty($orders))  
+                                     @foreach($orders as $order)                              
+                                      <tr>
+                                            <td scope="row">{{ $order->order_no }}</td>
+                                            <td>{{date('d-m-Y', strtotime($order->created_at))}}</td>
+                                            <td>{{ $order->user->name }}</td>
+                                            <td>{{ $order->items }}</td> 
+                                            <td><i class="fas fa-rupee-sign"></i>{{ $order->amount }}</td> 
+                                      </tr>
+                                      @endforeach
+                                  @else
+                                         <div class="text-center">
+                                              <h3>No User Found</h3>
+                                         </div>
+                                      @endif
                                  </table>
                               </div>
                            </div>
@@ -159,7 +166,7 @@
                                  <div class="d-flex flex-column">
                                     <h6 class="m-0 font-weight-bold ">Recent Customers</h6>
                                  </div>
-                                 <div class=""><a href="file:///C:/Users/just/Desktop/chittarr/View-customer.html" class="btn btn-outline-secondary btn-sm">
+                                 <div class=""><a href="/admin/users" class="btn btn-outline-secondary btn-sm">
                                     View All Customers
                                 </a></div>
                                  <!--end::User-->
@@ -170,26 +177,27 @@
                               <div class=" pb-2">
                                  <table class="table table-borderless datatable dataTable-table">
                                     <thead>
-                                       <tr>
-                                          <th scope="col">Customer Name</th>
-                                          <th scope="col" >Customer Email</th>
-                                          <th scope="col" >Phone</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       <tr>
-                                          <td>David Andrew</td>
-                                          <td>tribe@dummyid.com</td>
-                                          <td>4445234541</td>
-                                       </tr>
-
-                                       <tr><td>Pawan Kumar</td> <td>XXXXXX@ablysoft.com</td> <td>44453543541 </td></tr>
-
-                                       <tr><td>Misha Hesson</td> <td>XXXXXX@ablysoft.com</td> </tr>
-
-                                       <tr><td>Sharjeel Al Masood</td> <td>XXXXXX@ablysoft.com</td> <td>4489789879</td></tr>
-                                      
-                                    </tbody>
+                                    <tr>
+                                        <th>S.No</th>
+                                         <th>Name</th> 
+                                         <th>Email</th> 
+                                         <th>Phone</th> 
+                                    </tr>
+                                 </thead>
+                                   @if(!empty($users))
+                                   @foreach($users as $user)
+                                      <tr>
+                                          <td scope="row">{{ $loop->iteration }}</td>
+                                          <td>{{ $user->name }}</td>
+                                          <td>{{ $user->email }}</td> 
+                                          <td></td> 
+                                      </tr>
+                                      @endforeach
+                                      @else
+                                         <div class="text-center">
+                                              <h3>No User Found</h3>
+                                         </div>
+                                      @endif
                                  </table>
                               </div>
                            </div>

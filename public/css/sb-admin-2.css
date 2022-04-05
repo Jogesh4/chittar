@@ -7435,6 +7435,21 @@ div[data-role="editor-toolbar"] {
     user-select: none;
 }
 
+.main-heading {
+    font-weight: 400;
+    position: relative;
+    font-size: 25px;
+    text-align: center;
+}
+
+.main-heading:after {
+    content: '';
+    border-bottom: 3px solid #5d6b97;
+    width: 12%;
+    display: block;
+    margin: 5px auto 0 auto;
+}
+
 .buttonload {
     background-color: #04aa6d00;
     border: none;
