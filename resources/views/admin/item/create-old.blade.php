@@ -378,6 +378,7 @@
         $(document).ready(function(){
           let optionsLen = 1;
           $(document).on('click', '.btn-add', function() {
+            alert('jhvhj');
             $(this).hide();
             optionsLen++;
             $("#more-options").append(`<div class="row mb-2">

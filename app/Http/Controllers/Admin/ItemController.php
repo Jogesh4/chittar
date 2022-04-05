@@ -105,7 +105,7 @@ class ItemController extends Controller
         $item->max_purchase_qty = $request->max_purchase;
         $item->price = $request->cost_price;
         $item->stock_alert_qty = $request->stock_alert;
-        // $item->has_multiple_options = $request->has_multiple_options;
+        $item->has_multiple_options = $request->multiple_options;
         $item->country_of_origin = $request->country;
         $item->weight_unit = $request->weight_type;
         $item->weight = $request->weight;
@@ -146,21 +146,26 @@ class ItemController extends Controller
         
         if($item->save()) {
 
-            // if(is_array($request->type)) {
-            //     $types = $request->type ?? [];
-            //     $prices = $request->price;
-            //     $qties = $request->qty;
-            //     $skus = $request->sku;
-            //     for($i=0; $i<count($types);$i++){
-            //         $variant = new Variant;
-            //         $variant->type=$types[$i];
-            //         $variant->price=$prices[$i];
-            //         $variant->qty=$qties[$i];
-            //         $variant->sku=$skus[$i];
-            //         $variant->item_id=$item->id;
-            //         $variant->save();
-            //     }
-            // }
+            if(is_array($request->type)) {
+                if(!empty($request->type[0])){
+                    $types = $request->type ?? [];
+                    $variants = $request->variant;
+                    $prices = $request->price;
+                    $qties = $request->qty;
+                    $skus = $request->sku;
+                    for($i=0; $i<count($types);$i++){
+                        $variant = new Variant;
+                        $variant->type=$types[$i];
+                        $variant->variant_name=$variants[$i];
+                        $variant->price=$prices[$i];
+                        $variant->qty=$qties[$i];
+                        $variant->sku=$skus[$i];
+                        $variant->item_id=$item->id;
+                        $variant->save();
+                    }
+              }
+            }
+
 
             if($url == 'save'){
                   return redirect()->back()->with('success', 'Item update successfully');

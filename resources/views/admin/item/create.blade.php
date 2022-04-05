@@ -66,9 +66,9 @@
     <div class="col-sm-12 col-md-12 col-lg-3 p-2">
          <label>Product Type<span style="color:red;">*</span></label>
         <select class="selectpicker form-control1" id="product_type" name="product_type" value="{{ !empty($item->type) ? $item->type : "" }}" required="">
-            <option value="" disabled="" hidden="">Product Type</option>
-            <option value="physical" @if(old('type', 'physical') == 'physical') selected @endif>Physical</option>
-            <option value="digital" @if(old('type', 'digital') == 'digital') selected @endif>Digital</option>                                      
+            <option value="" disabled="" hidden="" selected>Product Type</option>
+            <option value="physical">Physical</option>
+            <option value="digital">Digital</option>                                      
         </select>
 
     </div> 
@@ -82,7 +82,7 @@
 
          <label>Brand</label>
         <select class="selectpicker form-control1" id="brand" name="brand" value="{{ !empty($item->brand_id) ? $item->brand_id : "" }}" required="">
-            <option value="" disabled="" hidden="">Brand</option>
+            <option value="" disabled="" hidden="" selected>Brand</option>
             @foreach($brands as $brand)
                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
             @endforeach                                      
@@ -94,7 +94,7 @@
 
          <label>Category<span style="color:red;">*</span></label>
         <select class="selectpicker form-control1" id="category" name="category" value="{{ !empty($item->category_id) ? $item->category_id : "" }}" required="">
-            <option value="" disabled="" hidden="">Category</option>
+            <option value="" disabled="" hidden="" selected>Category</option>
             @foreach($categories as $category)
                <option value="{{ $category->id }}" >{{ $category->name }}</option>
             @endforeach
@@ -154,7 +154,7 @@
     </div>
         <div class="row mt-5">
             <div class="d-flex justify-content-end">
-                <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
+                <a href="/admin/items/create" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
                 <span class="ml-3" id="general_next"> <a href="#" class="btn-blu-login">NEXT <i class="fas text-white fa-arrow-right"></i> </a></span>
             </div>
         </div>
@@ -243,7 +243,7 @@
         <div class="row ">	
             
             <div class="col-md-12 col-lg-10">
-              <p class="ptext">  Available for Cash on Delivery</p>
+              <p class="ptext"> Available for Cash on Delivery</p>
             </div>
 
             <div class="col-md-12 col-lg-2 form-outline">
@@ -311,7 +311,7 @@
 
 <div class="row  mt-5">
     <div class="d-flex justify-content-end">
-        <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
+        <a href="/admin/items/create" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
         <span class="ml-3 mr-3" id="inventory_previous"> <a href="#" class="btn-blu-login"><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
         <span class="ml-3 mr-3" id="inventory_next"> <a href="#" class="btn-blu-login">NEXT <i class="fas text-white fa-arrow-right"></i> </a></span>
     </div>
@@ -331,13 +331,13 @@
 
         <div class="col-md-12 col-lg-2 form-outline">
             <span class="ml-3 mr-4">
-                <input class="form-check-input" type="radio" name="Inventory" value="1">
+                <input class="form-check-input" type="radio" name="multiple_options" value="1">
                 <label class="form-check-label ptext" for="flexRadioDefault1">
                 Yes
                 </label>
                 </span>
                 <span class="ml-3" >
-                <input class="form-check-input" type="radio" name="Inventory" value="0">
+                <input class="form-check-input" type="radio" name="multiple_options" value="0">
                 <label class="form-check-label ptext" for="flexRadioDefault1">
                 No
                 </label>   
@@ -345,53 +345,61 @@
         </div>
     </div>
 
-    <div class="row ">	
+    <div>
+              {{-- <div id="more-options">
+                <div class="row mb-2">
+                  <div class="col-4">
+                    <select class="form-control" style="width: 120%;">
+                      <option value="size">Size</option>
+                      <option value="color">Color</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <input class="form-control tags-input" type="text" />
+                  </div>
+                  <div class="col-2">
+                    <button type="button" class="btn btn-danger btn-sm btn-remove">x</button>
+                    <button type="button" class="btn btn-info btn-sm btn-add">+</button>
+                  </div>
+                </div>
+              </div> --}}
 
-        <div class="col-md-12 col-lg-2 mt-3">
-            <label>Option 1</label>
-        </div>
-            
-        <div class="col-md-12 col-lg-3">
-            <label>Color</label>
-           <input type="text" name="color" id="color" placeholder="Enter Color" class="form-control2">
-        </div>
-
-        <div class="col-md-12 col-lg-3">
-            <label>Size</label>
-           <input type="text" name="size" id="size" placeholder="Enter Size" class="form-control2">
-        </div>
-
-
-        {{-- <div class="col-sm-12 col-md-12 col-lg-3 p-2">
-
-            <select class="selectpicker form-control1" id="type" name="type">
-                <option value="" disabled="" >Select Option</option>
-                <option value="1" selected="" >Color</option>
-                <option value="2">Size</option>
-                <option value="3">Carat</option>                                      
-                <option value="4">Clarity</option>                                      
-                <option value="5">Strap</option>                                      
-            </select>
-    
-        </div> --}}
-        {{-- <div class="col-md-12 col-lg-4 form-outline p-2">
-            <input type="number" name="type-product" id="" placeholder="Add Tag *" class="form-control2 ">
-        </div> --}}
-
-        <div class="col-md-12 col-lg-2 form-outline p-2">
-            
-            
-            <div class="actions mt-3">
-                <a href="#" title="Delete"><i class="fas faslls fa-trash-alt ml-4"></i></a>
-                <span class="ml-4"> <a href="#" title="Add"><i class="fas faslls fa-plus"></i></a> </span>
-                </a>
+              {{-- <div class="row"><div class="col"><button type="button" class="btn btn-info btn-sm btn-add-row">Add Item</button></div></div> --}}
+              <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Variant</th>
+                    <th>Price(excl. tax)</th>
+                    <th>Quantity</th>
+                    <th>SKU</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tbody">
+                     <td class="variant">
+                        <select class="form-control" name="type[]" style="width: 120%;">
+                            <option value="" selected hidden>Type</option>
+                            <option value="size">Size</option>
+                            <option value="color">Color</option>
+                        </select>
+                        </td>
+                        <td><input type="text" name="variant[]" class="form-control" placeholder="Enter Variant" /></td>
+                        <td><input type="text" name="price[]" class="form-control" placeholder="Enter price" /></td>
+                        <td><input type="text" name="qty[]" class="form-control" placeholder="Enter qty" /></td>
+                        <td><input type="text" name="sku[]" class="form-control" placeholder="Enter sku" /></td>
+                        <td>
+                        <button type="button" class="btn btn-danger btn-sm btn-remove-row">x</button>
+                        </td>
+                        <td>
+                        <button type="button" class="btn btn-info btn-sm btn-add-row">+</button>
+                        </td>
+                </tbody>
+              </table>
             </div>
 
-        </div>
-    </div>
 
-
-    <div class="row p-5 ">
+    {{-- <div class="row p-5 ">
         <div class="bor-uplo p-2">
             
             <table class=" table table-justified">
@@ -424,9 +432,9 @@
 
 
         </div>
-    </div>
+    </div> --}}
 
-    <div class="row ">	
+    {{-- <div class="row mt-3">	
             
         <div class="col-md-12 col-lg-8">
           <p class="ptext">  Select Default Product Variant  </p>
@@ -440,12 +448,12 @@
             </select>
     
         </div>
-    </div>
+    </div> --}}
 
 
     <div class="row  mt-5">
         <div class="d-flex justify-content-end">
-            <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
+            <a href="/admin/items/create" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
             <span class="ml-3 mr-3" id="variant_previous"> <a href="#" class="btn-blu-login"><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
             <span class="ml-3 mr-3" id="variant_next"> <a href="#" class="btn-blu-login">NEXT <i class="fas text-white fa-arrow-right"></i> </a></span>
         </div>
@@ -528,7 +536,7 @@
 
     <div class="row  mt-5">
         <div class="d-flex justify-content-end">
-            <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
+            <a href="/admin/items/create" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
             <span class="ml-3 mr-3" id="attribute_previous"> <a href="#" class="btn-blu-login" ><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
             <span class="ml-3 mr-3" id="attribute_next"> <a href="#" class="btn-blu-login">NEXT <i class="fas text-white fa-arrow-right"></i> </a></span>
         </div>
@@ -643,7 +651,7 @@
 
 <div class="row  mt-5">
         <div class="d-flex justify-content-end">
-            <a href="#" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
+            <a href="/admin/items/create" class="btn-blu-login " data-bs-toggle="modal" data-bs-target="">DISACRD</a>
             <span class="ml-3 mr-3" id="media_previous"> <a href="#" class="btn-blu-login"><i class="fas text-white fa-arrow-left"></i> PREVIOUS</a></span>
          <button class="btn-blu-login">{{ $button_text }} </button>
         </div>
@@ -952,3 +960,102 @@ $("#icon3").click(function(){
 });
 
 </script>
+
+    <script>
+        $(document).ready(function(){
+          let optionsLen = 1;
+          $(document).on('click', '.btn-add', function() {
+            // alert('jhvhj');
+            $(this).hide();
+            optionsLen++;
+            $("#more-options").append(`<div class="row mb-2">
+                <div class="col-4">
+                  <select class="form-control" style="width: 120%;">
+                    <option value="size">Size</option>
+                    <option value="color">Color</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <input class="form-control tags-input" type="text" />
+                </div>
+                <div class="col-2">
+                  <button type="button" class="btn btn-danger btn-sm btn-remove">x</button>
+                  <button type="button" class="btn btn-info btn-sm btn-add">+</button>
+                </div>
+              </div>`);
+          });
+          $(document).on("click", ".btn-remove", function(){
+            optionsLen--;
+            $(this).parent().parent().remove();
+          });
+
+          function generateVariants() {
+            let variants = '';
+            const selects = $('#more-options').find('select');
+            for(let i=0;i<selects.length;i++) {
+              // fetching selects and setting select for each option
+              const optionsValue = $(selects[i]).find(":selected").val();
+              const input = $(selects[i]).closest('.row').find('input[type="text"]');
+              variants += `<select name="type[]" class="form-control ${optionsValue}"></select>`;
+              generateOption(input)
+            }
+
+            return variants;
+          }
+
+          $(document).on('click', '.btn-add-row', function() {
+            // $(this).hide();
+            $("#tbody").append(`<tr>
+                <td class="variant">
+                  <select class="form-control" name="type[]">
+                    <option value="size">Size</option>
+                    <option value="color">Color</option>
+                  </select>
+                </td>
+                <td><input type="text" name="variant[]" class="form-control" placeholder="Enter Variant" /></td>
+                <td><input type="text" name="price[]" class="form-control" placeholder="Enter price" /></td>
+                <td><input type="text" name="qty[]" class="form-control" placeholder="Enter qty" /></td>
+                <td><input type="text" name="sku[]" class="form-control" placeholder="Enter sku" /></td>
+                <td>
+                        <button type="button" class="btn btn-danger btn-sm btn-remove-row">x</button>
+                        </td>
+                        <td>
+                        <button type="button" class="btn btn-info btn-sm btn-add-row">+</button>
+                        </td>
+              </tr>`);
+          });
+          $(document).on("click", ".btn-remove-row", function(){
+            $(this).parent().parent().remove();
+          });
+
+          
+
+          // $(".tags-input").keypress(function(e) {
+          //   console.log('pressed')
+          //   var code = e.keyCode || e.which;
+          //   if(code == 32) {
+          //     //Enter keycode
+          //     generateOption($(this));
+              
+
+          //   }
+          // });
+
+          function generateOption(ele) {
+            const values = ele.val();
+            const arr = values.split(" ")
+            const selectedOption = $(ele).closest('.row').find('select option:selected').val();
+            // const foundValues = $(`select option[value="${selectedOption}"]`).closest('.row').find('input[type="text"]').val();
+              // console.log(foundValues);
+            let options = '';
+            for(let i=0;i<arr.length; i++){
+              options+= `<option value="${arr[i]}">${arr[i]}</option>`;
+            }
+
+            $(".size").append(options)
+            // console.log($(document).find("select .size"))
+            // $(document).find("."+selectedOption).append(options);
+          }
+          
+        });
+    </script>
