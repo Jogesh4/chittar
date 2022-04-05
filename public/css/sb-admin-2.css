@@ -175,7 +175,7 @@ sup {
 }
 
 a {
-    color: #4e73df;
+   
     text-decoration: none!important;
     background-color: transparent;
 }
@@ -474,6 +474,26 @@ mark,
 
 
 /*=========r css==========*/
+.text-acttive {
+    background-color: #ffffff;
+    padding: 8px 18px;
+    border-bottom: 3px solid #169cc5;
+    color: #d72280;
+    font-weight: 800;
+}
+.text-attive {
+    padding: 8px 18px;
+}
+.pink-color {
+    color: #ae0151;
+}
+.email-show-user{
+    color: #f8f9fc;
+    background: #169dc6;
+    margin: 7px;
+    padding: 8px;
+    border-radius: 5px;
+}
 
 .btn-style-dum {
     padding: 1em 3em !important;
