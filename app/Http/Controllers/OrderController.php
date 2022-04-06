@@ -10,6 +10,8 @@ use App\Models\CartItem;
 use App\Models\Item;
 use App\Models\Address;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
 
 class OrderController extends Controller
 {
@@ -74,6 +76,8 @@ class OrderController extends Controller
 
     $order->order_no = 'ORD0000' . $order->id;
     $order->save();
+
+    Mail::to('nikhil@justconsult.us')->send(new OrderMail());
 
     $cartItem = CartItem::where(['user_id' => auth()->user()->id])->update(["status" => 0]);
 
