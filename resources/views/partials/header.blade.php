@@ -20,7 +20,7 @@
             }
           @endphp
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#categoryWomen">Home</a></li>
+        <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="/">Home</a></li>
         <li class="nav-item px-2"><a class="nav-link fw-medium" href="{{ route('about') }}">About Us</a></li>
         <li class="nav-item px-2"><a class="nav-link fw-medium" href="/search">Categories</a></li>
         <li class="nav-item px-2"><a class="nav-link fw-medium" href="{{ route('contact') }}">Contact Us</a></li>
