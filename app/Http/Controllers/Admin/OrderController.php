@@ -17,7 +17,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::orderBy('id','desc')->get();
+        
         return view('admin.order.index', compact('orders'));
     }
 

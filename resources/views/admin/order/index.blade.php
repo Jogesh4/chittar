@@ -59,8 +59,9 @@
                             <table class="table table-justified" id="example">
                                 <thead>
                                     <tr>
-                                        <th>Order No</th>
-                                        <th>Date</th>
+                                         <th>S No</th>
+                                         <th>Order No</th>
+                                         <th>Date</th>
                                          <th>Name</th>
                                          <th>Items</th> 
                                          <th>Amount</th> 
@@ -72,6 +73,7 @@
                                 @if(!empty($orders))  
                                      @foreach($orders as $order)                              
                                       <tr>
+                                             <td>{{ $loop->iteration }}</td>
                                             <td scope="row">{{ $order->order_no }}</td>
                                             <td>{{date('d-m-Y H:m:s', strtotime($order->created_at))}}</td>
                                             <td>{{ $order->user->name }}</td>
