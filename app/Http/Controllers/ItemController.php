@@ -24,7 +24,7 @@ class ItemController extends Controller
 
         $color_variants = Variant::where(['item_id' => $item->id,'type' => 'color'])->get();
         $size_variants = Variant::where(['item_id' => $item->id,'type' => 'size'])->get();
-        $reviews = Review::where(['item_id' => $item->id])->get();
+        $reviews = Review::where(['item_id' => $item->id,'status' => 1])->get();
 
     if(auth()->check()){
         \Cart::clear();
@@ -67,12 +67,19 @@ class ItemController extends Controller
 
     public function save_review(Request $request){
         
-        $review = new Review();
-        $review->description = $request->review;
-        $review->item_id = $request->item_id;
-        $review->user_id = auth()->user()->id;
-        $review->status = 1;
-        $review->save();
+        if($request->review_id != "" ){
+              $review = Review::where('id',$request->review_id)->first();
+              $review->description = $request->review;
+        }
+        else{
+             $review = new Review();
+            $review->description = $request->review;
+            $review->item_id = $request->item_id;
+            $review->user_id = auth()->user()->id;
+            $review->status = 1;
+            $review->save();
+        }
+        
 
            $i = 1;
              if($request->hasfile('review_image')){
@@ -100,8 +107,22 @@ class ItemController extends Controller
          $review->save();
 
          return back();
+    }
 
+    public function edit_review(Request $request){
+         
+         $review = Review::where('id',$request->id)->first();
 
+           $data['new'] = [
+                         'code' => 1,
+                         'description' => $review->description,
+                         'image' => $review->image,
+                         'image1' => $review->image1,
+                         'image2' => $review->image2,
+                         'image3' => $review->image3,
+                     ];
+
+                return json_encode($data);
     }
 
 }

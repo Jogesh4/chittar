@@ -317,16 +317,77 @@
 				</div>
 				<div class="row bg-white mt-3 d-none" id="review_div">
 					<h3 class="bg-white mt-3"> Product Reviews</h3>
-					<div> <img class="img-fluid text-center" src="/images/empty-state-cart.jpg" style=" max-width: 80%; "> </div>
+					<div class="row">
+                    <div class="col-lg-12">
+
+                            <div class="table-responsive bg-white p-3">
+                            <table class="table table-justified" id="example">
+                                <thead>
+                                    <tr>
+                                        <th>Sno</th>
+                                        <th>Review</th>
+                                        <th>Images</th>
+                                         {{-- <th>Status</th>
+                                         <th>Action</th> --}}
+                                    </tr>
+                                 </thead>
+                                @if($reviews->count() > 0)  
+                                     @foreach($reviews as $review)                              
+                                      <tr>
+                                            <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $review->description }}</td>
+                                            <td>
+																							<div class="row mt-2">
+																										<div class="col-md-12 col-lg-12 form-outline mb-2">
+																												@if(!empty($review->image))
+																													<div class="position-relative d-inline p-1">
+																															<img src="{{ !empty($review->image) ? asset('storage/'.$review->image) : '#' }}" alt="your image" width="50" height="50"/>
+																													</div>
+																												@endif
+																												@if(!empty($review->image1))
+																													<div class="position-relative d-inline p-1">
+																															<img src="{{ !empty($review->image1) ? asset('storage/'.$review->image1) : '#' }}" alt="your image" width="50" height="50"/>
+																													</div>
+																												@endif
+																												@if(!empty($review->image2))
+																													<div class="position-relative d-inline p-1">
+																															<img src="{{ !empty($review->image2) ? asset('storage/'.$review->image2) : '#' }}" alt="your image" width="50" height="50"/>
+																													</div>
+																												@endif
+																												@if(!empty($review->image3))
+																													<div class="position-relative d-inline p-1">
+																															<img src="{{ !empty($review->image3) ? asset('storage/'.$review->image3) : '#' }}" alt="your image" width="50" height="50"/>
+																													</div>
+																												@endif
+																													
+																										</div>
+																						</div>
+																						</td>
+                                            
+                                      </tr>
+                                      @endforeach
+                                  @else
+                                         <div class="text-center">
+                                              <h3>No Order Found</h3>
+                                         </div>
+                                      @endif
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
 				</div>
+
 				<div class="row bg-white mt-3 d-none" id="return_div">
 					<h3 class="bg-white mt-3"> Return Requests</h3>
 					<div> <img class="img-fluid text-center" src="/images/empty-state-cart.jpg" style=" max-width: 80%; "> </div>
 				</div>
+
 				<div class="row bg-white mt-3 d-none" id="cancel_div">
 					<h3 class="bg-white mt-3"> Cancellation Requests</h3>
 					<div> <img class="img-fluid text-center" src="/images/empty-state-cart.jpg" style=" max-width: 80%; "> </div>
 				</div>
+
 				<div class="row bg-white mt-3 d-none" id="card_div">
 					<h3 class="bg-white mt-3">Saved Cards</h3>
 					<div> <img class="img-fluid text-center" src="/images/empty-state-cart.jpg" style=" max-width: 80%; "> </div>

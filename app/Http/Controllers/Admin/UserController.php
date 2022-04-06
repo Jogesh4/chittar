@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\Review;
 
 
 class UserController extends Controller
@@ -58,8 +59,10 @@ class UserController extends Controller
 
         $orders = Order::where('user_id',$id)->get();
 
+        $reviews = Review::where('user_id',$id)->get();
 
-        return view('admin.user.user-details',compact('user','addressess','orders'));
+
+        return view('admin.user.user-details',compact('user','addressess','orders','reviews'));
     }
 
     /**

@@ -67,8 +67,8 @@
          <label>Product Type<span style="color:red;">*</span></label>
         <select class="selectpicker form-control1" id="product_type" name="product_type" value="{{ !empty($item->type) ? $item->type : "" }}" required="">
             <option value="" disabled="" hidden="" selected>Product Type</option>
-            <option value="physical">Physical</option>
-            <option value="digital">Digital</option>                                      
+            <option value="physical" @if(!empty($item->type)) @if($item->type == 'physical') selected @endif  @endif>Physical</option>
+            <option value="digital" @if(!empty($item->type)) @if($item->type == 'digital') selected @endif  @endif>Digital</option>                                      
         </select>
 
     </div> 
@@ -84,7 +84,7 @@
         <select class="selectpicker form-control1" id="brand" name="brand" value="{{ !empty($item->brand_id) ? $item->brand_id : "" }}" required="">
             <option value="" disabled="" hidden="" selected>Brand</option>
             @foreach($brands as $brand)
-               <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+               <option value="{{ $brand->id }}" @if(!empty($item->brand_id)) @if($item->brand_id == $brand->id) selected @endif  @endif>{{ $brand->name }}</option>
             @endforeach                                      
         </select>
 
@@ -96,7 +96,7 @@
         <select class="selectpicker form-control1" id="category" name="category" value="{{ !empty($item->category_id) ? $item->category_id : "" }}" required="">
             <option value="" disabled="" hidden="" selected>Category</option>
             @foreach($categories as $category)
-               <option value="{{ $category->id }}" >{{ $category->name }}</option>
+               <option value="{{ $category->id }}" @if(!empty($item->category_id)) @if($item->category_id == $category->id) selected @endif  @endif>{{ $category->name }}</option>
             @endforeach
                                                   
         </select>
@@ -121,8 +121,10 @@
 
          <label>Tax Category<span style="color:red;">*</span></label>
         <select class="selectpicker form-control1" id="tax_category" name="tax_category" value="{{ !empty($item->tax_category) ? $item->tax_category : "" }}" required="">
-            <option value="" disabled="" hidden="">Tax Category</option>
-            <option value="tax" >Tax</option>
+            <option value="" disabled="" hidden="" selected>Tax Category</option>
+            <option value="5" >5</option>
+            <option value="7" >7</option>
+            <option value="10" >10</option>
         </select>
   
     </div>
@@ -133,10 +135,10 @@
 
          <label>Product Condition<span style="color:red;">*</span></label>
         <select class="selectpicker form-control1" id="product_condition" name="product_condition" value="{{ !empty($item->condition) ? $item->condition : "" }}" required="">
-            <option value="" disabled="" hidden="">Product Condition </option>
-            <option value="old" >Old</option>
-            <option value="new" >New</option>
-            <option value="refurbished" >Refurbished</option>                                      
+            <option value="" disabled="" hidden="" selected>Product Condition </option>
+            <option value="old" @if(!empty($item->condition)) @if($item->condition == 'old') selected @endif  @endif>Old</option>
+            <option value="new" @if(!empty($item->condition)) @if($item->condition == 'new') selected @endif  @endif>New</option>
+            <option value="refurbished" @if(!empty($item->condition)) @if($item->condition == 'refurbished') selected @endif  @endif>Refurbished</option>                                      
         </select>
 
     </div>
