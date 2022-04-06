@@ -301,6 +301,8 @@
               @endif
 
      </div>
+                    </div>
+    </div>
 
 
 
@@ -400,6 +402,30 @@ magnify("main-image", 3);
                          
                              document.getElementById('review_view').classList.add('d-none');
                              document.getElementById('review_form').classList.remove('d-none');
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
+
+    function add_favorite(id){
+       
+            $.ajax({
+                    type: "Get",
+                    url: '{{route('add_favorite')}}',
+                    datatype: 'json',
+                    data: {
+                        'item_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                         
+                           document.getElementById('favorite_icon-'+id).classList.add('d-none');
+                           document.getElementById('favorite_icon1-'+id).classList.remove('d-none');
 
                       },
                     complete: function () {
