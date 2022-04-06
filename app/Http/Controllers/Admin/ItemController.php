@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\Variant;
+use App\Models\Review;
 
 class ItemController extends Controller
 {
@@ -197,14 +198,24 @@ class ItemController extends Controller
              $item->is_active = $status;
              $item->save();
         }
-
         else if($type == 'category'){
              $item = Category::where('id',$id)->first();
              $item->is_active = $status;
              $item->save();
         }
+        else if($type == 'review'){
+             $review = Review::where('id',$id)->first();
+             $review->status = $status;
+             $review->save();
+        }
 
         return back();
+    }
+
+    public function manage_reviews(){
+         $reviews = Review::orderBy('id','desc')->get();
+
+         return view('admin.review.index',compact('reviews'));
     }
 
     /**

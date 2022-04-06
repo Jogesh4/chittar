@@ -24,7 +24,7 @@ class ItemController extends Controller
 
         $color_variants = Variant::where(['item_id' => $item->id,'type' => 'color'])->get();
         $size_variants = Variant::where(['item_id' => $item->id,'type' => 'size'])->get();
-        $reviews = Review::where(['item_id' => $item->id])->get();
+        $reviews = Review::where(['item_id' => $item->id,'status' => 1])->get();
 
     if(auth()->check()){
         \Cart::clear();

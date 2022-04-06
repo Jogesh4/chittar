@@ -29,13 +29,15 @@
                                         <img class="" id="blah0" src="{{ !empty($category->image) ? asset('storage/'.$category->image) : '#' }}" alt="your image" width="20%" height="20%"/>
                                       </td>
                                       <td>{{ $category->name }}</td>
-                                      <td>@if($category->is_active)
+                                      <td>
+                                                      @if($category->is_active)
                                                               @php $statusBtn = '<a title="Deactivate" href="'. route('change_status', ['type' => 'category', 'id' => $category->id, 'status' => '0']) .'" class="btn btn-danger btn-sm"><i class="fa fa-user-times" aria-hidden="true"></i></a>' @endphp
                                                                   Active
                                                               @else
                                                                   @php $statusBtn = '<a title="Activate" href="'. route('change_status', ['type' => 'category', 'id' => $category->id, 'status' => '1']) .'" class="btn btn-success btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i></a>' @endphp
                                                                   Deactive
-                                                              @endif</td>
+                                                              @endif
+                                      </td>
                                       <td>
                                                               {!! $statusBtn !!}
                                                               <a style="text-decoration: underline;" href="{{ route('admin.categories.edit', $category->id) }}"><span class="btn btn-warning"><i class="fa fa-pencil-alt" aria-hidden="true"></i></span></a>

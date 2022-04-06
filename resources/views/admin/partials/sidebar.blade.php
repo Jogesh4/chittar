@@ -111,10 +111,19 @@
 
    <!-- Divider -->
    <hr class="sidebar-divider d-none d-md-block">
-  </li>  <li class="nav-item">
+  </li> 
+  
+  <li class="nav-item">
     <a class="nav-link" href="/special-price">
        <i class="fas fa-shoe-prints navbar-picons"></i>
       <span>Special Price</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="/manage-reviews">
+       <i class="fas fa-shoe-prints navbar-picons"></i>
+      <span>Manage Reviews</span>
     </a>
   </li>
   <!-- Sidebar Toggler (Sidebar) -->
