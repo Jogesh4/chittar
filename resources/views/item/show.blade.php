@@ -212,7 +212,7 @@
         <div class="h3 titllee text-center fw-bold">Customer Reviews</div>
 </div>
         <div class="ratings"> <span class="product-rating" style="font-size: 33px;">4.6</span><span style="font-size: 25px;">/5</span>
-            <div class="stars"> <i class="fa fassas0 fase fa-star"></i> <i class="fa fassas1 fase fa-star"></i> <i class="fa fassas2 fase fa-star"></i> <i class="fa fassas3 fase fa-star"></i> </div>
+            <div class="align-items-center product"> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="far fa-star"></span> </div>                       
             <div class="rating-text"> <span>0 ratings & {{ $reviews->count() }} reviews</span> </div>
         </div>
 
@@ -237,7 +237,7 @@
                         <div class="review">
                             <div class="row ">
                                 
-                                    <h5 class="">{{ $review->user->name }}</h5>
+                                    <h5 class="">{{ $review->user->name }}<span onclick="edit_review({{ $review->id }})"><i class="fas fasu fa-pen p-1"></i></span></h5>
                                     <p class="grey-text">1 min ago</p>
                                 </div>
                             </div>
@@ -298,6 +298,7 @@
                <h3>Write a Review</h3>
            </div>
            <input type="hidden" name="item_id" value="{{ $item->id }}"/>
+           <input type="hidden" name="review_id" id="review_id" value=""/>
 
                 <div class="ssw-stars ssw-stars-large brand">  
                     <i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i>
@@ -359,6 +360,34 @@
 @section('extras')
   <script>
 
+    function edit_review(id){
+        
+             $.ajax({
+                    type: "Post",
+                    url: '{{route('edit_review')}}',
+                    datatype: 'json',
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                        'id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+
+                             document.getElementById('description').value = obj.new.description;
+                             document.getElementById('review_id').value = id;
+                         
+                             document.getElementById('review_view').classList.add('d-none');
+                             document.getElementById('review_form').classList.remove('d-none');
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
+
     function image_upload(){
       const fileInput = document.getElementById('imgInp');
       var files = [...fileInput.files];
@@ -415,8 +444,6 @@
      else{
         var quantity = 1;
      }
-
-
             $.ajax({
                     type: "Post",
                     url: '{{route('add.to.cart')}}',

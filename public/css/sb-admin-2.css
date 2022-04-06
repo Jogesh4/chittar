@@ -179,7 +179,6 @@ sup {
 }
 
 a {
-   
     text-decoration: none!important;
     background-color: transparent;
     font-family: "Poppins", sans-serif !important;
@@ -252,7 +251,6 @@ th {
 label {
     display: inline-block;
     margin-bottom: 0.5rem;
-    
     font-family: "Poppins", sans-serif !important;
 }
 
@@ -386,7 +384,11 @@ template {
 [hidden] {
     display: none !important;
 }
-p {font-family: "Poppins", sans-serif !important;}
+
+p {
+    font-family: "Poppins", sans-serif !important;
+}
+
 h1,
 h2,
 h3,
@@ -485,21 +487,25 @@ mark,
 
 
 /*=========r css==========*/
-.navbar-picons{
-    color: #fff !important ;
+
+.navbar-picons {
+    color: #fff !important;
     font-size: 12px !important;
 }
+
 .form-check-input:checked {
     background-color: #d72280 !important;
     border-color: #d72280 !important;
 }
-.faslli{
+
+.faslli {
     margin: 0 1px;
     color: #bdbdbd;
     background-color: #f5f2f4;
     padding: 6px 9px;
     border-radius: 3px;
-  }
+}
+
 .faslls {
     margin: 0px 3px;
     color: #d72280;
@@ -507,6 +513,7 @@ mark,
     font-weight: 600;
     font-size: 18px;
 }
+
 .text-acttive {
     background-color: #ffffff;
     padding: 8px 18px;
@@ -514,13 +521,16 @@ mark,
     color: #d72280;
     font-weight: 800;
 }
+
 .text-attive {
     padding: 8px 18px;
 }
+
 .pink-color {
     color: #ae0151;
 }
-.email-show-user{
+
+.email-show-user {
     color: #f8f9fc;
     background: #169dc6;
     margin: 7px;
@@ -973,7 +983,6 @@ a.nav-link {
     letter-spacing: 1px;
     text-decoration: none;
 }
-
 
 .btn-blu-dis,
 .btn-blu-login:hover,

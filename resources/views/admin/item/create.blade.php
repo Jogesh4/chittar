@@ -122,7 +122,9 @@
          <label>Tax Category<span style="color:red;">*</span></label>
         <select class="selectpicker form-control1" id="tax_category" name="tax_category" value="{{ !empty($item->tax_category) ? $item->tax_category : "" }}" required="">
             <option value="" disabled="" hidden="">Tax Category</option>
-            <option value="tax" >Tax</option>
+            <option value="5" >5</option>
+            <option value="7" >7</option>
+            <option value="10" >10</option>
         </select>
   
     </div>
