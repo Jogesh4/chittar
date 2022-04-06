@@ -8,6 +8,29 @@ label {
 
 
 /* ------------------------------------------------- */
+.thumbnails img {
+    max-width: 110px;
+  }
+  
+  .mainphoto img {
+    // min-width: 400px;
+    max-width: 100%;
+  }
+  
+  .zoom_01 {
+    border: 1px solid red;
+  }
+  
+  img.data-zoom {
+    border: 4px solid black;
+  }
+  
+  .mainphoto img[src] {
+    border: 3px solid #000;
+  }
+
+
+
 
 .outl-bsg {
     position: absolute;
@@ -103,9 +126,9 @@ label {
 
 .size-button {
     border-radius: 50%;
-    height: 45px;
-    width: 45px;
-    font-size: 20px;
+    height: 25px;
+    width: 25px;
+    font-size: 15px;
     border: 1px solid #ccc;
     color: #000;
     padding: 5px;
@@ -162,7 +185,7 @@ label {
 
 /* -------------------------------- */
 .mag {
-    width:200px;
+   
     margin: 0 auto;
     float: none;
 }
@@ -181,8 +204,8 @@ label {
 .magnify-large {
     position: absolute;
     display: none;
-    width: 175px;
-    height: 175px;
+    width: 250px;
+    height: 250px;
 
     -webkit-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
        -moz-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);

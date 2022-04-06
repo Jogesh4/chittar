@@ -13,19 +13,19 @@
               <div class="images p-3">
                 <div class="text-center p-4  ">
                    <div class="img-zoom-container mag"> 
-                     <img data-toggle="magnify" id="main-image" src="{{ asset('storage/'.$item->image) }}" width="250" />  
+                     <img data-toggle="magnify" id="main-image" src="{{ asset('storage/'.$item->image) }}" width="350"  />  
                 
                 </div>
               </div>
                 <div class="thumbnail text-center">
                    @if(!empty($item->image1))
-                      <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image1) }}" width="70" > 
+                      <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image1) }}" width="100" > 
                    @endif
                    @if(!empty($item->image2))
-                   <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image2) }}" width="70" > 
+                   <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image2) }}" width="100" > 
                    @endif
                    @if(!empty($item->image3))
-                   <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image3) }}" width="70" > 
+                   <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image3) }}" width="100" > 
                    @endif
                 </div>
                 
@@ -362,6 +362,8 @@
 
 
     </div>
+
+    <!-- ----------------------------------------------------- -->
 </div>
 
 </section> 
@@ -369,20 +371,8 @@
 <!-- ------------------------------------------------------ -->
                 
 @endsection
-<script>
-// Initiate zoom effect:
-imageZoom("main-image", "myresult");
-</script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-
-
-
-
-
-
-
-
 
 @section('extras')
   <script>
@@ -552,60 +542,31 @@ $("#icon3").click(function(){
   </script>
 
 <script>
-function imageZoom(imgID, resultID) {
-  var img, lens, result, cx, cy;
-  img = document.getElementById(imgID);
-  result = document.getElementById(resultID);
-  /*create lens:*/
-  lens = document.createElement("DIV");
-  lens.setAttribute("class", "img-zoom-lens");
-  /*insert lens:*/
-  img.parentElement.insertBefore(lens, img);
-  /*calculate the ratio between result DIV and lens:*/
-  cx = result.offsetWidth / lens.offsetWidth;
-  cy = result.offsetHeight / lens.offsetHeight;
-  /*set background properties for the result DIV:*/
-  result.style.backgroundImage = "url('" + img.src + "')";
-  result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
-  /*execute a function when someone moves the cursor over the image, or the lens:*/
-  lens.addEventListener("mousemove", moveLens);
-  img.addEventListener("mousemove", moveLens);
-  /*and also for touch screens:*/
-  lens.addEventListener("touchmove", moveLens);
-  img.addEventListener("touchmove", moveLens);
-  function moveLens(e) {
-    var pos, x, y;
-    /*prevent any other actions that may occur when moving over the image:*/
-    e.preventDefault();
-    /*get the cursor's x and y positions:*/
-    pos = getCursorPos(e);
-    /*calculate the position of the lens:*/
-    x = pos.x - (lens.offsetWidth / 2);
-    y = pos.y - (lens.offsetHeight / 2);
-    /*prevent the lens from being positioned outside the image:*/
-    if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
-    if (x < 0) {x = 0;}
-    if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
-    if (y < 0) {y = 0;}
-    /*set the position of the lens:*/
-    lens.style.left = x + "px";
-    lens.style.top = y + "px";
-    /*display what the lens "sees":*/
-    result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
-  }
-  function getCursorPos(e) {
-    var a, x = 0, y = 0;
-    e = e || window.event;
-    /*get the x and y positions of the image:*/
-    a = img.getBoundingClientRect();
-    /*calculate the cursor's x and y coordinates, relative to the image:*/
-    x = e.pageX - a.left;
-    y = e.pageY - a.top;
-    /*consider any page scrolling:*/
-    x = x - window.pageXOffset;
-    y = y - window.pageYOffset;
-    return {x : x, y : y};
-  }
-}
+new Drift(document.querySelector('img'), {
+  inlinePane: true,
+  containInline: true,
+  // inlinePane: 105,
+  zoomFactor: 2
+});
+
+
+// arxikopoihsi megalis / kai piso zoom arxikhs eikonas 
+// me ena apo ta thumbnail mas 
+//var first = $('.thumbnails').find('img').attr('src');
+var first = $('.thumbnails').find("img:eq(0)").attr('src');//for second image
+// h proth pou fenetai
+$(".main-image img").attr('src', first);
+//kai to zoom on hover thn
+$('.main-image img').attr('data-zoom', first);
+
+// otan klikaroume ena apo ta thumbnail ...to pathmeno 
+// thumbnail na antika8ista thn arxikh mas photo kai ths piso ths 
+$('.thumbnails .zoom').click(function(e) {
+  e.preventDefault();
+  var photo_fullsize = $(this).find('img').attr('src');
+  $('.main-image img').attr('src', photo_fullsize);
+  $('.main-image img').attr('data-zoom', photo_fullsize);
+});
+
 </script>
 @endsection
