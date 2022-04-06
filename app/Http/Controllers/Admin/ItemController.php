@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Item;
 use App\Models\Variant;
 use App\Models\Review;
+use App\Models\User;
 
 class ItemController extends Controller
 {
@@ -214,6 +215,11 @@ class ItemController extends Controller
              $review = Review::where('id',$id)->first();
              $review->status = $status;
              $review->save();
+        }
+        else if($type == 'user'){
+             $user = User::where('id',$id)->first();
+             $user->status = $status;
+             $user->save();
         }
 
         return back();

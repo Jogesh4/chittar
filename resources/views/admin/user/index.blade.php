@@ -15,7 +15,7 @@
                                          <th>Name</th> 
                                          <th>Email</th> 
                                          <th>Phone</th> 
-                                         <th>Publish</th> 
+                                         <th>Status</th> 
                                         <th></th>
                                     </tr>
                                  </thead>
@@ -26,12 +26,18 @@
                                           <td>{{ $user->name }}</td>
                                           <td>{{ $user->email }}</td> 
                                           <td>9876768543</td> 
-                                          <td> <div class="form-check form-switch">
-                                              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>                                   
-                                            </div></td> 
+                                          <td> 
+                                                 @if($user->is_active)
+                                                              @php $statusBtn = '<a title="Deactivate" href="'. route('change_status', ['type' => 'user', 'id' => $user->id, 'status' => '0']) .'" class="btn btn-danger btn-sm"><i class="fa fa-user-times" aria-hidden="true"></i></a>' @endphp
+                                                                  Active
+                                                              @else
+                                                                  @php $statusBtn = '<a title="Activate" href="'. route('change_status', ['type' => 'user', 'id' => $user->id, 'status' => '1']) .'" class="btn btn-success btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i></a>' @endphp
+                                                                  Deactive
+                                                              @endif
                                           
                                           <td>
                                               <div class="actions">
+                                                  {!! $statusBtn !!}
                                               <a href="{{ route('admin.users.show', $user->id) }}" title="Delete"><i class="fas faslli fa-eye"></i></a>
                                               <span> <a href="#" title="Profile"><i class="fas faslli fa-user"></i></a> </span>
                                               <span> <a href="{{ route('admin.users.edit', $user->id) }}" title="Edit"><i class="fas faslli fa-pen"></i></a> </span>
