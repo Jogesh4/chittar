@@ -258,11 +258,7 @@
                                 <p>{{ $review->description }}.</p>
                             </div>
 
-    <div class="review ">
-                    <div class="row ">
-                        
-                            <h5 class="">Emily</h5>
-                            <p class="grey-text">30 min ago</p>
+   
                              <div class="row mt-2">
                                      <div class="col-md-12 col-lg-12 form-outline mb-2">
                                         @if(!empty($review->image))
@@ -301,9 +297,7 @@
               @endif
 
      </div>
-
-
-
+                   
      <div class="col-lg-8 col-md-8 col-sm-12 bg-white p-2 m-2 d-none" id="review_form">
         
       <form method="POST" action="{{ route('save_review') }}" enctype="multipart/form-data">
@@ -375,6 +369,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 @section('extras')
+
+<script>
+/* Initiate Magnify Function
+with the id of the image, and the strength of the magnifier glass:*/
+magnify("main-image", 3);
+</script>
+
   <script>
 
     function edit_review(id){
@@ -395,6 +396,30 @@
                          
                              document.getElementById('review_view').classList.add('d-none');
                              document.getElementById('review_form').classList.remove('d-none');
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
+
+    function add_favorite(id){
+       
+            $.ajax({
+                    type: "Get",
+                    url: '{{route('add_favorite')}}',
+                    datatype: 'json',
+                    data: {
+                        'item_id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                         
+                           document.getElementById('favorite_icon-'+id).classList.add('d-none');
+                           document.getElementById('favorite_icon1-'+id).classList.remove('d-none');
 
                       },
                     complete: function () {
@@ -432,6 +457,8 @@
     function change_image(image){
       var container = document.getElementById("main-image");
       container.src = image.src;
+      magnify("main-image", 3);
+
     }
     document.addEventListener("DOMContentLoaded", function(event) {
     });
@@ -541,32 +568,5 @@ $("#icon3").click(function(){
 
   </script>
 
-<script>
-new Drift(document.querySelector('img'), {
-  inlinePane: true,
-  containInline: true,
-  // inlinePane: 105,
-  zoomFactor: 2
-});
 
-
-// arxikopoihsi megalis / kai piso zoom arxikhs eikonas 
-// me ena apo ta thumbnail mas 
-//var first = $('.thumbnails').find('img').attr('src');
-var first = $('.thumbnails').find("img:eq(0)").attr('src');//for second image
-// h proth pou fenetai
-$(".main-image img").attr('src', first);
-//kai to zoom on hover thn
-$('.main-image img').attr('data-zoom', first);
-
-// otan klikaroume ena apo ta thumbnail ...to pathmeno 
-// thumbnail na antika8ista thn arxikh mas photo kai ths piso ths 
-$('.thumbnails .zoom').click(function(e) {
-  e.preventDefault();
-  var photo_fullsize = $(this).find('img').attr('src');
-  $('.main-image img').attr('src', photo_fullsize);
-  $('.main-image img').attr('data-zoom', photo_fullsize);
-});
-
-</script>
 @endsection

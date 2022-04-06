@@ -33,6 +33,7 @@ Route::view('/report', 'admin.report.sale-report');
 Route::view('/customer-report', 'admin.report.customer-report');
 Route::view('/special-price', 'admin.price.special-price');
 
+
 require __DIR__.'/cart.php';
 require __DIR__.'/search.php';
 require __DIR__.'/order.php';

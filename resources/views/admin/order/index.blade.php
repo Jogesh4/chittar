@@ -5,7 +5,7 @@
     
                       <h3 class="mb-2 main-heading">Orders</h3>
 
-                    <div class="row p-1"> 
+                    {{-- <div class="row p-1"> 
                         <div class="card">
                       <p class="text-attive">
                         <span class="text-acttive"> All </span> 
@@ -18,7 +18,7 @@
 
                         </div>
 
-                    </div>     
+                    </div>      --}}
                     
                     {{-- <div class="row p-1">
                         
