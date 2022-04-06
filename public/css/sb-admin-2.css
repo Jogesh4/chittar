@@ -103,6 +103,7 @@ h6 {
 p {
     margin-top: 0;
     margin-bottom: 1rem;
+    font-family: "Poppins", sans-serif !important;
 }
 
 abbr[title],
@@ -120,6 +121,7 @@ address {
     margin-bottom: 1rem;
     font-style: normal;
     line-height: inherit;
+    font-family: "Poppins", sans-serif !important;
 }
 
 ol,
@@ -127,6 +129,7 @@ ul,
 dl {
     margin-top: 0;
     margin-bottom: 1rem;
+    font-family: "Poppins", sans-serif !important;
 }
 
 ol ol,
@@ -134,6 +137,7 @@ ul ul,
 ol ul,
 ul ol {
     margin-bottom: 0;
+    font-family: "Poppins", sans-serif !important;
 }
 
 dt {
@@ -178,6 +182,7 @@ a {
    
     text-decoration: none!important;
     background-color: transparent;
+    font-family: "Poppins", sans-serif !important;
 }
 
 a:hover {
@@ -226,6 +231,7 @@ svg {
 
 table {
     border-collapse: collapse;
+    font-family: "Poppins", sans-serif !important;
 }
 
 caption {
@@ -240,12 +246,14 @@ th {
     text-align: inherit;
     text-align: -webkit-match-parent;
     font-weight: 600;
+    font-family: "Poppins", sans-serif !important;
 }
 
 label {
     display: inline-block;
     margin-bottom: 0.5rem;
-    font-family: 'Font Awesome 5 Free';
+    
+    font-family: "Poppins", sans-serif !important;
 }
 
 button {
@@ -265,6 +273,7 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+    font-family: "Poppins", sans-serif !important;
 }
 
 button,
@@ -316,6 +325,7 @@ input[type="checkbox"] {
 textarea {
     overflow: auto;
     resize: vertical;
+    font-family: "Poppins", sans-serif !important;
 }
 
 fieldset {
@@ -376,7 +386,7 @@ template {
 [hidden] {
     display: none !important;
 }
-
+p {font-family: "Poppins", sans-serif !important;}
 h1,
 h2,
 h3,
@@ -392,6 +402,7 @@ h6,
     margin-bottom: 0.5rem;
     font-weight: 400;
     line-height: 1.2;
+    font-family: "Poppins", sans-serif !important;
 }
 
 h1,
@@ -474,6 +485,28 @@ mark,
 
 
 /*=========r css==========*/
+.navbar-picons{
+    color: #fff !important ;
+    font-size: 12px !important;
+}
+.form-check-input:checked {
+    background-color: #d72280 !important;
+    border-color: #d72280 !important;
+}
+.faslli{
+    margin: 0 1px;
+    color: #bdbdbd;
+    background-color: #f5f2f4;
+    padding: 6px 9px;
+    border-radius: 3px;
+  }
+.faslls {
+    margin: 0px 3px;
+    color: #d72280;
+    padding: 2px 4px;
+    font-weight: 600;
+    font-size: 18px;
+}
 .text-acttive {
     background-color: #ffffff;
     padding: 8px 18px;
