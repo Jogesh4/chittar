@@ -218,8 +218,13 @@ class ItemController extends Controller
         }
         else if($type == 'user'){
              $user = User::where('id',$id)->first();
-             $user->status = $status;
+             $user->is_active = $status;
              $user->save();
+        }
+        else if($type == 'brand'){
+             $brand = Brand::where('id',$id)->first();
+             $brand->is_active = $status;
+             $brand->save();
         }
 
         return back();
