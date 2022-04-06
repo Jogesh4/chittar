@@ -333,7 +333,7 @@
 
         <div class="col-md-12 col-lg-2 form-outline">
             <span class="ml-3 mr-4">
-                <input class="form-check-input" type="radio" name="multiple_options" value="1">
+                <input class="form-check-input" type="radio" name="multiple_options" value="1" checked>
                 <label class="form-check-label ptext" for="flexRadioDefault1">
                 Yes
                 </label>
@@ -379,7 +379,32 @@
                   </tr>
                 </thead>
                 <tbody id="tbody">
-                     <td class="variant">
+                  @if($variants->count() > 0)
+                    @foreach($variants as $variant)
+                     <tr>
+                      <td class="variant">
+                          <select class="form-control" name="type[]" style="width: 120%;">
+                              <option value="" selected hidden>Type</option>
+                              <option value="size" @if(!empty($variant->type)) @if($variant->type == 'size') selected @endif  @endif>Size</option>
+                              <option value="color" @if(!empty($variant->type)) @if($variant->type == 'color') selected @endif  @endif>Color</option>
+                          </select>
+                          </td>
+                          <td><input type="text" name="variant[]" class="form-control" value="{{ $variant->variant_name }}" placeholder="Enter Variant" /></td>
+                          <td><input type="text" name="price[]" class="form-control" value="{{ $variant->price }}" placeholder="Enter price" /></td>
+                          <td><input type="text" name="qty[]" class="form-control" value="{{ $variant->qty }}" placeholder="Enter qty" /></td>
+                          <td><input type="text" name="sku[]" class="form-control" value="{{ $variant->sku }}" placeholder="Enter sku" /></td>
+                          <td>
+                          <button type="button" class="btn btn-danger btn-sm btn-remove-row">x</button>
+                          </td>
+                          <td>
+                          <button type="button" class="btn btn-info btn-sm btn-add-row">+</button>
+                          </td>
+                      </tr>
+                    @endforeach
+
+                  @else
+                      <tr>
+                         <td class="variant">
                         <select class="form-control" name="type[]" style="width: 120%;">
                             <option value="" selected hidden>Type</option>
                             <option value="size">Size</option>
@@ -396,6 +421,8 @@
                         <td>
                         <button type="button" class="btn btn-info btn-sm btn-add-row">+</button>
                         </td>
+                        </tr>
+                  @endif
                 </tbody>
               </table>
             </div>

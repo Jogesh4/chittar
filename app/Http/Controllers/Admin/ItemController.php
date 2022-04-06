@@ -67,7 +67,9 @@ class ItemController extends Controller
         $item = Item::where('id',$id)->first();
         $categories = Category::where('is_active', 1)->get();
         $brands = Brand::where('is_active', 1)->get();
-        return view('admin.item.create', compact('brands', 'categories'))->with('item',$item);
+        $variants = Variant::where('item_id', $id)->get();
+
+        return view('admin.item.create', compact('brands', 'categories','variants'))->with('item',$item);
     }
 
     /**
@@ -155,14 +157,19 @@ class ItemController extends Controller
                     $qties = $request->qty;
                     $skus = $request->sku;
                     for($i=0; $i<count($types);$i++){
-                        $variant = new Variant;
-                        $variant->type=$types[$i];
-                        $variant->variant_name=$variants[$i];
-                        $variant->price=$prices[$i];
-                        $variant->qty=$qties[$i];
-                        $variant->sku=$skus[$i];
-                        $variant->item_id=$item->id;
-                        $variant->save();
+
+                        $variant = Variant::where(['item_id' => $item->id,'variant_name' => $variants[$i]])->first();
+
+                        if(!$variant){
+                            $variant = new Variant;
+                        }
+                            $variant->type=$types[$i];
+                            $variant->variant_name=$variants[$i];
+                            $variant->price=$prices[$i];
+                            $variant->qty=$qties[$i];
+                            $variant->sku=$skus[$i];
+                            $variant->item_id=$item->id;
+                            $variant->save();
                     }
               }
             }
