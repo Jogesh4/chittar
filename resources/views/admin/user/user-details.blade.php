@@ -1,6 +1,6 @@
 @extends('admin.layouts.dashboard') @section('title', 'All Users') @section('content')
 <section>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row ">
 			<div class="col-3">
 				<div class="row p-4 ">
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-8">
+			<div class="col-9">
 				<div class="row p-2 ">
 					<div class="col-4 email-show-user mt-2"> {{ $user->email }} <span><a href="/admin/users" class="text-white fw-bold m-2 ">X</a></span></div>
 				</div>
@@ -212,32 +212,103 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row bg-white mt-3 d-none" id="order_div">
 					<h3 class="bg-white mt-3"> Orders</h3>
-					<div> <img class="img-fluid text-center" src="/images/empty-state-cart.jpg" style=" max-width: 80%; "> </div>
+					<div class="row">
+                    <div class="col-lg-12">
+
+                            <div class="table-responsive bg-white p-3">
+                            <table class="table table-justified" id="example">
+                                <thead>
+                                    <tr>
+                                        <th>Order No</th>
+                                        <th>Date</th>
+                                         <th>Name</th>
+                                         <th>Items</th> 
+                                         <th>Amount</th> 
+                                         <th>Payment Status</th> 
+                                         {{-- <th>Fulfillment status</th>  --}}
+                                        <th>Action</th>
+                                    </tr>
+                                 </thead>
+                                @if($orders->count() > 0)  
+                                     @foreach($orders as $order)                              
+                                      <tr>
+                                            <td scope="row">{{ $order->order_no }}</td>
+                                            <td>{{date('d-m-Y H:m:s', strtotime($order->created_at))}}</td>
+                                            <td>{{ $order->user->name }}</td>
+                                            <td>{{ $order->items }}</td> 
+                                            <td><i class="fas fa-rupee-sign"></i>{{ $order->amount }}</td> 
+                                            <td>
+                                                @if($order->status == 'PAID')
+                                                <span class="text-success"> <i class="fas fa-credit-card"></i>  Paid </span>
+                                                @endif 
+                                                @if($order->status == 'UNPAID')
+                                                <span class="text-danger"> <i class="fas fa-credit-card"></i>  UnPaid </span>
+                                                @endif
+                                                @if($order->status == 'COD')
+                                                <span class="text-success"> <i class="fas fa-money-bill"></i>  Cash </span>
+                                                @endif
+                                                @if($order->status == 'FAILED')
+                                                <span class="text-danger"> <i class="fas fa-credit-card"></i>  Failed </span>
+                                                @endif
+                                            </td>
+                                            
+                                            {{-- <td> <select class="selectpicker form-control1" id="type" name="type" required="">
+                                                <option value=" packing" selected="">Packing</option>
+                                                <option value="reviewing">Reviewing</option>
+                                                <option value="ready-for-pick">Ready for pickup</option>                                      
+                                                <option value="picked">Picked up</option>                                      
+                                            </select></td> --}}
+                                            
+                                            <td>
+                                                <div class="actions">
+                                                <a href="/admin/orders/{{ $order->id }}" title="View"><i class="fas faslls fa-eye"></i></a>
+                                                <a href="/admin/orders/{{ $order->id }}/edit" title="View"><i class="fas faslls fa-pen"></i></a>
+                                                {{-- <span> <a href="#" title="Share"><i class="fas faslls fa-share-alt"></i></a> </span>
+                                                <span> <a href="#" title="Slip"><i class="fas faslls fa-clipboard"></i></a> </span>
+                                                <span> <a href="#" title="Cancel Order"><i class="fas faslls fa-window-close"></i></a> </span>
+                                                <span> <a href="#" title="Complete Order"><i class="fas faslls fa-check-square"></i> </span> --}}
+                                                </div>
+                                                </td>
+                                      </tr>
+                                      @endforeach
+                                  @else
+                                         <div class="text-center">
+                                              <h3>No Order Found</h3>
+                                         </div>
+                                      @endif
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
 				</div>
+
 				<div class="row bg-white mt-3 d-none" id="address_div">
 					<h3 class="bg-white mt-3"> Addresses</h3>
 					<h5 class="text-center"></h5>
 					<div class="portlet__body p-0 flex-grow-1">
 						
 						<ul class="my-addresses list-addresses p-5">
-                            @if(!empty($addressess))
+                            @if($addressess->count() > 0)
                               @foreach($addressess as $address)
-							     <li>
-								   <div class="my-addresses__body">
-                                       <address class="delivery-address">
-                                           <h5>{{ $address->firstname }} {{ $address->lastname }}</h5> 
-                                           <p>{{ $address->address }},{{ $address->city }},{{ $address->state }},{{ $address->country }},{{ $address->pincode }}</p>
-                                            <p class="phone-txt"><i class="fas fa-mobile-alt"></i>{{ $address->phone }}</p>
-                                        </address>
-                                    </div>
-							      </li>
+																		<li>
+																		         <div class="my-addresses__body">
+																												<address class="delivery-address">
+																														<h5>{{ $address->firstname }} {{ $address->lastname }}</h5> 
+																														<p>{{ $address->address }},{{ $address->city }},{{ $address->state }},{{ $address->country }},{{ $address->pincode }}</p>
+																															<p class="phone-txt"><i class="fas fa-mobile-alt"></i>{{ $address->phone }}</p>
+																													</address>
+																											</div>
+																			</li>
                               @endforeach
                             @else
-                              <div class="text-center mt-3">
-                                    <h4>No Address Found</h4>
-                              </div>
+																				<div class="text-center mt-3">
+																							<h4>No Address Found</h4>
+																				</div>
+
                             @endif
 							
 						</ul>
@@ -264,8 +335,26 @@
 		</div>
 </section> @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js" defer></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js" defer></script>
+
 <script>
+
 $(document).ready(function() {
+
+    $('#example').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                 ''
+            ]
+        } );
+
 	$("#details").click(function() {
 		document.getElementById('detail_div').classList.remove('d-none');
 		document.getElementById('reward_div').classList.add('d-none');
