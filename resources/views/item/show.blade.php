@@ -253,22 +253,22 @@
                                      <div class="col-md-12 col-lg-12 form-outline mb-2">
                                         @if(!empty($review->image))
                                           <div class="position-relative d-inline p-1">
-                                              <img src="{{ !empty($review->image) ? asset('storage/'.$review->image) : '#' }}" alt="your image" width="20%" height="100%"/>
+                                              <img src="{{ !empty($review->image) ? asset('storage/'.$review->image) : '#' }}" alt="your image" width="80" height="80"/>
                                           </div>
                                         @endif
                                         @if(!empty($review->image1))
                                           <div class="position-relative d-inline p-1">
-                                              <img src="{{ !empty($review->image1) ? asset('storage/'.$review->image1) : '#' }}" alt="your image" width="20%" height="100%"/>
+                                              <img src="{{ !empty($review->image1) ? asset('storage/'.$review->image1) : '#' }}" alt="your image" width="80" height="80"/>
                                           </div>
                                         @endif
                                         @if(!empty($review->image2))
                                           <div class="position-relative d-inline p-1">
-                                              <img src="{{ !empty($review->image2) ? asset('storage/'.$review->image2) : '#' }}" alt="your image" width="20%" height="100%"/>
+                                              <img src="{{ !empty($review->image2) ? asset('storage/'.$review->image2) : '#' }}" alt="your image" width="80" height="80"/>
                                           </div>
                                         @endif
                                         @if(!empty($review->image3))
                                           <div class="position-relative d-inline p-1">
-                                              <img src="{{ !empty($review->image3) ? asset('storage/'.$review->image3) : '#' }}" alt="your image" width="20%" height="100%"/>
+                                              <img src="{{ !empty($review->image3) ? asset('storage/'.$review->image3) : '#' }}" alt="your image" width="80" height="80"/>
                                           </div>
                                         @endif
                                           
