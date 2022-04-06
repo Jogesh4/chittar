@@ -19,6 +19,9 @@
                    @if(!empty($item->image2))
                    <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image2) }}" width="70"> 
                    @endif
+                   @if(!empty($item->image3))
+                   <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image3) }}" width="70"> 
+                   @endif
                 </div>
               </div>
             </div>
@@ -29,7 +32,7 @@
                  
                   <h2 class="item-name-view">{{ $item->name }}</h2>
 
-                  <div class="text-uppercase text-muted  mt-3 mb-3">Model:  {{ $item->model }} <span class="fw-bold m-3"> | </span> <span class="text-uppercase text-muted brand">SKU:  {{ $item->sku }}</span> </div>
+                  <div class="text-uppercase text-muted  mt-3 mb-3">Model:  {{ $item->model }} <span class="fw-bold m-3"> | </span> <span class="text-uppercase text-muted brand">SKU:  @if($color_variants->count() > 0){{ $size_variants[0]->sku }} @endif</span> </div>
                   <div class="ssw-stars ssw-stars-large brand">  
                     <i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i>
                     <!-- <span class="ssw-review-counts" >5 Star </span> -->
