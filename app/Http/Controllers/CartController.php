@@ -41,14 +41,15 @@ class CartController extends Controller
             $cartItem = new CartItem;
             if(!empty($request->quantity)){
                $cartItem->qty = $request->quantity;
+               $cartItem->total = $item->price * $request->quantity;
             }
             else{
                 $cartItem->qty = 1;
+                $cartItem->total = $item->price;
             }
             $cartItem->name = $item->name;
             $cartItem->image = $item->image;
             $cartItem->price = $item->price;
-            $cartItem->total = $item->price;
             $cartItem->item_id = $item->id;
             $cartItem->user_id = $userID;
             $cartItem->status = 1;
