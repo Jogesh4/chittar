@@ -12,6 +12,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sno</th>
+                                        <th>Customer</th>
                                         <th>Review</th>
                                         <th>Images</th>
                                          <th>Status</th>
@@ -22,6 +23,7 @@
                                      @foreach($reviews as $review)                              
                                       <tr>
                                             <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $review->user->name }}</td>
                                             <td>{{ $review->description }}</td>
                                             <td>
 																							<div class="row mt-2">

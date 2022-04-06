@@ -325,44 +325,60 @@
                                 <thead>
                                     <tr>
                                         <th>Sno</th>
+                                        <th>Customer</th>
                                         <th>Review</th>
                                         <th>Images</th>
-                                         {{-- <th>Status</th>
-                                         <th>Action</th> --}}
+                                         <th>Status</th>
+                                         <th>Action</th>
                                     </tr>
                                  </thead>
                                 @if($reviews->count() > 0)  
                                      @foreach($reviews as $review)                              
                                       <tr>
                                             <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $review->user->name }}</td>
                                             <td>{{ $review->description }}</td>
                                             <td>
 																							<div class="row mt-2">
 																										<div class="col-md-12 col-lg-12 form-outline mb-2">
 																												@if(!empty($review->image))
 																													<div class="position-relative d-inline p-1">
-																															<img src="{{ !empty($review->image) ? asset('storage/'.$review->image) : '#' }}" alt="your image" width="50" height="50"/>
+																															<img src="{{ !empty($review->image) ? asset('storage/'.$review->image) : '#' }}" alt="your image" width="50" height="30"/>
 																													</div>
 																												@endif
 																												@if(!empty($review->image1))
 																													<div class="position-relative d-inline p-1">
-																															<img src="{{ !empty($review->image1) ? asset('storage/'.$review->image1) : '#' }}" alt="your image" width="50" height="50"/>
+																															<img src="{{ !empty($review->image1) ? asset('storage/'.$review->image1) : '#' }}" alt="your image" width="50" height="30"/>
 																													</div>
 																												@endif
 																												@if(!empty($review->image2))
 																													<div class="position-relative d-inline p-1">
-																															<img src="{{ !empty($review->image2) ? asset('storage/'.$review->image2) : '#' }}" alt="your image" width="50" height="50"/>
+																															<img src="{{ !empty($review->image2) ? asset('storage/'.$review->image2) : '#' }}" alt="your image" width="50" height="30"/>
 																													</div>
 																												@endif
 																												@if(!empty($review->image3))
 																													<div class="position-relative d-inline p-1">
-																															<img src="{{ !empty($review->image3) ? asset('storage/'.$review->image3) : '#' }}" alt="your image" width="50" height="50"/>
+																															<img src="{{ !empty($review->image3) ? asset('storage/'.$review->image3) : '#' }}" alt="your image" width="50" height="30"/>
 																													</div>
 																												@endif
 																													
 																										</div>
 																						</div>
 																						</td>
+
+                                            <td>
+                                                      @if($review->status)
+                                                              @php $statusBtn = '<a title="Deactivate" href="'. route('change_status', ['type' => 'review', 'id' => $review->id, 'status' => '0']) .'" class="btn btn-danger btn-sm"><i class="fa fa-user-times" aria-hidden="true"></i></a>' @endphp
+                                                                  Active
+                                                              @else
+                                                                  @php $statusBtn = '<a title="Activate" href="'. route('change_status', ['type' => 'review', 'id' => $review->id, 'status' => '1']) .'" class="btn btn-success btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i></a>' @endphp
+                                                                  Deactive
+                                                              @endif
+                                            </td>
+                                             <td>
+                                                              {!! $statusBtn !!}
+                                                              {{-- <a style="text-decoration: underline;" href="{{ route('admin.categories.edit', $review->id) }}"><span class="btn btn-warning"><i class="fa fa-pencil-alt" aria-hidden="true"></i></span></a> --}}
+                                               </td>
                                             
                                       </tr>
                                       @endforeach
