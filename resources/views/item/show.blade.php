@@ -258,11 +258,7 @@
                                 <p>{{ $review->description }}.</p>
                             </div>
 
-    <div class="review ">
-                    <div class="row ">
-                        
-                            <h5 class="">Emily</h5>
-                            <p class="grey-text">30 min ago</p>
+    
                              <div class="row mt-2">
                                      <div class="col-md-12 col-lg-12 form-outline mb-2">
                                         @if(!empty($review->image))
@@ -301,8 +297,7 @@
               @endif
 
      </div>
-                    </div>
-    </div>
+                  
 
 
 
