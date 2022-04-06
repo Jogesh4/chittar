@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\Address;
+use App\Models\Order;
+
 
 class UserController extends Controller
 {
@@ -49,7 +52,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::where('id',$id)->first();
+
+        $addressess = Address::where('user_id',$id)->get();
+
+        $orders = Order::where('user_id',$id)->get();
+
+
+        return view('admin.user.user-details',compact('user','addressess','orders'));
     }
 
     /**
