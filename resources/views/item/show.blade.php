@@ -207,7 +207,7 @@
   
 
 <div class="d-flex justify-content-center">
-    <div class="col-lg-4 col-sm-12 text-center p-2 m-2 ">
+    <div class="col-lg-4 col-md-4 col-sm-12 text-center p-2 m-2 ">
     <div class="">
         <div class="h3 titllee text-center fw-bold">Customer Reviews</div>
 </div>
