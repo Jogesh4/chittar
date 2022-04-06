@@ -12,7 +12,14 @@
             <div class="col-md-6">
               <div class="images p-3">
                 <div class="text-center p-4"> <img id="main-image" src="{{ asset('storage/'.$item->image) }}" width="250" /> </div>
-                <div class="thumbnail text-center"> <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image) }}" width="70"> <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image) }}" width="70"> </div>
+                <div class="thumbnail text-center">
+                   @if(!empty($item->image1))
+                      <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image1) }}" width="70"> 
+                   @endif
+                   @if(!empty($item->image2))
+                   <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image2) }}" width="70"> 
+                   @endif
+                </div>
               </div>
             </div>
 
@@ -36,19 +43,21 @@
                 </div>
                 <div class="d-flex mt-3">
 
-                  <div class="col-lg-6 product-quantity">
-                   <p class="fw-bold">Size </p>
-                    <div class="quantity quantity-2 YK-quantity">  
-                        <input class="qty-input no-focus YK-qty" data-page="product-view" title="Available Quantity" type="text" name="size" max="1" min="15">
-                       </div>
-                  </div>
+                  @if($size_variants->count() > 0)
+                      <div class="col-lg-6 product-quantity">
+                      <p class="fw-bold">Size </p>
+                          @foreach($size_variants as $size)
+                            <a class="size-button">{{ $size->variant_name }}</a>
+                          @endforeach
+                      </div>
+                 @endif
 
                   <div class="col-lg-6 product-quantity">
                   <p class="fw-bold">Quantity </p>
                     <div class="quantity quantity-2 YK-quantity">                   
                         <span class="decrease" onclick="decreaseQty(this, '75|3|83|')">
                         <i class="fas fasu fa-minus"></i></span>
-                        <input class="qty-input no-focus YK-qty" data-page="product-view" title="Available Quantity" type="text" name="quantity" max="10" min="14" value="14" readonly="">
+                        <input class="qty-input no-focus YK-qty" data-page="product-view" title="Available Quantity" type="text" id="quantity" value="1" readonly="">
                         <span class="increase" onclick="increaseQty(this, '75|3|83|')"> <i class="fas fasu fa-plus"></i></span>
                     </div>
                   </div>
@@ -58,19 +67,20 @@
 
 
                 </div>
-
+          @if($color_variants->count() > 0)
                 <div class="d-flex mt-3">
                               <div class="col-3 text-left">
                               <p class="fw-bold">Variant</p>
                             </div>
                               <div class="col-3 text-left">
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  
-                              <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>
+
+                                
+                                    @foreach($color_variants as $color)
+                                       <a class="color-box" style="background: {{ $color->variant_name }}" href="#"><span ></span></a>
+                                     @endforeach
                             </div>
-                              </div>
+                </div>
+          @endif
 
 
                 
@@ -135,7 +145,7 @@
                  
                  <div style="max-height: 250px; overflow: hidden;width: 100%;position:relative;">
                    
-                      <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$s->image) }}" alt="..." /></a>
+                      <a class="" href="{{ route('item.show', $s) }}"><img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$s->image) }}" alt="..." /></a>
                     <div class="fw-bold favorite-icon">
                       <span class="" id="favorite_icon-{{ $s->id }}" onclick="add_favorite({{ $s->id }})"><i class="fa fa-thin fa-heart"></i></span>
                       <span class="favorite-active d-none" id="favorite_icon1-{{ $s->id }}"><i class="fa fa-thin fa-heart"></i></span>
@@ -143,11 +153,13 @@
                     </div>
                   
                 </div> 
-               
+
+               <a class="" href="{{ route('item.show', $s) }}">
                   <div class="card-body ps-0  text-center">
                     <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $s->name }}</p>
                     <div class="fw-bold"><span class="pink-color">INR {{ $s->price }}</span></div>
                   </div>
+               </a>
                  
 
                   <div class="d-flex"> 
@@ -201,11 +213,15 @@
 </div>
         <div class="ratings"> <span class="product-rating" style="font-size: 33px;">4.6</span><span style="font-size: 25px;">/5</span>
             <div class="stars"> <i class="fa fassas0 fase fa-star"></i> <i class="fa fassas1 fase fa-star"></i> <i class="fa fassas2 fase fa-star"></i> <i class="fa fassas3 fase fa-star"></i> </div>
-            <div class="rating-text"> <span>46 ratings & 15 reviews</span> </div>
+            <div class="rating-text"> <span>0 ratings & {{ $reviews->count() }} reviews</span> </div>
         </div>
 
-        <div class="text-center mt-3">                        
-          <button class="btn-pink"> Write A Review</button>              
+        <div class="text-center mt-3">
+                 @if(auth()->check())
+                   <button class="btn-pink" onclick="review_click()"> Write A Review</button>  
+                  @else
+                  <a href="{{ route('login') }}" class="btn-pink"> Write A Review</a>
+                @endif            
         </div>
 
 
@@ -213,25 +229,120 @@
 
 
 
-    <div class="col-lg-8 col-md-8 col-sm-12 bg-white p-2 m-2">
+    <div class="col-lg-8 col-md-8 col-sm-12 bg-white p-2 m-2" id="review_view">
         
+              @if($reviews->count() > 0)
+                 @foreach($reviews as $review)
+                    <div>
+                        <div class="review">
+                            <div class="row ">
+                                
+                                    <h5 class="">{{ $review->user->name }}</h5>
+                                    <p class="grey-text">1 min ago</p>
+                                </div>
+                            </div>
+                            <div class="row pb-3">  
+                            <div class="d-flex align-items-center product"> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="far fa-star"></span> </div>                       
+                                    {{-- <p class="mb-0 pl-3" style=" color: #b00755 ">Excellent</p>                         --}}
+                            </div>
+                            <div class="row pb-3">
+                                <p>{{ $review->description }}.</p>
+                            </div>
 
-    <div class="review ">
-                    <div class="row d-flex">
-                        
-                            <h5 class="">Emily</h5>
-                            <p class="grey-text">30 min ago</p>
+                             <div class="row mt-2">
+                                     <div class="col-md-12 col-lg-12 form-outline mb-2">
+                                        @if(!empty($review->image))
+                                          <div class="position-relative d-inline p-1">
+                                              <img src="{{ !empty($review->image) ? asset('storage/'.$review->image) : '#' }}" alt="your image" width="20%" height="100%"/>
+                                          </div>
+                                        @endif
+                                        @if(!empty($review->image1))
+                                          <div class="position-relative d-inline p-1">
+                                              <img src="{{ !empty($review->image1) ? asset('storage/'.$review->image1) : '#' }}" alt="your image" width="20%" height="100%"/>
+                                          </div>
+                                        @endif
+                                        @if(!empty($review->image2))
+                                          <div class="position-relative d-inline p-1">
+                                              <img src="{{ !empty($review->image2) ? asset('storage/'.$review->image2) : '#' }}" alt="your image" width="20%" height="100%"/>
+                                          </div>
+                                        @endif
+                                        @if(!empty($review->image3))
+                                          <div class="position-relative d-inline p-1">
+                                              <img src="{{ !empty($review->image3) ? asset('storage/'.$review->image3) : '#' }}" alt="your image" width="20%" height="100%"/>
+                                          </div>
+                                        @endif
+                                          
+                                    </div>
+                             </div>
+
+                      </div>
+                      <hr/>
+                  @endforeach
+              @else
+
+                        <div class="text-center mt-5">
+                            <h3>No Reviews Found</h3>
                         </div>
-                    </div>
-                    <div class="row pb-3">  
-                    <div class="d-flex align-items-center product"> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="far fa-star"></span> </div>                       
-                            <p class="mb-0 pl-3" style=" color: #b00755 ">Excellent</p>                        
-                    </div>
-                    <div class="row pb-3">
-                        <p>Blue Pine, Artesian water is bottled at the source in the pristine Himalayas. Confined in an aquifer deep beneath the earth, its natural condition is protected from the source to the bottle. Naturally enriched with high amounts of vital organic minerals, Blue Pine makes its way through varying geological rocks that act as a natural purifying filter and also imbue it with a unique blend of natural minerals that give it, its distinct taste.</p>
-                    </div>
-                    
+
+              @endif
+
+     </div>
+
+
+
+     <div class="col-lg-8 col-md-8 col-sm-12 bg-white p-2 m-2 d-none" id="review_form">
+        
+      <form method="POST" action="{{ route('save_review') }}" enctype="multipart/form-data">
+        @csrf
+           <div class="text-center mb-5">
+               <h3>Write a Review</h3>
+           </div>
+           <input type="hidden" name="item_id" value="{{ $item->id }}"/>
+
+                <div class="ssw-stars ssw-stars-large brand">  
+                    <i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i>
+                    <!-- <span class="ssw-review-counts" >5 Star </span> -->
+                  </div>
+
+                <div class="row mt-5">
+                     <textarea id="description" name="review" class="form-control2" placeholder="Share details of your own experience at this place" spellcheck="false"></textarea>
                 </div>
+                <div class="row mt-3">
+                     <div class="col-lg-4">
+                        <input type="file" name="review_image[]" id="imgInp" accept="image/*" class="file-box" onchange="image_upload()" multiple/>
+                      </div>
+                </div>
+
+                <div class="row mt-3">
+                 <div class="col-md-12 col-lg-12 form-outline mb-2">
+                     <div class="position-relative d-inline p-1">
+                      <img class="d-none" id="blah0" src="#" alt="your image" width="20%" height="100%"/><i id="icon0" class="far fa-times-circle cross-icon d-none"></i>
+                    </div>
+                     <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah1" src="#" alt="your image" width="20%" height="100%"/><i id="icon1" class="far fa-times-circle cross-icon d-none"></i>
+                     </div>
+                     <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah2" src="#" alt="your image" width="20%" height="100%"/><i id="icon2" class="far fa-times-circle cross-icon d-none"></i>
+                      </div>
+                      <div class="position-relative d-inline p-1">
+                       <img class="d-none" id="blah3" src="#" alt="your image" width="20%" height="100%"/><i id="icon3" class="far fa-times-circle cross-icon d-none"></i>
+                      </div>
+                  </div>
+            </div>
+
+                <div class="row mt-5">
+                  <div class="col-4">
+                  </div>
+                  <div class="col-8">
+                    <button class="btn-pink text-end" onclick="review_cancel()" style="background: #a9788e;">Cancel</button>
+                       <button class="btn-pink">Submit</button>
+                  </div>
+                </div>
+       </form>
+
+     </div>
+
+                
 
 
 
@@ -247,6 +358,31 @@
 
 @section('extras')
   <script>
+
+    function image_upload(){
+      const fileInput = document.getElementById('imgInp');
+      var files = [...fileInput.files];
+      var i = 0;
+      for (const f of files) { 
+        document.getElementById('blah'+i).classList.remove('d-none');
+        document.getElementById('icon'+i).classList.remove('d-none');
+         document.getElementById('blah'+i).src = URL.createObjectURL(f);
+
+         i++;
+      }
+      
+}
+
+    function review_click(){
+        document.getElementById('review_view').classList.add('d-none');
+        document.getElementById('review_form').classList.remove('d-none');
+    }
+
+    function review_cancel(){
+        document.getElementById('review_view').classList.remove('d-none');
+        document.getElementById('review_form').classList.add('d-none');
+    }
+
     function change_image(image){
       var container = document.getElementById("main-image");
       container.src = image.src;
@@ -254,9 +390,32 @@
     document.addEventListener("DOMContentLoaded", function(event) {
     });
 
+    function increaseQty(){
+       var quantity = document.getElementById('quantity').value;
+       
+       document.getElementById('quantity').value = parseInt(quantity) + 1;
+
+    }
+
+    function decreaseQty(){
+       var quantity = document.getElementById('quantity').value;
+
+       if(quantity > 1){
+          document.getElementById('quantity').value = parseInt(quantity) - 1;
+       }
+    }
+
     function add_cart(id,$type){
 
      var cart_no = document.getElementById('cart_no').textContent;
+
+     if($type == 1){
+         var quantity = document.getElementById('quantity').value;
+     }
+     else{
+        var quantity = 1;
+     }
+
 
             $.ajax({
                     type: "Post",
@@ -265,6 +424,7 @@
                     data: {
                       "_token": "{{ csrf_token() }}",
                         'item_id' : id,
+                        'quantity' : quantity,
                     },
                     success: function (data) {
                         const obj = JSON.parse(data);
@@ -287,7 +447,53 @@
                     error: function () {
                     }
                 });
-
     }
+
+  $( document ).ready(function() {
+   
+    $("#icon0").click(function(){
+  const fileInput = document.getElementById('imgInp');
+  console.log(fileInput)
+      var files = [...fileInput.files];
+      console.log(files);
+            files.splice(0, 1);
+        document.getElementById('blah0').classList.add('d-none');
+        document.getElementById('icon0').classList.add('d-none');
+});
+
+$("#icon1").click(function(){
+  const fileInput = document.getElementById('imgInp');
+  console.log(fileInput)
+      var files = [...fileInput.files];
+      console.log(files);
+            files.splice(1, 1);
+        document.getElementById('blah1').classList.add('d-none');
+        document.getElementById('icon1').classList.add('d-none');
+});
+
+$("#icon2").click(function(){
+  const fileInput = document.getElementById('imgInp');
+  console.log(fileInput)
+      var files = [...fileInput.files];
+      console.log(files);
+            files.splice(2, 1);
+        document.getElementById('blah2').classList.add('d-none');
+        document.getElementById('icon2').classList.add('d-none');
+
+});
+
+$("#icon3").click(function(){
+  const fileInput = document.getElementById('imgInp');
+  console.log(fileInput)
+      var files = [...fileInput.files];
+      console.log(files);
+            files.splice(2, 1);
+        document.getElementById('blah3').classList.add('d-none');
+        document.getElementById('icon3').classList.add('d-none');
+
+});
+});
+
+
   </script>
 @endsection

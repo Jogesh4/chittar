@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Favorite;
 use App\Models\CartItem;
-
+use App\Models\Variant;
+use App\Models\Review;
 
 class ItemController extends Controller
 {
@@ -20,6 +21,10 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         $similar_items = Item::where('category_id', '!=', $item->category_id)->where('is_active',1)->take(8)->get();
+
+        $color_variants = Variant::where(['item_id' => $item->id,'type' => 'color'])->get();
+        $size_variants = Variant::where(['item_id' => $item->id,'type' => 'size'])->get();
+        $reviews = Review::where(['item_id' => $item->id])->get();
 
     if(auth()->check()){
         \Cart::clear();
@@ -37,7 +42,7 @@ class ItemController extends Controller
         }
     }
 
-        return view('item.show', compact('item', 'similar_items'));
+        return view('item.show', compact('item', 'similar_items','color_variants','size_variants','reviews'));
     }
 
     public function add_favorite(Request $request){
@@ -59,4 +64,44 @@ class ItemController extends Controller
         }
 
     }
+
+    public function save_review(Request $request){
+        
+        $review = new Review();
+        $review->description = $request->review;
+        $review->item_id = $request->item_id;
+        $review->user_id = auth()->user()->id;
+        $review->status = 1;
+        $review->save();
+
+           $i = 1;
+             if($request->hasfile('review_image')){
+                     foreach($request->file('review_image') as $img){
+
+                            $file= $img;
+                            $imagePath = $img->store('review_image', 'public');
+                            if(empty($review->image)){
+                                  $review->image = $imagePath;
+                            }
+                            else if(empty($review->image1)){
+                                  $review->image1 = $imagePath;
+                            }
+                            else if(empty($review->image2)){
+                                  $review->image2 = $imagePath;
+                            }
+                            else if(empty($review->image3)){
+                                  $review->image3 = $imagePath;
+                            }
+                           
+                            $i++;
+                     }
+         }
+
+         $review->save();
+
+         return back();
+
+
+    }
+
 }

@@ -30,7 +30,7 @@ class CartController extends Controller
     }
 
     public function add_to_cart(Request $request)
-    {
+    {  
         $userID = auth()->user()->id;
 
         $item = Item::where('id',$request->item_id)->first();
@@ -39,7 +39,12 @@ class CartController extends Controller
 
         if(!$cart){
             $cartItem = new CartItem;
-            $cartItem->qty = 1;
+            if(!empty($request->quantity)){
+               $cartItem->qty = $request->quantity;
+            }
+            else{
+                $cartItem->qty = 1;
+            }
             $cartItem->name = $item->name;
             $cartItem->image = $item->image;
             $cartItem->price = $item->price;
