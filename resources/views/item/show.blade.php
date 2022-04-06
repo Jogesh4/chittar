@@ -195,7 +195,7 @@
   
 
 <div class="d-flex justify-content-center">
-    <div class="col-lg-4 col-sm-12 text-center p-2 m-2 ">
+    <div class="col-lg-4 col-md-4 col-sm-12 text-center p-2 m-2 ">
     <div class="">
         <div class="h3 titllee text-center fw-bold">Customer Reviews</div>
 </div>
@@ -217,7 +217,7 @@
         
 
     <div class="review ">
-                    <div class="row d-flex">
+                    <div class="row ">
                         
                             <h5 class="">Emily</h5>
                             <p class="grey-text">30 min ago</p>

@@ -974,6 +974,22 @@ a.nav-link {
     text-decoration: none;
 }
 
+
+.btn-blu-dis,
+.btn-blu-login:hover,
+.btn-blu-login:focus {
+    background: #f8f9fc00;
+    padding: 6px 15px;
+    color: #d72280;
+    font-size: 17px;
+    display: inline-block;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #d72280;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
 .btn-blu-cancel,
 .btn-blu-cancel:hover,
 .btn-blu-cancel:focus {
