@@ -27,7 +27,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('change_status/{type}{id}{status}', [App\Http\Controllers\Admin\ItemController::class, 'change_status'])->name('change_status');
-
+Route::get('autocomplete', [App\Http\Controllers\ItemController::class, 'autocomplete'])->name('autocomplete');
 Route::get('/manage-reviews', [App\Http\Controllers\Admin\ItemController::class, 'manage_reviews'])->name('manage-reviews');
 Route::view('/report', 'admin.report.sale-report');
 Route::view('/customer-report', 'admin.report.customer-report');

@@ -36,7 +36,8 @@
                                                   <h6 class="mb-0">{{ $item->name }}</h6>
                                               </div>
                                               {{-- <div class="col-auto my-auto"> <small>Golden Blue </small></div> --}}
-                                              <div class="col my-auto"> <small>Size : M</small></div>
+                                              <div class="col my-auto"> <small>Size : {{ $item->size }}</small></div>
+                                              <div class="col my-auto"> <small>Color : {{ $item->color }}</small></div>
                                               <div class="col my-auto"> <small>Qty : {{ $item->qty }}</small></div>
                                               <div class="col my-auto">
                                                   <h6 class="mb-0">$ {{ $item->price }}</h6>

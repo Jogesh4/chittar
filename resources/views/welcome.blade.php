@@ -123,7 +123,7 @@
 
                         @endif
                     </div>
-                  
+                   
                 </div> 
                 <a class="" href="{{ route('item.show', $item) }}">
                   <div class="card-body ps-0  text-center">
@@ -134,7 +134,14 @@
 
                   <div class="d-flex"> 
                    
-                  <div class="col-8 p-2 info-pt"><i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days</div>
+                  <div class="col-8 p-2 info-pt">
+                    {{-- <i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days --}}
+                  <div class="ssw-stars ssw-stars-large brand">  
+                    <i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i>
+                   <span class="" style="font-size: 12px">5 Reviews </span>
+                  </div>
+                  
+                  </div>
                   
                   <div class="col-2 p-2 info-pt">
                     {{-- <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1"> --}}
@@ -357,6 +364,9 @@
   </script>
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+
 
 <script>
 

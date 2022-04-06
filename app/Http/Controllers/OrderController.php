@@ -13,6 +13,8 @@ use App\Models\User;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
+use Razorpay\Api\Api;
+use DB;
 
 class OrderController extends Controller
 {
@@ -65,7 +67,8 @@ class OrderController extends Controller
           $orderItem = new OrderItem;
           $orderItem->name = $row->name;
           $orderItem->image = $row->image;
-          $orderItem->size = $item->weight;
+          $orderItem->size = $row->size;
+          $orderItem->color = $row->color;
           $orderItem->price = $row->price;
           $orderItem->qty = $row->qty;
           $orderItem->item_id = $row->item_id;
@@ -88,7 +91,29 @@ class OrderController extends Controller
 
     \Cart::session($userID)->clear();
 
-    return redirect()->route('user_dashboard');
+    $last_order = DB::table('orders')
+                    ->where('orders.user_id', '=', $userID)
+                    ->orderBy('orders.id', 'DESC')
+                    ->first();
+    // Razorpay Transaction
+                $api = new Api('rzp_test_6H6AUtBZCXyatL', 'MByNkzz8MybQMZ8q8RR2KfUD');
+
+                // RazorpayOrder
+                $RazorpayOrder  = $api->order->create(array('receipt' => 'order_rcptid_'.$last_order->id, 'amount' => $last_order->amount * 100, 'currency' => 'INR')); // Creates RazorpayOrder
+                $orderId = $RazorpayOrder['id']; // Get the created RazorpayOrder ID
+                $RazorpayOrder  = $api->order->fetch($orderId);
+                $payments = $api->order->fetch($orderId)->payments();
+
+    $data['new'] = [
+                         'code' => 1,
+                         'order' => $order,
+                         'orderId' => $orderId,
+
+                     ];
+
+                return json_encode($data);
+
+    // return redirect()->route('user_dashboard');
   }
 
   public function cancel(Request $request, Order $order)
@@ -172,6 +197,22 @@ class OrderController extends Controller
     }
 
       return view('cart.payment',compact('address'));
+  }
+
+  public function update_order_status(Request $request){
+
+       $order = Order::where('id',$request->OrderID)->first();
+       $order->razorpay_order_id = $request->razorpay_order_id;
+       $order->razorpay_payment_id = $request->razorpay_payment_id;
+       $order->razorpay_signature = $request->razorpay_signature;
+
+       if($order->save()){
+                $data['code'] = 200;
+                $data['result'] = 'success';
+                $data['message'] = 'Action completed';
+       }
+       
+
   }
 
 }

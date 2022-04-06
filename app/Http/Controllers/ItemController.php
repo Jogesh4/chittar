@@ -21,9 +21,20 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         $similar_items = Item::where('category_id', '!=', $item->category_id)->where('is_active',1)->take(8)->get();
+        $final_out = [];
+        
+        $size_variants = Variant::where(['item_id' => $item->id])->select('type')->distinct('type')->get();
+        $variants = Variant::where(['item_id' => $item->id])->get();
 
-        $color_variants = Variant::where(['item_id' => $item->id,'type' => 'color'])->get();
-        $size_variants = Variant::where(['item_id' => $item->id,'type' => 'size'])->get();
+
+         if($variants->count() > 0){
+             $color_variants = Variant::where(['item_id' => $item->id,'type' => $variants[0]->type])->get();
+         }
+         else{
+              $color_variants = Variant::where(['item_id' => $item->id])->get();
+         }
+         
+        
         $reviews = Review::where(['item_id' => $item->id,'status' => 1])->get();
 
     if(auth()->check()){
@@ -42,7 +53,7 @@ class ItemController extends Controller
         }
     }
 
-        return view('item.show', compact('item', 'similar_items','color_variants','size_variants','reviews'));
+        return view('item.show', compact('item', 'similar_items','color_variants','size_variants','reviews','variants'));
     }
 
     public function add_favorite(Request $request){
@@ -123,6 +134,46 @@ class ItemController extends Controller
                      ];
 
                 return json_encode($data);
+    }
+
+    public function get_variant(Request $request){
+
+        if(!empty($request->id)){
+              $var = Variant::where('id',$request->id)->first();
+        }
+        else{
+             $var = Variant::where('type',$request->variant_id)->first();
+        }
+
+         $colorvariant = Variant::where('type',$request->variant_id)->get();
+
+            $data['new'] = [
+                         'code' => 1,
+                         'variant' => $var,
+                         'colorvariant' => $colorvariant,
+                         
+                     ];
+
+                return json_encode($data);
+
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $search = $request->search;
+
+      if($search == ''){
+         $employees = Item::orderby('name','asc')->select('id','name')->limit(5)->get();
+      }else{
+         $employees = Item::orderby('name','asc')->select('id','name')->where('name', 'like', '%' .$search . '%')->limit(10)->get();
+      }
+        // dd($employees);
+      $response = array();
+      foreach($employees as $employee){
+         $response[] = array("value"=>$employee->id,"label"=>$employee->name);
+      }
+
+      return response()->json($response);
     }
 
 }

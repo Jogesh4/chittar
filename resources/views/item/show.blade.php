@@ -38,15 +38,20 @@
                  
                   <h2 class="item-name-view">{{ $item->name }}</h2>
 
-                  <div class="text-uppercase text-muted  mt-3 mb-3">Model:  {{ $item->model }} <span class="fw-bold m-3"> | </span> <span class="text-uppercase text-muted brand">SKU:  @if($color_variants->count() > 0){{ $size_variants[0]->sku }} @endif</span> </div>
+                  <div class="text-uppercase text-muted  mt-3 mb-3">Model:  {{ $item->model }} <span class="fw-bold m-3"> | </span> <span class="text-uppercase text-muted brand" id="sku">SKU:  @if($variants->count() > 0){{ $variants[0]->sku }} @endif</span> </div>
                   <div class="ssw-stars ssw-stars-large brand">  
-                    <i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i>
+                    <i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i>
                     <!-- <span class="ssw-review-counts" >5 Star </span> -->
                   </div>
 
-                  <div class="price align-items-center mt-3">                    
-                    <p class="act-price mb-0" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "><span class="fassas">INR </span>{{ $item->price }}</p>                   
-                    <p class="mt-0">Price: Excluding of all taxes</p>
+                  <div class="price align-items-center mt-3">
+                    @if($variants->count() > 0)
+                      <p class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "><span class="">INR </span>{{ $variants[0]->price }}</p>                   
+                     @else
+                      <p class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "><span class="">INR </span>{{ $item->price }}</p>                   
+                     @endif
+                    
+                      <p class="mt-0">Price: Excluding of all taxes</p>
                   </div>
                   
                 </div>
@@ -55,9 +60,15 @@
                   @if($size_variants->count() > 0)
                       <div class="col-lg-6 product-quantity">
                       <p class="fw-bold">Size </p>
-                          @foreach($size_variants as $size)
-                            <a class="size-button">{{ $size->variant_name }}</a>
-                          @endforeach
+                      <select class="selectpicker form-control1" id="product_size" name="product_size" onchange="change_size(this)">
+                                      <option value="">Select</option>
+                                            @foreach($size_variants as $size)
+                                                   
+                                              {{-- <span class="size-button" id="variant_size">{{ $size->type }}</span> --}}
+                                                        <option value="{{ $size->type }}" @if(!empty($size_variants[0]->type)) @if($size_variants[0]->type == $size->type) selected @endif  @endif>{{ $size->type }}</option>
+                                            @endforeach
+                          </select>
+
                       </div>
                  @endif
 
@@ -77,15 +88,14 @@
 
                 </div>
           @if($color_variants->count() > 0)
+                <input type="hidden" id="variant_id" value="{{ $color_variants[0]->id }}"/>
                 <div class="d-flex mt-3">
                               <div class="col-3 text-left">
                               <p class="fw-bold">Variant</p>
                             </div>
-                              <div class="col-3 text-left">
-
-                                
+                              <div class="col-3 text-left" id="color_div">
                                     @foreach($color_variants as $color)
-                                       <a class="color-box" style="background: {{ $color->variant_name }}" href="#"><span ></span></a>
+                                       <span class="color-box" id="color_span{{ $color->id }}" style="background: {{ $color->variant_name }}" onclick="color_save({{ $color->id }},this)"></span>
                                      @endforeach
                             </div>
                 </div>
@@ -114,10 +124,10 @@
                     
                       <button id="add" class="btn-pink text-uppercase mr-2 px-4" onclick="add_cart({{ $item->id }},1)">Add to Cart</button>
 
-                      <button id="added" type="button" disabled class="btn-pink text-uppercase mr-2 px-4 d-none">Added to Cart</button>
+                      <button id="added" type="button" disabled class="btn-pink text-uppercase mr-2 px-4 d-none" disabled>Added to Cart</button>
 
                     @else
-                      <button type="button" disabled class="btn-pink text-uppercase mr-2 px-4">Added to Cart</button>
+                      <button type="button" disabled class="btn-pink text-uppercase mr-2 px-4" disabled>Added to Cart</button>
                     @endif
                   @else
                     <a href="{{ route('login') }}" class="btn-pink text-uppercase mr-2 px-4">Login to add</a>
@@ -371,13 +381,73 @@
 
 @section('extras')
 
-<script>
-/* Initiate Magnify Function
-with the id of the image, and the strength of the magnifier glass:*/
-magnify("main-image", 3);
-</script>
-
   <script>
+
+    function color_save(id,element){
+      
+        document.getElementById('variant_id').value = id;
+        $(".color-box").not($(this)).removeClass("color-box-active");
+        element.classList.add('color-box-active');
+
+           $.ajax({
+                    type: "Get",
+                    url: '{{route('get_variant')}}',
+                    datatype: 'json',
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                        'id' : id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                           console.log(obj);
+                             document.getElementById('sku').textContent = 'SKU: ' + obj.new.variant.sku;
+                            //  document.getElementById('price').textContent = 'INR ' + obj.new.variant.price;
+                         
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+
+    }
+
+    function change_size(element){
+         var variant_id = element.value;
+
+           $.ajax({
+                    type: "Get",
+                    url: '{{route('get_variant')}}',
+                    datatype: 'json',
+                    data: {
+                      "_token": "{{ csrf_token() }}",
+                        'variant_id' : variant_id,
+                    },
+                    success: function (data) {
+                        const obj = JSON.parse(data);
+                           console.log(obj);
+                             document.getElementById('sku').textContent = 'SKU: ' + obj.new.variant.sku;
+                             document.getElementById('price').textContent = 'INR ' + obj.new.variant.price;
+                         
+                                var item = $('#color_div');
+                                item.empty();
+                              if(obj.new.colorvariant.length == 0){
+                                      item.empty();
+                              }
+                              else{
+                                  $.each(obj.new.colorvariant, function(key,value) {
+                                      item.append('<span class="color-box" id="color_span" style="background: ' + value.variant_name + '" onclick="color_save(' + value.id + ',this)"></span>');
+                                  });
+                              }
+
+                      },
+                    complete: function () {
+                    },
+                    error: function () {
+                    }
+                });
+         
+    }
 
     function edit_review(id){
         
@@ -482,6 +552,9 @@ magnify("main-image", 3);
     function add_cart(id,$type){
 
      var cart_no = document.getElementById('cart_no').textContent;
+     var variant_id = document.getElementById('variant_id').value;
+    //  var colorvariant_id = document.getElementById('variant_id').value;
+
 
      if($type == 1){
          var quantity = document.getElementById('quantity').value;
@@ -497,6 +570,7 @@ magnify("main-image", 3);
                       "_token": "{{ csrf_token() }}",
                         'item_id' : id,
                         'quantity' : quantity,
+                        'variant_id' : variant_id,
                     },
                     success: function (data) {
                         const obj = JSON.parse(data);

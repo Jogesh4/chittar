@@ -17,11 +17,13 @@ $userID = auth()->user() ? auth()->user()->id : 1;
             @if($cartItems->count() > 0)
             @foreach($cartItems as $row)
             <tr class="selected-product">
+              
               <td class="item-thumbnail">
-                <img src="{{ $row->image ? asset('storage/'.$row->image) : 'images/1.jpg' }}" width="80" height="80" data-max-width="80" data-max-height="80">
+                <a class="" href="{{ route('item.show', $row->name) }}"><img src="{{ $row->image ? asset('storage/'.$row->image) : 'images/1.jpg' }}" width="80" height="80" data-max-width="80" data-max-height="80"></a>
               </td>
               <td class="item-info">
-                <p class="item-title"><a href="">{{ $row->name }}</a></p>
+                <a class="" href="{{ route('item.show', $row->name) }}"><h6 class="item-title">{{ $row->name }}</h6></a>
+                <p class="item-title">Size: <span>{{ !empty($row->size)?$row->size : "" }}</span><span class="fw-bold m-3"> | </span> <span>  Color: {{ !empty($row->color)?$row->color : "" }}</span></p>
               </td>
               <td class="item-qty mt-2">
                 <div class="product-quantity">
@@ -54,14 +56,20 @@ $userID = auth()->user() ? auth()->user()->id : 1;
           </tbody>
         </table>
         <div class="row">
-          <div class="text-start col">
-            @if($cartItems->count() > 0)
-            <form method="POST" action="{{ route('remove.from.cart') }}">
-              @csrf
-              <button class="btn btn-danger btn-block">Empty Cart</button>
-            </form>
-            @endif
+          <div class="col-4">
+                <div class="text-start">
+                  @if($cartItems->count() > 0)
+                  <form method="POST" action="{{ route('remove.from.cart') }}">
+                    @csrf
+                    <button class="btn btn-danger btn-block">Empty Cart</button>
+                  </form>
+                  @endif
+                </div>
           </div>
+          <div class="col-6">
+                <a href="/search" class="btn-pink">Continue Shopping</a>
+          </div>
+          
           <div class="text-end col">Subtotal: <span class="cart-subtotal total"> Rs.{{ $total }}</span></div>
         </div>
       </div>

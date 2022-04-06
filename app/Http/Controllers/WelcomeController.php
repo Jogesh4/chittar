@@ -36,8 +36,9 @@ class WelcomeController extends Controller
         else{
           $categoryItems = Item::where('category_id', $currentCategoryId)->where('is_active',1)->get();
         }
-
+         
         // dd($categoryItems);
+
 
     if(auth()->check()){
         \Cart::clear();

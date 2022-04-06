@@ -370,8 +370,8 @@
               <table class="table mt-3">
                 <thead>
                   <tr>
-                    <th>Type</th>
-                    <th>Variant</th>
+                    <th>Variant Size</th>
+                    <th>Variant Color</th>
                     <th>Price(excl. tax)</th>
                     <th>Quantity</th>
                     <th>SKU</th>
@@ -383,13 +383,9 @@
                     @foreach($variants as $variant)
                      <tr>
                       <td class="variant">
-                          <select class="form-control" name="type[]" style="width: 120%;">
-                              <option value="" selected hidden>Type</option>
-                              <option value="size" @if(!empty($variant->type)) @if($variant->type == 'size') selected @endif  @endif>Size</option>
-                              <option value="color" @if(!empty($variant->type)) @if($variant->type == 'color') selected @endif  @endif>Color</option>
-                          </select>
+                          <input type="text" name="type[]" class="form-control" value="{{ $variant->type }}" placeholder="Enter Size" />
                           </td>
-                          <td><input type="text" name="variant[]" class="form-control" value="{{ $variant->variant_name }}" placeholder="Enter Variant" /></td>
+                          <td><input type="text" name="variant[]" class="form-control" value="{{ $variant->variant_name }}" placeholder="Enter Color" /></td>
                           <td><input type="text" name="price[]" class="form-control" value="{{ $variant->price }}" placeholder="Enter price" /></td>
                           <td><input type="text" name="qty[]" class="form-control" value="{{ $variant->qty }}" placeholder="Enter qty" /></td>
                           <td><input type="text" name="sku[]" class="form-control" value="{{ $variant->sku }}" placeholder="Enter sku" /></td>
@@ -405,13 +401,9 @@
                   @else
                       <tr>
                          <td class="variant">
-                        <select class="form-control" name="type[]" style="width: 120%;">
-                            <option value="" selected hidden>Type</option>
-                            <option value="size">Size</option>
-                            <option value="color">Color</option>
-                        </select>
+                            <input type="text" name="type[]" class="form-control" placeholder="Enter Size" />
                         </td>
-                        <td><input type="text" name="variant[]" class="form-control" placeholder="Enter Variant" /></td>
+                        <td><input type="text" name="variant[]" class="form-control" placeholder="Enter Color" /></td>
                         <td><input type="text" name="price[]" class="form-control" placeholder="Enter price" /></td>
                         <td><input type="text" name="qty[]" class="form-control" placeholder="Enter qty" /></td>
                         <td><input type="text" name="sku[]" class="form-control" placeholder="Enter sku" /></td>
@@ -1036,10 +1028,7 @@ $("#icon3").click(function(){
             // $(this).hide();
             $("#tbody").append(`<tr>
                 <td class="variant">
-                  <select class="form-control" name="type[]">
-                    <option value="size">Size</option>
-                    <option value="color">Color</option>
-                  </select>
+                  <input type="text" name="type[]" class="form-control" placeholder="Enter Size" />
                 </td>
                 <td><input type="text" name="variant[]" class="form-control" placeholder="Enter Variant" /></td>
                 <td><input type="text" name="price[]" class="form-control" placeholder="Enter price" /></td>
