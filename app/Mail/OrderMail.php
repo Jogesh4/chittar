@@ -16,9 +16,12 @@ class OrderMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($order,$shipping,$billing)
     {
-        //
+        $this->order = $order;
+        $this->shipping = $shipping;
+        $this->billing = $billing;
+
     }
 
     /**
@@ -28,6 +31,6 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.order_mail');
+        return $this->view('emails.order_mail',array('order'=> $this->order,'shipping'=> $this->shipping,'billing'=> $this->billing));
     }
 }
