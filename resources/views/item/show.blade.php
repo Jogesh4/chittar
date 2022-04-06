@@ -256,9 +256,7 @@
                             </div>
                             <div class="row pb-3">
                                 <p>{{ $review->description }}.</p>
-                            </div>
-
-   
+                            </div>   
                              <div class="row mt-2">
                                      <div class="col-md-12 col-lg-12 form-outline mb-2">
                                         @if(!empty($review->image))
@@ -296,8 +294,7 @@
 
               @endif
 
-     </div>
-                   
+     </div>                   
      <div class="col-lg-8 col-md-8 col-sm-12 bg-white p-2 m-2 d-none" id="review_form">
         
       <form method="POST" action="{{ route('save_review') }}" enctype="multipart/form-data">

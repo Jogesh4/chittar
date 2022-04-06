@@ -9,13 +9,17 @@ use App\Models\OrderItem;
 use App\Models\CartItem;
 use App\Models\Item;
 use App\Models\Address;
+use App\Models\User;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderMail;
 
 class OrderController extends Controller
 {
   public function place(Request $request)
   {
     $userID = auth()->user()->id;
+    $user = User::where('id',$userID)->first();
 
     if($request->address_radio == '2'){
         $address = new Address;
@@ -74,6 +78,11 @@ class OrderController extends Controller
 
     $order->order_no = 'ORD0000' . $order->id;
     $order->save();
+
+    $shipping_address = Address::where('id',$order->shipping_address)->first();
+    $billing_address = Address::where('id',$order->billing_address)->first();
+
+    Mail::to($user->email)->send(new OrderMail($order,$shipping_address,$billing_address));
 
     $cartItem = CartItem::where(['user_id' => auth()->user()->id])->update(["status" => 0]);
 
