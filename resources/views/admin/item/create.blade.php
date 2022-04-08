@@ -288,24 +288,28 @@
         </div>
 
 <div class="row mt-3">
-    <div class="col-md-12 col-lg-3 form-outline p-2">
+    <div class="col-md-12 col-lg-4 form-outline p-2">
     <label>Minimum Purchase Quantity<span style="color:red;">*</span></label>
         <input type="number" name="min_purchase" id="" placeholder="Minimum Purchase Quantity *" class="form-control2" value="{{ !empty($item->min_purchase_qty) ? $item->min_purchase_qty : "" }}">
     </div>
 
-    <div class="col-md-12 col-lg-3 form-outline p-2">
+    <div class="col-md-12 col-lg-4 form-outline p-2">
     <label>Maximum Purchase Quantity<span style="color:red;">*</span></label>
         <input type="number" name="max_purchase" id="" placeholder="Maximum Purchase Quantity *" class="form-control2" value="{{ !empty($item->max_purchase_qty) ? $item->max_purchase_qty : "" }}">
     </div>
 
-    <div class="col-md-12 col-lg-3 form-outline p-2">
+    <div class="col-md-12 col-lg-4 form-outline p-2">
     <label>Stock Alert Quantity<span style="color:red;">*</span></label>
         <input type="number" name="stock_alert" id="" placeholder="Stock Alert Quantity *" class="form-control2" value="{{ !empty($item->stock_alert_qty) ? $item->stock_alert_qty : "" }}">
     </div>
 
-    <div class="col-md-12 col-lg-3 form-outline p-2">
-    <label>Cost Price <span style="color:red;">*</span></label>
-        <input type="number" name="cost_price" id="" placeholder="Cost Price *" class="form-control2" value="{{ !empty($item->price) ? $item->price : "" }}">
+    <div class="col-md-12 col-lg-4 form-outline p-2">
+      <label>Cost Price <span style="color:red;">*</span></label>
+          <input type="number" name="cost_price" id="" placeholder="Cost Price *" class="form-control2" value="{{ !empty($item->price) ? $item->price : "" }}">
+    </div>
+    <div class="col-md-12 col-lg-4 form-outline p-2">
+      <label>Sale Price <span style="color:red;">*</span></label>
+          <input type="number" name="sale_price" id="" placeholder="Sale Price *" class="form-control2" value="{{ !empty($item->sale_price) ? $item->sale_price : "" }}">
     </div>
 
 </div>

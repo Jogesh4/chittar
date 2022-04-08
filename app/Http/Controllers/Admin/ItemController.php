@@ -108,6 +108,7 @@ class ItemController extends Controller
         $item->min_purchase_qty = $request->min_purchase;
         $item->max_purchase_qty = $request->max_purchase;
         $item->price = $request->cost_price;
+        $item->sale_price = $request->sale_price;
         $item->stock_alert_qty = $request->stock_alert;
         $item->has_multiple_options = $request->multiple_options;
         $item->country_of_origin = $request->country;

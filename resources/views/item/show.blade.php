@@ -6,10 +6,10 @@
 <section class="py-7 border-bottom border-white border-5">
   <div class="container mt-5">
     <div class="row d-flex justify-content-center mb-5">
-      <div class="col-md-12">
+      <div class="col-lg-12 col-12">
         <div class="card">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-6 col-12">
               <div class="images p-3">
                 <div class="text-center p-4  ">
                    <div class="img-zoom-container mag"> 
@@ -18,6 +18,9 @@
                 </div>
               </div>
                 <div class="thumbnail text-center">
+                  @if(!empty($item->image))
+                      <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image) }}" width="100" > 
+                   @endif
                    @if(!empty($item->image1))
                       <img onclick="change_image(this)" src="{{ asset('storage/'.$item->image1) }}" width="100" > 
                    @endif
@@ -32,7 +35,7 @@
               </div>
             </div>
 
-            <div class="col-md-6 brands">
+            <div class="col-lg-6 col-12 brands">
               <div class="product p-4 detail">                
                 <div class="mt-4 mb-3">
                  
@@ -46,12 +49,34 @@
 
                   <div class="price align-items-center mt-3">
                     @if($variants->count() > 0)
-                      <i class="fas fa-rupee-sign font-size: 1.8rem; font-weight: 500;"></i><span class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "> {{ $variants[0]->price }}</span>   <span class="mrp-cut"><i class="fas fa-rupee-sign"></i> {{ $item->price }}</span>                
-                     @else
-                      <p class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "><span class=""><i class="fas fa-rupee-sign"></i> </span>{{ $item->price }}</p>                   
+                        @php
+                             $save_price = $item->price - $variants[0]->price;
+                        @endphp
+                        <div>
+                          <span style="width: 70px;display: inline-block;margin-right: 10px;text-align: right;">M.R.P.:  </span><span class="mrp-cut"><i class="fas fa-rupee-sign"></i> {{ $item->price }}</span>
+                        </div>
+                        <div>
+                          <span style="width: 70px;display: inline-block;margin-right: 10px;text-align: right;">Price:  </span><i class="fas fa-rupee-sign" style="font-size: 1.4rem;"></i><span class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; ">{{ $variants[0]->price }}</span>                
+                        </div>
+                        <div>
+                          <span style="width: 70px;display: inline-block;margin-right: 10px;text-align: right;">You Save:  </span><i class="fas fa-rupee-sign"></i><span class="" id="save_price">{{ $save_price }}</span>
+                        </div>
+                    @else
+                         @php
+                             $save_price = $item->price - $item->sale_price;
+                        @endphp
+                         <div>
+                          <span style="width: 70px;display: inline-block;margin-right: 10px;text-align: right;">M.R.P.:  </span><span class="mrp-cut"><i class="fas fa-rupee-sign"></i> {{ $item->price }}</span>
+                        </div>
+                        <div>
+                          <span style="width: 70px;display: inline-block;margin-right: 10px;text-align: right;">Price:  </span><i class="fas fa-rupee-sign" style="font-size: 1.4rem;"></i><span class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; ">{{ $item->sale_price }}</span>                
+                        </div>
+                        <div>
+                          <span style="width: 70px;display: inline-block;margin-right: 10px;text-align: right;">You Save:  </span><span class=""><i class="fas fa-rupee-sign"></i> {{ $save_price }}</span>
+                        </div>
                      @endif
                     
-                      <p class="mt-0">Price: Excluding of all taxes</p>
+                      <p class="mt-0"> <span style="width: 70px;display: inline-block;margin-right: 10px;text-align: right;"></span> Inclusive of all taxes</p>
                   </div>
                   
                 </div>
@@ -60,7 +85,7 @@
                   @if($size_variants->count() > 0)
                       <div class="col-lg-6 product-quantity">
                       <p class="fw-bold">Size </p>
-                      <select class="selectpicker form-control1" id="product_size" name="product_size" onchange="change_size(this)">
+                      <select class="selectpicker form-control1" id="product_size" name="product_size" onchange="change_size(this,{{ $item->price }})">
                                       <option value="">Select</option>
                                             @foreach($size_variants as $size)
                                                    
@@ -225,13 +250,13 @@
 <section class=" p-4 bg-light ">
   
 
-<div class="d-flex justify-content-center">
+<div class="d-lg-flex justify-content-center">
     <div class="col-lg-4 col-md-4 col-sm-12 text-center p-2 m-2 ">
     <div class="">
         <div class="h3 titllee text-center fw-bold">Customer Reviews</div>
 </div>
         <div class="ratings"> <span class="product-rating" style="font-size: 33px;">4.6</span><span style="font-size: 25px;">/5</span>
-            <div class="align-items-center product"> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="far fa-star"></span> </div>                       
+            <div class="align-items-center product"> <span class="fas fassas-yellow fa-star"></span> <span class="fas fassas-yellow fa-star"></span> <span class="fas fassas-yellow fa-star"></span> <span class="fas fassas-yellow fa-star"></span> <span class="far fa-star"></span> </div>                       
             <div class="rating-text"> <span>0 ratings & {{ $reviews->count() }} reviews</span> </div>
         </div>
 
@@ -261,7 +286,7 @@
                                 </div>
                             </div>
                             <div class="row pb-3">  
-                            <div class="d-flex align-items-center product"> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="fas fassas fa-star"></span> <span class="far fa-star"></span> </div>                       
+                            <div class="d-flex align-items-center product"> <span class="fas fassas-yellow fa-star"></span> <span class="fas fassas-yellow fa-star"></span> <span class="fas fassas-yellow fa-star"></span> <span class="fas fassas-yellow fa-star"></span> <span class="far fa-star"></span> </div>                       
                                     {{-- <p class="mb-0 pl-3" style=" color: #b00755 ">Excellent</p>                         --}}
                             </div>
                             <div class="row pb-3">
@@ -322,7 +347,7 @@
            <input type="hidden" name="review_id" id="review_id" value=""/>
 
                 <div class="ssw-stars ssw-stars-large brand">  
-                    <i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i>
+                    <i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i>
                     <!-- <span class="ssw-review-counts" >5 Star </span> -->
                   </div>
 
@@ -425,7 +450,7 @@ new Drift(demoTrigger, {
 
     }
 
-    function change_size(element){
+    function change_size(element,price){
          var variant_id = element.value;
 
            $.ajax({
@@ -441,6 +466,7 @@ new Drift(demoTrigger, {
                            console.log(obj);
                              document.getElementById('sku').textContent = 'SKU: ' + obj.new.variant.sku;
                              document.getElementById('price').textContent = obj.new.variant.price;
+                             document.getElementById('save_price').textContent = price - obj.new.variant.price;
                             //  $('#color_div').append('<i class="fas fa-rupee-sign">' + obj.new.variant.price);
                          
                                 var item = $('#color_div');
@@ -566,7 +592,9 @@ new Drift(demoTrigger, {
     function add_cart(id,$type){
 
      var cart_no = document.getElementById('cart_no').textContent;
-     var variant_id = document.getElementById('variant_id').value;
+     if($('#variant_id').length){
+       var variant_id = document.getElementById('variant_id').value;
+     }
     //  var colorvariant_id = document.getElementById('variant_id').value;
 
 

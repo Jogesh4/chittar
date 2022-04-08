@@ -23,7 +23,9 @@ $userID = auth()->user() ? auth()->user()->id : 1;
               </td>
               <td class="item-info">
                 <a class="" href="{{ route('item.show', $row->name) }}"><h6 class="item-title">{{ $row->name }}</h6></a>
-                <p class="item-title">Size: <span>{{ !empty($row->size)?$row->size : "" }}</span><span class="fw-bold m-3"> | </span> <span>  Color: {{ !empty($row->color)?$row->color : "" }}</span></p>
+                @if(!empty($row->size))
+                   <p class="item-title">Size: <span>{{ !empty($row->size)?$row->size : "" }}</span><span class="fw-bold m-3"> | </span> <span>  Color: {{ !empty($row->color)?$row->color : "" }}</span></p>
+                @endif
               </td>
               <td class="item-qty mt-2">
                 <div class="product-quantity">

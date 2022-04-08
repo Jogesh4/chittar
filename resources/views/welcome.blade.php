@@ -128,7 +128,7 @@
                 <a class="" href="{{ route('item.show', $item['items']) }}">
                   <div class="card-body ps-0  text-center">
                     <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item['items']['name'] }}</p>
-                    <div class="fw-bold"><span class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $item['items']['price'] }}</span></div>
+                    <div class="fw-bold"><span class="mrp-cut mr-4"><i class="fas fa-rupee-sign"></i> {{ $item['items']['price'] }}</span>  <span class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $item['items']['sale_price'] }}</span></div>
                   </div>
                   </a>
 
@@ -238,7 +238,7 @@
               @endforeach
               
               {{-- <button class="nav-link" id="nav-men-tab" data-bs-toggle="tab" data-bs-target="#nav-men" type="button" role="tab" aria-controls="nav-men" aria-selected="false">For Men</button> --}}
-            </div>
+            </div><script></script>
             
                 <div class="tab-content">
                   <div class="tab-pane fade show active" id="pills-wshoes" role="tabpanel" aria-labelledby="pills-wshoes-tab">
@@ -371,7 +371,7 @@
 <script>
 
 $( document ).ready(function() {
-      document.getElementById('nav-1').classList.add('active');
+      // document.getElementById('nav-1').classList.add('active');
 });
 
 function add_cart(id){
@@ -445,7 +445,7 @@ function add_favorite(id){
                         }
                         else{
                             $.each(obj.new.items, function(key,value) {
-                                item.append('<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100"><div class="card card-span h-100 text-white"><div class="img-style-low"><img class="img-fluid h-100" src="https://chittarr.com/storage/' + value.image +'" alt="..."/></div><div class="card-img-overlay "></div><div class="card-body  bg-200  bttn"><div class="d-flex"><div class="col-8"><h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">' + value.name + '</h5></div><div class="col-4"><div class="fw-bold"><span class="pink-color">Rs.' + value.price +'</span></div></div></div><div class="d-flex"><div class="col-8"><div class="ssw-stars ssw-stars-large"><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><span class="ssw-review-count">75 Reviews</span></div></div><div class="col-4"><p class="ssw-review-count "><a href="#" class="text-dark"><i class="fas fa-ruler-horizontal"></i>  Size Guide</a></p></div></div><div class="d-flex"><div class="col-2 text-left"><p class="ssw-review-count">Color</p></div><div class="col-10 text-left"><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a></div></div></div><a class="stretched-link" href="http://127.0.0.1:8000/item/'+ value.slug +'"></a></div></div>');
+                                item.append('<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100"><div class="card card-span h-100 text-white"><div class="img-style-low"><img class="img-fluid h-100" src="https://chittarr.com/storage/' + value.image +'" alt="..."/></div><div class="card-img-overlay "></div><div class="card-body  bg-200  bttn"><div class="d-flex"><div class="col-8"><h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">' + value.name + '</h5></div><div class="col-4"><div class="fw-bold"><span class="pink-color">Rs.' + value.price +'</span></div></div></div><div class="d-flex"><div class="col-8"><div class="ssw-stars ssw-stars-large"><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><span class="ssw-review-count">75 Reviews</span></div></div><div class="col-4"><p class="ssw-review-count "><a href="#" class="text-dark"><i class="fas fa-ruler-horizontal"></i>  Size Guide</a></p></div></div><div class="d-flex"><div class="col-2 text-left"><p class="ssw-review-count">Color</p></div><div class="col-10 text-left"><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a></div></div></div><a class="stretched-link" href="/item/'+ value.slug +'"></a></div></div>');
                             });
                         }
                          
