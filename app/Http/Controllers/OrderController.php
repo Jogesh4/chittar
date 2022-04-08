@@ -10,6 +10,7 @@ use App\Models\CartItem;
 use App\Models\Item;
 use App\Models\Address;
 use App\Models\User;
+use App\Models\Shipping;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
@@ -200,6 +201,8 @@ class OrderController extends Controller
 
       $address = Address::where('id',$id)->first();
 
+      $shipping = Shipping::where('pincode',$address->pincode)->first();
+
       if(auth()->check()){
         \Cart::clear();
          \Cart::session(auth()->user()->id)->clear();
@@ -216,7 +219,7 @@ class OrderController extends Controller
         }
     }
 
-      return view('cart.payment',compact('address'));
+      return view('cart.payment',compact('address','shipping'));
   }
 
   public function update_order_status(Request $request){

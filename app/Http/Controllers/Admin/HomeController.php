@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Shipping;
 
 class HomeController extends Controller
 {
@@ -28,5 +30,42 @@ class HomeController extends Controller
         $orders = Order::orderBy('id', 'desc')->take(5)->get();
 
         return view('admin.home',compact('users','orders'));
+    }
+
+    public function manage_shippings(Request $request){
+
+        $shippings = Shipping::orderBy('id','desc')->get();
+
+        return view('admin.shipping.index',compact('shippings'));
+
+    }
+
+    public function edit_shippings($id){
+
+        $shipping = Shipping::where('id',$id)->first();
+
+        return view('admin.shipping.create',compact('shipping'));
+    }
+
+    public function store_shippings(Request $request){
+         
+         $shipping = new Shipping();
+         $shipping->pincode = $request->pincode;
+         $shipping->price = $request->price;
+         $shipping->save();
+
+         return redirect()->back()->with('success', 'Shipping Created successfully');
+
+    }
+
+    public function update_shippings(Request $request){
+         
+         $shipping = Shipping::where('id',$request->shipping_id)->first();
+         $shipping->pincode = $request->pincode;
+         $shipping->price = $request->price;
+         $shipping->save();
+
+         return redirect()->back()->with('success', 'Shipping Updated successfully');
+
     }
 }

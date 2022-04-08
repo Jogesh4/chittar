@@ -12,6 +12,7 @@ use App\Models\Item;
 use App\Models\Variant;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Shipping;
 
 class ItemController extends Controller
 {
@@ -226,6 +227,11 @@ class ItemController extends Controller
              $brand = Brand::where('id',$id)->first();
              $brand->is_active = $status;
              $brand->save();
+        }
+        else if($type == 'shipping'){
+             $shipping = Shipping::where('id',$id)->first();
+             $shipping->status = $status;
+             $shipping->save();
         }
 
         return back();

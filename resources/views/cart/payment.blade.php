@@ -54,7 +54,7 @@
             <p>Standard Shipping(8-12 business days)</p>
           </div>
           <div class="col-3">
-            <p>INR. 195</p>
+            <p><i class="fas fa-rupee-sign"></i> {{ !empty($shipping) ? $shipping->price : 0 }}</p>
           </div>       
         </div>
 
@@ -218,7 +218,7 @@
       <div class="row p-2 mt-2">
         <div class="col-3"> <img src="{{ asset('storage/'.$item->associatedModel->image) }}" width="60" height="60" data-max-width="60" data-max-height="80" style="border-radius:5px;"> </div>
         <div class="col-5"><p class="item-title text-white">{{ $item->name }} </br><span class="item-title text-white">QTY:<span>{{ $item->quantity }}</span></span></p></div>
-        <div class="col-4 "> <p class="item-title text-white">INR.{{ $item->price }}</p></div>
+        <div class="col-4 "> <p class="item-title text-white"><i class="fas fa-rupee-sign"></i> {{ $item->price }}</p></div>
       </div>
     @endforeach
   @endif
@@ -226,14 +226,14 @@
 
   <div class="row p-1">
     <div class="col-8"><p class="item-title text-white">Subtotal</p></div>
-    <div class="col-4 "> <p class="item-title text-white">INR.{{ \Cart::getTotal() }}</p></div>
+    <div class="col-4 "> <p class="item-title text-white"><i class="fas fa-rupee-sign"></i> {{ \Cart::getTotal() }}</p></div>
     <div class="col-8"><p class="item-title text-white">Shipping</p></div>
-    <div class="col-4 "> <p class="item-title text-white info-pt">Calculated at next step</p></div>
+    <div class="col-4 "> <p class="item-title text-white info-pt"> <span style="font-size: 1.2rem;"><i class="fas fa-rupee-sign"></i> {{ !empty($shipping) ? $shipping->price : 0 }}</span></p></div>
   </div>
   <hr>
   <div class="row p-1">
     <div class="col-8"><p class="item-title text-white h3">Total</p></div>
-    <div class="col-4 "> <p class="item-title text-white ">INR.<span class="h3 text-white">{{ \Cart::getTotal() }}</span></p></div>
+    <div class="col-4 "> <p class="item-title text-white "><i class="fas fa-rupee-sign"></i> <span class="h3 text-white">{{ \Cart::getTotal() }}</span></p></div>
   
   </div>
   <div class="row p-1 outl-bg">
@@ -409,7 +409,7 @@
                                        } else {
                                             var options = {
                                               "key": "rzp_test_6H6AUtBZCXyatL", // Enter the Key ID generated from the Dashboard
-                                              "amount": obj.new.order.amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                                              "amount": obj.new.order.amount * 100, // Amount is in currency subunits. Default currency is <i class="fas fa-rupee-sign"></i> Hence, 50000 refers to 50000 paise
                                               "currency": "INR",
                                               "name": "Chittar",
                                               "description": "Razorpay Transaction",
