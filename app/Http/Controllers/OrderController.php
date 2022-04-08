@@ -153,7 +153,27 @@ class OrderController extends Controller
        
       $user_id = auth()->user()->id;
 
-      $address = new Address;
+      if(!empty($request->shipaddress_id)){
+          $address = Address::where('id',$request->shipaddress_id)->first();
+
+          $address->user_id = $user_id;
+          $address->phone = $request->phone;
+          $address->firstname = $request->first_name;
+          $address->lastname = $request->last_name;
+          $address->address = $request->address;
+          $address->city = $request->city;
+          $address->state = $request->state;
+          $address->country = $request->country;
+          $address->pincode = $request->pincode;
+          $address->locality = $request->locality;
+          $address->save();
+
+          return back();
+      }
+      else{
+            $address = new Address;
+      }
+      
       $address->user_id = $user_id;
       $address->phone = $request->phone;
       $address->firstname = $request->first_name;

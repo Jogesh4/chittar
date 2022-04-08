@@ -21,10 +21,97 @@ $userID = auth()->user() ? auth()->user()->id : 1;
             <div class="form-check col-12"> 
               <input class="form-check-input mt-3" type="radio" value="{{ $address->id }}" name="address_radio" id="flexCheckChecked" onclick="radio_click(this)"> 
               <label class="form-check-label" for="flexCheckChecked"> 
-                <p>{{ $address->address }},{{ $address->city }},{{ $address->state }},{{ $address->country }},{{ $address->pincode }}<br><span>
-                {{ $address->firstname }} {{ $address->lastname }} ({{ $address->phone }})</span></p>
+                <p>{{ $address->address }},{{ $address->city }},{{ $address->state }},{{ $address->country }},{{ $address->pincode }}<br>
+                  <span>{{ $address->firstname }} {{ $address->lastname }} ({{ $address->phone }})</span> <a style="text-decoration: underline;" href="#" data-toggle="modal" data-target="#exampleModal-{{ $address->id }}"><span class="pink-color"><i class="fa fa-pencil-alt" aria-hidden="true"></i></span></a></p>
+                
               </label> 
             </div> 
+
+<div class="modal fade" id="exampleModal-{{ $address->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form method="POST" action="{{ route('save.address') }}">
+           @csrf
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                <div class="p-2">
+                    <input type="hidden" name="shipaddress_id" value="{{ $address->id }}"/>
+                      <div class="row">
+                        <h5>Contact information</h5>
+                        <div class="col-md-12 col-lg-12 form-outline p-2">
+                        <label>Mobile No.<span style="color:red;">*</span></label>
+                          <input type="tel" name="phone" id="phone" placeholder="Mobile No." class="form-control2" value="{{ $address->phone }}" required>
+                        </div>  
+                      </div>
+
+                      <div class="row mt-3">
+                        <h5>Shipping address</h5>
+                        <div class="col-md-12 col-lg-6 form-outline p-2">
+                        <label>First Name<span style="color:red;">*</span></label>
+                          <input type="text" name="first_name" id="first_name" placeholder="First Name" class="form-control2" value="{{ $address->firstname }}" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6 form-outline p-2">
+                        <label>Last Name<span style="color:red;">*</span></label>
+                          <input type="text" name="last_name" id="last_name" placeholder="Last Name" class="form-control2" value="{{ $address->lastname }}" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 form-outline p-2">
+                        <label>Address<span style="color:red;">*</span></label>
+                          <input type="text" name="address" id="address" placeholder="Address" class="form-control2" value="{{ $address->address }}" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6 form-outline p-2">
+                        <label>Locality</label>
+                          <input type="text" name="locality" id="locality" placeholder="Apartment, suite, etc. (optional)" class="form-control2" value="{{ $address->locality }}" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-6 form-outline p-2">
+                        <label>City<span style="color:red;">*</span></label>
+                          <input type="text" name="city" id="city" placeholder="City" class="form-control2" value="{{ $address->city }}" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-4 form-outline p-2">
+                        <label>State<span style="color:red;">*</span></label>
+                          <input type="text" name="state" id="state" placeholder="State" class="form-control2" value="{{ $address->state }}" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-4 form-outline p-2">
+                        <label>Country<span style="color:red;">*</span></label>
+                          <input type="text" name="country" id="country" placeholder="Country" class="form-control2" value="{{ $address->country }}" required>
+                        </div>
+
+                        <div class="col-md-12 col-lg-4 form-outline p-2">
+                        <label>Zip<span style="color:red;">*</span></label>
+                          <input type="text" name="pincode" id="pincode" placeholder="Zip" class="form-control2" value="{{ $address->pincode }}" required>
+                        </div>         
+
+                      </div>
+                      {{-- <div class="form-check col-12 mt-3"> 
+                        <input class="form-check-input" type="checkbox" value="1" name="same" id="flexCheckChecked" checked> 
+                        <label class="form-check-label" for="flexCheckChecked"> Billing Address Same as Shipping Address</label> 
+                      </div> --}}
+
+
+                      
+
+                  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-pink" style="background: #a9788e;" data-dismiss="modal">Close</button>
+        <button class="btn btn-pink">SUBMIT</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+
          @endforeach
         @endif
           </div>
@@ -34,6 +121,10 @@ $userID = auth()->user() ? auth()->user()->id : 1;
                </div>
 
         </div>
+
+
+
+
 
         <div id="add_address">
             <h3 style="color: #c96f8b">Add Address +</h3>

@@ -21,7 +21,7 @@
             <p>{{ $address->firstname }} {{ $address->lastname }} ({{ $address->phone }})</p>
           </div>
           <div class="col-3">
-            <a href="#" class="pink-color">Change</a>
+            <a href="/select-address" class="pink-color">Change</a>
           </div>
           <hr>
         </div>
@@ -34,7 +34,7 @@
           {{ $address->address }},{{ $address->city }},{{ $address->state }},{{ $address->country }},{{ $address->pincode }}
           </div>
           <div class="col-3">
-            <a href="#" class="pink-color">Change</a>
+            <a href="/select-address" class="pink-color">Change</a>
           </div>
         </div>
         
@@ -266,6 +266,7 @@
                          <i class="fa fa-spinner fa-spin"></i>
                       </button>
 
+
  <div id="your-modal-cod" class="modal">
 	<div class="modal-dialog modal-confirm">
 		<div class="modal-content">
@@ -329,7 +330,7 @@
 				</div>
 				<div class="row text-center">
 					<div class="ml-5">
-            <div class="price">Payment Mode: <a href="javascript:void(0);">COD</a></div>
+            <div class="price">Payment Mode: <a href="javascript:void(0);">Online</a></div>
         </div>
 				</div>
 				<div class="row text-center">
