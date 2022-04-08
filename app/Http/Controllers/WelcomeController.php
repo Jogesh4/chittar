@@ -22,6 +22,7 @@ class WelcomeController extends Controller
         $items = Item::where('is_active', 1)->take(10)->get();
         $currentCategoryId=$categories[0]->id;
         $currentCategoryName=$categories[0]->name;
+        
         if($request->category_id){
             $currentCategoryId=$request->category_id;
             // $currentCategoryName=$request->category;

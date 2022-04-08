@@ -14,7 +14,9 @@
     <link href="{{ asset('style.css') }}" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  </head>
+   <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/164071/drift-basic.css" rel="stylesheet" />
+   <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/164071/luminous-basic.css" rel="stylesheet" />
+</head>
   <body>
     <!-- ===============================================-->
     <!--    Main Content-->

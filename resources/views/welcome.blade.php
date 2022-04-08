@@ -128,7 +128,7 @@
                 <a class="" href="{{ route('item.show', $item) }}">
                   <div class="card-body ps-0  text-center">
                     <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item->name }}</p>
-                    <div class="fw-bold"><span class="pink-color">INR {{ $item->price }}</span></div>
+                    <div class="fw-bold"><span class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $item->price }}</span></div>
                   </div>
                   </a>
 
@@ -188,8 +188,8 @@
                 <p class="mb-0"></p>
                 <h4 class="fw-semi-bold ">{{ $items[0]->name }}</h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[0]->price }}</h4>
-                  <h4 class="pink-color">INR{{ $items[0]->price }}</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through"><i class="fas fa-rupee-sign"></i> {{ $items[0]->price }}</h4>
+                  <h4 class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $items[0]->price }}</h4>
                 </div>
                 {{-- <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button> --}}
 
@@ -208,8 +208,8 @@
                 <!-- <p class="mb-0">Mules</p> -->
                 <h4 class="fw-semi-bold" >{{ $items[1]->name }}</h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[1]->price }}</h4>
-                  <h4 class="pink-color">INR{{ $items[1]->price }}</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through"><i class="fas fa-rupee-sign"></i> {{ $items[1]->price }}</h4>
+                  <h4 class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $items[1]->price }}</h4>
                 </div>
                 {{-- <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button> --}}
               </div>

@@ -375,6 +375,22 @@ label {
     border-left: 1px solid #e8e8e8;
 }
 
+.mrp-cut {
+    color: #c7c7c7;
+    text-decoration: line-through;
+    font-size: 18px;
+}
+
+.demo-trigger {
+    display: inline-block;
+    cursor: zoom-in;
+}
+
+.detail {
+    position: relative;
+    float: left;
+}
+
 .fassas {
     color: #b00755;
     font-size: 20px;

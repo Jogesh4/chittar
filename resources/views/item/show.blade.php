@@ -13,7 +13,7 @@
               <div class="images p-3">
                 <div class="text-center p-4  ">
                    <div class="img-zoom-container mag"> 
-                     <img data-toggle="magnify" id="main-image" src="{{ asset('storage/'.$item->image) }}" width="350" />  
+                     <img class="demo-trigger" data-zoom="{{ asset('storage/'.$item->image) }}" id="main-image" src="{{ asset('storage/'.$item->image) }}" width="350" />  
                 
                 </div>
               </div>
@@ -33,22 +33,22 @@
             </div>
 
             <div class="col-md-6 brands">
-              <div class="product p-4">                
+              <div class="product p-4 detail">                
                 <div class="mt-4 mb-3">
                  
                   <h2 class="item-name-view">{{ $item->name }}</h2>
 
                   <div class="text-uppercase text-muted  mt-3 mb-3">Model:  {{ $item->model }} <span class="fw-bold m-3"> | </span> <span class="text-uppercase text-muted brand" id="sku">SKU:  @if($variants->count() > 0){{ $variants[0]->sku }} @endif</span> </div>
                   <div class="ssw-stars ssw-stars-large brand">  
-                    <i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i><i class="fas fa-star fassas"></i>
+                    <i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i>
                     <!-- <span class="ssw-review-counts" >5 Star </span> -->
                   </div>
 
                   <div class="price align-items-center mt-3">
                     @if($variants->count() > 0)
-                      <p class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "><span class="">INR </span>{{ $variants[0]->price }}</p>                   
+                      <i class="fas fa-rupee-sign font-size: 1.8rem; font-weight: 500;"></i><span class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "> {{ $variants[0]->price }}</span>   <span class="mrp-cut"><i class="fas fa-rupee-sign"></i> {{ $item->price }}</span>                
                      @else
-                      <p class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "><span class="">INR </span>{{ $item->price }}</p>                   
+                      <p class="act-price mb-0" id="price" style=" line-height: 1; font-size: 1.8rem; font-weight: 500; color: var(--txt-body); margin-right: 8px; "><span class=""><i class="fas fa-rupee-sign"></i> </span>{{ $item->price }}</p>                   
                      @endif
                     
                       <p class="mt-0">Price: Excluding of all taxes</p>
@@ -176,7 +176,7 @@
                <a class="" href="{{ route('item.show', $s) }}">
                   <div class="card-body ps-0  text-center">
                     <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $s->name }}</p>
-                    <div class="fw-bold"><span class="pink-color">INR {{ $s->price }}</span></div>
+                    <div class="fw-bold"><span class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $s->price }}</span></div>
                   </div>
                </a>
                  
@@ -377,9 +377,22 @@
                 
 @endsection
 
+<script src="https://rawgit.com/imgix/drift/master/dist/Drift.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 @section('extras')
+
+<script>
+var demoTrigger = document.querySelector('.demo-trigger');
+var paneContainer = document.querySelector('.detail');
+
+new Drift(demoTrigger, {
+  paneContainer: paneContainer,
+  inlinePane: false,
+  hoverBoundingBox: true
+});
+  </script>
 
   <script>
 
@@ -427,7 +440,8 @@
                         const obj = JSON.parse(data);
                            console.log(obj);
                              document.getElementById('sku').textContent = 'SKU: ' + obj.new.variant.sku;
-                             document.getElementById('price').textContent = 'INR ' + obj.new.variant.price;
+                             document.getElementById('price').textContent = obj.new.variant.price;
+                            //  $('#color_div').append('<i class="fas fa-rupee-sign">' + obj.new.variant.price);
                          
                                 var item = $('#color_div');
                                 item.empty();
@@ -528,7 +542,7 @@
     function change_image(image){
       var container = document.getElementById("main-image");
       container.src = image.src;
-      magnify("main-image", 3);
+      $("#main-image").attr('data-zoom', image.src);
 
     }
     document.addEventListener("DOMContentLoaded", function(event) {
@@ -643,62 +657,4 @@ $("#icon3").click(function(){
 
   </script>
 
-<script>
-
-function magnify(imgID, zoom) {
-  var img, glass, w, h, bw;
-  img = document.getElementById(imgID);
-  /*create magnifier glass:*/
-  glass = document.createElement("DIV");
-  glass.setAttribute("class", "img-magnifier-glass");
-  /*insert magnifier glass:*/
-  img.parentElement.insertBefore(glass, img);
-  /*set background properties for the magnifier glass:*/
-  glass.style.backgroundImage = "url('" + img.src + "')";
-  glass.style.backgroundRepeat = "no-repeat";
-  glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
-  bw = 3;
-  w = glass.offsetWidth / 2;
-  h = glass.offsetHeight / 2;
-  /*execute a function when someone moves the magnifier glass over the image:*/
-  glass.addEventListener("mousemove", moveMagnifier);
-  img.addEventListener("mousemove", moveMagnifier);
-  /*and also for touch screens:*/
-  glass.addEventListener("touchmove", moveMagnifier);
-  img.addEventListener("touchmove", moveMagnifier);
-  function moveMagnifier(e) {
-    var pos, x, y;
-    /*prevent any other actions that may occur when moving over the image*/
-    e.preventDefault();
-    /*get the cursor's x and y positions:*/
-    pos = getCursorPos(e);
-    x = pos.x;
-    y = pos.y;
-    /*prevent the magnifier glass from being positioned outside the image:*/
-    if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
-    if (x < w / zoom) {x = w / zoom;}
-    if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
-    if (y < h / zoom) {y = h / zoom;}
-    /*set the position of the magnifier glass:*/
-    glass.style.left = (x - w) + "px";
-    glass.style.top = (y - h) + "px";
-    /*display what the magnifier glass "sees":*/
-    glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
-  }
-  function getCursorPos(e) {
-    var a, x = 0, y = 0;
-    e = e || window.event;
-    /*get the x and y positions of the image:*/
-    a = img.getBoundingClientRect();
-    /*calculate the cursor's x and y coordinates, relative to the image:*/
-    x = e.pageX - a.left;
-    y = e.pageY - a.top;
-    /*consider any page scrolling:*/
-    x = x - window.pageXOffset;
-    y = y - window.pageYOffset;
-    return {x : x, y : y};
-  }
-}
-
-</script>
 @endsection
