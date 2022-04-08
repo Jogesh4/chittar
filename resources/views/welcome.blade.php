@@ -105,30 +105,30 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="row align-items-center g-2">
-            @if($items->count() > 0)
-              @foreach($items as $item)
+            @if(count($final_out) > 0)
+              @foreach($final_out as $item)
               <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
                 <div class="card card-span h-100">
                  
                  <div style="overflow: hidden;width: 100%;position:relative;">
-                   <a class="" href="{{ route('item.show', $item) }}">
+                   <a class="" href="{{ route('item.show', $item['items']) }}">
                    <div class="img-style-low">
-                      <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></div ></a>
+                      <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item['items']['image']) }}" alt="..." /></div ></a>
                     <div class="fw-bold favorite-icon">
                        @if(auth()->check())
-                                  <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
-                                 <span class="favorite-active d-none" id="favorite_icon1-{{ $item->id }}"><i class="fa fa-thin fa-heart"></i></span>
+                                  <span class="" id="favorite_icon-{{ $item['items']['id'] }}" onclick="add_favorite({{ $item['items']['id'] }})"><i class="fa fa-thin fa-heart"></i></span>
+                                 <span class="favorite-active d-none" id="favorite_icon1-{{ $item['items']['id'] }}"><i class="fa fa-thin fa-heart"></i></span>
                         @else
-                                  <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><a href="{{ route('login') }}"><i class="fa fa-thin fa-heart"></i></a></span>
+                                  <span class="" id="favorite_icon-{{ $item['items']['id'] }}" onclick="add_favorite({{ $item['items']['id'] }})"><a href="{{ route('login') }}"><i class="fa fa-thin fa-heart"></i></a></span>
 
                         @endif
                     </div>
                    
                 </div> 
-                <a class="" href="{{ route('item.show', $item) }}">
+                <a class="" href="{{ route('item.show', $item['items']) }}">
                   <div class="card-body ps-0  text-center">
-                    <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item->name }}</p>
-                    <div class="fw-bold"><span class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $item->price }}</span></div>
+                    <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item['items']['name'] }}</p>
+                    <div class="fw-bold"><span class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $item['items']['price'] }}</span></div>
                   </div>
                   </a>
 
@@ -138,7 +138,7 @@
                     {{-- <i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days --}}
                   <div class="ssw-stars ssw-stars-large brand">  
                     <i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i>
-                   <span class="" style="font-size: 12px">5 Reviews </span>
+                   <span class="" style="font-size: 12px">{{ $item['review_count'] }} Reviews </span>
                   </div>
                   
                   </div>
@@ -149,11 +149,11 @@
                   <div class="col-2 p-2">
                 
                 @if(auth()->check())
-                  @if(!\Cart::session(auth()->user()->id)->get($item->id))
+                  @if(!\Cart::session(auth()->user()->id)->get($item['items']['id']))
                   
-                    <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
+                    <button id="add-{{ $item['items']['id'] }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item['items']['id'] }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
                     
-                    <button id="added-{{ $item->id }}" type="button" disabled class="bttn d-none" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
+                    <button id="added-{{ $item['items']['id'] }}" type="button" disabled class="bttn d-none" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
                     
                 @else
                     <button type="button" disabled class="bttn" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>

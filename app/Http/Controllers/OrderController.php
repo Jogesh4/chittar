@@ -85,7 +85,7 @@ class OrderController extends Controller
     $shipping_address = Address::where('id',$order->shipping_address)->first();
     $billing_address = Address::where('id',$order->billing_address)->first();
 
-    Mail::to($user->email)->send(new OrderMail($order,$shipping_address,$billing_address));
+    // Mail::to($user->email)->send(new OrderMail($order,$shipping_address,$billing_address));
 
     $cartItem = CartItem::where(['user_id' => auth()->user()->id])->update(["status" => 0]);
 

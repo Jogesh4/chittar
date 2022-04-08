@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\CartItem;
-
+use App\Models\Review;
+use App\Models\Variant;
 
 class WelcomeController extends Controller
 {
@@ -18,10 +19,23 @@ class WelcomeController extends Controller
      */
     public function index(Request $request)
     {
+        $final_out = [];
         $categories = Category::where('is_active', 1)->get();
         $items = Item::where('is_active', 1)->take(10)->get();
         $currentCategoryId=$categories[0]->id;
         $currentCategoryName=$categories[0]->name;
+
+        foreach($items as $item){
+              $out['items'] = $item;
+
+              $reviews = Review::where('item_id',$item->id)->get();
+
+              $out['review_count'] = $reviews->count();
+
+              $out['variants'] = Variant::where('item_id',$item->id)->get();
+
+              $final_out[] = $out; 
+        }
         
         if($request->category_id){
             $currentCategoryId=$request->category_id;
@@ -56,7 +70,7 @@ class WelcomeController extends Controller
             ));
         }
     }
-
-        return view('welcome', compact('categories', 'items', 'currentCategoryId', 'currentCategoryName', 'categoryItems'));
+        //   dd($final_out);
+        return view('welcome', compact('categories', 'items', 'currentCategoryId', 'currentCategoryName', 'categoryItems','final_out'));
     }
 }
