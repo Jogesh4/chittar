@@ -30,7 +30,7 @@ Route::get('item-by-id', [ItemController::class, 'itemByID']);
 
 
 Route::post('add-cart', [CartController::class, 'add_to_cart']);
-
+Route::get('view-cart', [CartController::class, 'view_cart']);
 
 Route::post('place-order', [OrderController::class, 'place']);
 Route::get('user-orders', [OrderController::class, 'userOrders']);

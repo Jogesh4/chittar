@@ -46,4 +46,18 @@ class CartController extends Controller
 
     }
 
+    public function view_cart(Request $request){
+         $userID = $request->user_id;
+
+         $cart = CartItem::where(['user_id'=>$userID,'status' => 1])->get();
+
+         if(!empty($cart)){
+             return response()->json(['success' => true,'message' => 'View Cart','cart' => $cart]);
+         }
+         else{
+             return response()->json(['success' => false,'message' => 'Cart is Empty','cart' => $cart]);
+         }
+
+    }
+
 }
