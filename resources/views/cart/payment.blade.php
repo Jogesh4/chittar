@@ -54,7 +54,7 @@
             <p>Standard Shipping(8-12 business days)</p>
           </div>
           <div class="col-3">
-            <p><i class="fas fa-rupee-sign"></i> {{ !empty($shipping) ? $shipping->price : 0 }}</p>
+            <p><i class="fas fa-rupee-sign"></i> {{ !empty($shipping) ? $shipping->price : 100.00 }}</p>
           </div>       
         </div>
 
@@ -211,9 +211,17 @@
 
 
   </div> 
+  
   <!-------------- section left end --------------------->
   <div class="col-lg-4" style="background: #c96f8b; border-top-right-radius: 2em; border-bottom-right-radius: 2em;">        
   @if(!empty(\Cart::getContent()))
+       <?php
+       $cart_total = \Cart::getTotal();
+       $shipping_price = !empty($shipping) ? $shipping->price : 100.00;
+
+        $total = $cart_total + $shipping_price;
+
+       ?>
     @foreach(\Cart::getContent() as $item)
       <div class="row p-2 mt-2">
         <div class="col-3"> <img src="{{ asset('storage/'.$item->associatedModel->image) }}" width="60" height="60" data-max-width="60" data-max-height="80" style="border-radius:5px;"> </div>
@@ -228,12 +236,12 @@
     <div class="col-8"><p class="item-title text-white">Subtotal</p></div>
     <div class="col-4 "> <p class="item-title text-white"><i class="fas fa-rupee-sign"></i> {{ \Cart::getTotal() }}</p></div>
     <div class="col-8"><p class="item-title text-white">Shipping</p></div>
-    <div class="col-4 "> <p class="item-title text-white info-pt"> <span style="font-size: 1.2rem;"><i class="fas fa-rupee-sign"></i> {{ !empty($shipping) ? $shipping->price : 0 }}</span></p></div>
+    <div class="col-4 "> <p class="item-title text-white info-pt"> <span style="font-size: 1.2rem;"><i class="fas fa-rupee-sign"></i> {{ !empty($shipping) ? $shipping->price : 100.00 }}</span></p></div>
   </div>
   <hr>
   <div class="row p-1">
     <div class="col-8"><p class="item-title text-white h3">Total</p></div>
-    <div class="col-4 "> <p class="item-title text-white "><i class="fas fa-rupee-sign"></i> <span class="h3 text-white">{{ \Cart::getTotal() }}</span></p></div>
+    <div class="col-4 "> <p class="item-title text-white "><i class="fas fa-rupee-sign"></i> <span class="h3 text-white">{{ $total }}</span></p></div>
   
   </div>
   <div class="row p-1 outl-bg">

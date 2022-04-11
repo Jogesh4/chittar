@@ -68,7 +68,7 @@ tbody {
     <div>
     <h4 >Total Item : <span style="font-size:25px;">{{ $order->items }}</span></h4>    
     <h4 >Item Subtotal: <span style="font-size:25px;">INR. {{ $order->amount }}</span></h4>
-    <h4 >Shipping & Handling: <span style="font-size:25px;"> INR. 00</span></h4>
+    <h4 >Shipping & Handling: <span style="font-size:25px;"> INR. {{ $order->shipping_price }}</span></h4>
     @if($order->status == 'COD')
        <h4 >Payment Method:<span> COD</span></h4> 
     @else

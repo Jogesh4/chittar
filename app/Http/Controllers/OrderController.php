@@ -86,7 +86,19 @@ class OrderController extends Controller
     $shipping_address = Address::where('id',$order->shipping_address)->first();
     $billing_address = Address::where('id',$order->billing_address)->first();
 
-    // Mail::to($user->email)->send(new OrderMail($order,$shipping_address,$billing_address));
+    $shipping = Shipping::where('pincode',$shipping_address->pincode)->first();
+    if($shipping){
+        $order->shipping_price = $shipping->price;
+        $order->amount = $total + $shipping->price;
+    }
+    else{
+         $order->shipping_price = 100;
+        $order->amount = $total + 100;
+    }
+
+    $order->save();
+
+    Mail::to($user->email)->send(new OrderMail($order,$shipping_address,$billing_address));
 
     $cartItem = CartItem::where(['user_id' => auth()->user()->id])->update(["status" => 0]);
 
