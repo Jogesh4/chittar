@@ -68,11 +68,11 @@ $userID = auth()->user() ? auth()->user()->id : 1;
                   @endif
                 </div>
           </div>
-          <div class="col-6">
+          <div class="col-5">
                 <a href="/search" class="btn-pink">Continue Shopping</a>
           </div>
           
-          <div class="text-end col">Subtotal: <span class="cart-subtotal total"> Rs.{{ $total }}</span></div>
+          <div class="text-end col-3">Subtotal: <span class="cart-subtotal total"> Rs.{{ $total }}</span></div>
         </div>
       </div>
       <div class="col-md-4" style="background: #c96f8b; border-top-right-radius: 2em; border-bottom-right-radius: 2em;">
