@@ -26,11 +26,11 @@ class CartController extends Controller
 
         if(!$cart){
             $cartItem = new CartItem;
-            $cartItem->qty = 1;
+            $cartItem->qty = $request->quantity;
             $cartItem->name = $item->name;
             $cartItem->image = $item->image;
             $cartItem->price = $item->price;
-            $cartItem->total = $item->price;
+            $cartItem->total = $item->price * $request->quantity;
             $cartItem->item_id = $item->id;
             $cartItem->user_id = $userID;
             $cartItem->status = 1;
@@ -41,7 +41,7 @@ class CartController extends Controller
                  $cartItem->size = $variant->type;
                  $cartItem->color = $variant->variant_name;
                  $cartItem->price = $variant->price;
-                 $cartItem->total = $variant->price;
+                 $cartItem->total = $variant->price * $request->quantity;
                  $cartItem->variant_id = $variant->id;
             }
             $cartItem->save();
