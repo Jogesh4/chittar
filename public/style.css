@@ -31,6 +31,24 @@ label {
 
 
 
+/*==========*/
+.demo-trigger {
+    display: inline-block;
+    cursor: zoom-in;
+  }
+  
+  .detail {
+    position: relative;
+    float: left;
+  }
+  
+ 
+
+/*=========*/
+
+  
+ 
+
 
 .outl-bsg {
     position: absolute;

@@ -12,9 +12,9 @@
             <div class="col-md-6">
               <div class="images p-3">
                 <div class="text-center p-4  ">
-                   <div class="img-zoom-container mag"> 
-                     <img data-toggle="magnify" id="main-image" src="{{ asset('storage/'.$item->image) }}" width="350"  />  
-                
+                   <div class="img-zoom-container"> 
+                    <img class="demo-trigger" id="main-image" src="{{ asset('storage/'.$item->image) }}" width="350" data-zoom="{{ asset('storage/'.$item->image) }}"  />  
+                   
                 </div>
               </div>
                 <div class="thumbnail text-center">
@@ -33,7 +33,7 @@
             </div>
 
             <div class="col-md-6 brands">
-              <div class="product p-4">                
+              <div class="product p-4 detail">                
                 <div class="mt-4 mb-3">
                  
                   <h2 class="item-name-view">{{ $item->name }}</h2>
@@ -359,18 +359,30 @@
 
 </section> 
 
+
+
 <!-- ------------------------------------------------------ -->
                 
 @endsection
+<script src="https://rawgit.com/imgix/drift/master/dist/Drift.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 @section('extras')
+<script>
+var demoTrigger = document.querySelector('.demo-trigger');
+var paneContainer = document.querySelector('.detail');
 
+new Drift(demoTrigger, {
+  paneContainer: paneContainer,
+  inlinePane: false,
+  hoverBoundingBox: true
+});
+  </script>
 <script>
 /* Initiate Magnify Function
-with the id of the image, and the strength of the magnifier glass:*/
-magnify("main-image", 3);
+with the id of the image, and the strength of the magnifier glass:
+magnify("main-image", 3);*/
 </script>
 
   <script>

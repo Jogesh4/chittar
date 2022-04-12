@@ -13,6 +13,9 @@
     <link href="{{ asset('assets/css/theme.css') }}" rel="stylesheet" />
     <link href="{{ asset('style.css') }}" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link href="https://codepen.io/imgix/pen/d06269809bb83c85326ebbbf7e81241b" rel="stylesheet" />
+    <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/164071/drift-basic.css" rel="stylesheet" />
+    <link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/164071/luminous-basic.css" rel="stylesheet" />
   </head>
   <body>
     <!-- ===============================================-->
