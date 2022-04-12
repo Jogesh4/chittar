@@ -173,7 +173,7 @@
                   <div class="col-2 p-2 info-pt">
                     {{-- <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1"> --}}
                   </div>
-                  <div class="col-2 p-2">
+                  {{-- <div class="col-2 p-2">
                 
                 @if(auth()->check())
                   @if(!\Cart::session(auth()->user()->id)->get($item->id))
@@ -188,7 +188,7 @@
                 @else
                   <a href="{{ route('login') }}" class="bttn"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></a>
                 @endif
-</div>
+</div> --}}
 
 </div>
                 </div>
@@ -247,7 +247,7 @@
                   <div class="col-2 p-2 info-pt">
                     {{-- <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1"> --}}
                   </div>
-                  <div class="col-2 p-2">
+                  {{-- <div class="col-2 p-2">
                 
                 @if(auth()->check())
                   @if(!\Cart::session(auth()->user()->id)->get($item->id))
@@ -262,7 +262,7 @@
                 @else
                   <a href="{{ route('login') }}" class="bttn"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></a>
                 @endif
-</div>
+</div> --}}
 
 </div>
                 </div>

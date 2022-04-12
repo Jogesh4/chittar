@@ -1,11 +1,17 @@
 @extends('admin.layouts.dashboard')
-@section('title', 'All Categories')
+@section('title', 'All Shippings')
 @section('content')
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-                
-                                          <h3 class="mb-2 main-heading">Categories</h3>
+                 <div class="row">
+                    <div class="col-10">
+                          <h3 class="mb-2 main-heading">Shippings</h3>
+                    </div>
+                    <div class="col-2">
+                            <a style="text-decoration: underline;" href="{{ route('shippings.create') }}"><span class="btn btn-warning">Add</span></a>
+                    </div>
+                </div>
 
     <div class="row">
                         <div class="col-lg-12">
@@ -15,33 +21,33 @@
                                 <thead>
                                   <tr>
                                     <th>#</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
+                                    <th>Pincode</th>
+                                    <th>Price</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  @if($categories->count() > 0)
-                                    @foreach($categories as $category)
+                                  @if($shippings->count() > 0)
+                                    @foreach($shippings as $ship)
                                     <tr>
                                       <td>{{ $loop->iteration }}</td>
                                       <td>
-                                        <img class="" id="blah0" src="{{ !empty($category->image) ? asset('storage/'.$category->image) : '#' }}" alt="your image" width="20%" height="20%"/>
+                                        {{ $ship->pincode }}
                                       </td>
-                                      <td>{{ $category->name }}</td>
+                                      <td>{{ $ship->price }}</td>
                                       <td>
-                                                      @if($category->is_active)
-                                                              @php $statusBtn = '<a title="Deactivate" href="'. route('change_status', ['type' => 'category', 'id' => $category->id, 'status' => '0']) .'" class="btn btn-danger btn-sm"><i class="fa fa-user-times" aria-hidden="true"></i></a>' @endphp
+                                                      @if($ship->status)
+                                                              @php $statusBtn = '<a title="Deactivate" href="'. route('change_status', ['type' => 'shipping', 'id' => $ship->id, 'status' => '0']) .'" class="btn btn-danger btn-sm"><i class="fa fa-user-times" aria-hidden="true"></i></a>' @endphp
                                                                   Active
                                                               @else
-                                                                  @php $statusBtn = '<a title="Activate" href="'. route('change_status', ['type' => 'category', 'id' => $category->id, 'status' => '1']) .'" class="btn btn-success btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i></a>' @endphp
+                                                                  @php $statusBtn = '<a title="Activate" href="'. route('change_status', ['type' => 'shipping', 'id' => $ship->id, 'status' => '1']) .'" class="btn btn-success btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i></a>' @endphp
                                                                   Deactive
                                                               @endif
                                       </td>
                                       <td>
                                                               {!! $statusBtn !!}
-                                                              <a style="text-decoration: underline;" href="{{ route('admin.categories.edit', $category->id) }}"><span class="btn btn-warning"><i class="fa fa-pencil-alt" aria-hidden="true"></i></span></a>
+                                                              <a style="text-decoration: underline;" href="{{ route('shippings.edit', $ship->id) }}"><span class="btn btn-warning"><i class="fa fa-pencil-alt" aria-hidden="true"></i></span></a>
                                                               <!-- <button class="btn btn-warning" ><i class="fa fa-plus" aria-hidden="true"></i></button> -->
                                       </td>
                                     </tr>

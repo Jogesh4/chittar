@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Item;
+use App\Models\Variant;
 
 class ItemController extends Controller
 {
@@ -29,6 +30,21 @@ class ItemController extends Controller
                 return response()->json(['success' => true, 'item' => $item]);
             }
             return response()->json(['success' => false, 'message' => 'Item not found']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Item ID is required']);
+        }
+    }
+
+    public function get_variant(Request $request)
+    {
+        if($request->has('item_id')){
+            // $item = Item::find($request->id);
+            $variant = Variant::where('item_id',$request->item_id)->get();
+
+            if($variant) {
+                return response()->json(['success' => true, 'variant' => $variant]);
+            }
+            return response()->json(['success' => false, 'message' => 'Variant not found']);
         } else {
             return response()->json(['success' => false, 'message' => 'Item ID is required']);
         }

@@ -105,48 +105,55 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="row align-items-center g-2">
-            @if($items->count() > 0)
-              @foreach($items as $item)
+            @if(count($final_out) > 0)
+              @foreach($final_out as $item)
               <div class="col-sm-6 col-md-3 col-lg-3 mb-3 mb-md-0 h-100" data-aos="fade-up">
                 <div class="card card-span h-100">
                  
                  <div style="overflow: hidden;width: 100%;position:relative;">
-                   <a class="" href="{{ route('item.show', $item) }}">
+                   <a class="" href="{{ route('item.show', $item['items']) }}">
                    <div class="img-style-low">
-                      <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item->image) }}" alt="..." /></div ></a>
+                      <img class="img-fluid h-100 w-100" src="{{ asset('storage/'.$item['items']['image']) }}" alt="..." /></div ></a>
                     <div class="fw-bold favorite-icon">
                        @if(auth()->check())
-                                  <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><i class="fa fa-thin fa-heart"></i></span>
-                                 <span class="favorite-active d-none" id="favorite_icon1-{{ $item->id }}"><i class="fa fa-thin fa-heart"></i></span>
+                                  <span class="" id="favorite_icon-{{ $item['items']['id'] }}" onclick="add_favorite({{ $item['items']['id'] }})"><i class="fa fa-thin fa-heart"></i></span>
+                                 <span class="favorite-active d-none" id="favorite_icon1-{{ $item['items']['id'] }}"><i class="fa fa-thin fa-heart"></i></span>
                         @else
-                                  <span class="" id="favorite_icon-{{ $item->id }}" onclick="add_favorite({{ $item->id }})"><a href="{{ route('login') }}"><i class="fa fa-thin fa-heart"></i></a></span>
+                                  <span class="" id="favorite_icon-{{ $item['items']['id'] }}" onclick="add_favorite({{ $item['items']['id'] }})"><a href="{{ route('login') }}"><i class="fa fa-thin fa-heart"></i></a></span>
 
                         @endif
                     </div>
-                  
+                   
                 </div> 
-                <a class="" href="{{ route('item.show', $item) }}">
+                <a class="" href="{{ route('item.show', $item['items']) }}">
                   <div class="card-body ps-0  text-center">
-                    <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item->name }}</p>
-                    <div class="fw-bold"><span class="pink-color">INR {{ $item->price }}</span></div>
+                    <p class="mb-0" style="text-transform: uppercase;font-size: 19px;font-weight: 500;color: #000;">{{ $item['items']['name'] }}</p>
+                    <div class="fw-bold"><span class="mrp-cut mr-4"><i class="fas fa-rupee-sign"></i> {{ $item['items']['price'] }}</span>  <span class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $item['items']['sale_price'] }}</span></div>
                   </div>
                   </a>
 
                   <div class="d-flex"> 
                    
-                  <div class="col-8 p-2 info-pt"><i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days</div>
+                  <div class="col-8 p-2 info-pt">
+                    {{-- <i class="fas fa-cut"></i> Processing Time: 2-5 days </br> <i class="fas fa-plane"></i>  Shipping Time: 3-6 Business Days --}}
+                  <div class="ssw-stars ssw-stars-large brand">  
+                    <i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i><i class="fas fa-star fassas-yellow"></i>
+                   <span class="" style="font-size: 12px">{{ $item['review_count'] }} Reviews </span>
+                  </div>
+                  
+                  </div>
                   
                   <div class="col-2 p-2 info-pt">
                     {{-- <input type="number" id="quantity12" name="quantity" min="1" max="12" value="1"> --}}
                   </div>
-                  <div class="col-2 p-2">
+                  {{-- <div class="col-2 p-2">
                 
                 @if(auth()->check())
-                  @if(!\Cart::session(auth()->user()->id)->get($item->id))
+                  @if(!\Cart::session(auth()->user()->id)->get($item['items']['id']))
                   
-                    <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
+                    <button id="add-{{ $item['items']['id'] }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item['items']['id'] }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button>
                     
-                    <button id="added-{{ $item->id }}" type="button" disabled class="bttn d-none" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
+                    <button id="added-{{ $item['items']['id'] }}" type="button" disabled class="bttn d-none" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
                     
                 @else
                     <button type="button" disabled class="bttn" style=" border: 0; background: transparent;" ><i class="fas fa-cart-arrow-down" style=" color: #ccc; font-size: 20px; "></i></button>
@@ -154,7 +161,7 @@
                 @else
                   <a href="{{ route('login') }}" class="bttn"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></a>
                 @endif
-</div>
+</div> --}}
 
 </div>
                 </div>
@@ -181,8 +188,8 @@
                 <p class="mb-0"></p>
                 <h4 class="fw-semi-bold ">{{ $items[0]->name }}</h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[0]->price }}</h4>
-                  <h4 class="pink-color">INR{{ $items[0]->price }}</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through"><i class="fas fa-rupee-sign"></i> {{ $items[0]->price }}</h4>
+                  <h4 class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $items[0]->sale_price }}</h4>
                 </div>
                 {{-- <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button> --}}
 
@@ -201,8 +208,8 @@
                 <!-- <p class="mb-0">Mules</p> -->
                 <h4 class="fw-semi-bold" >{{ $items[1]->name }}</h4>
                 <div class="fw-bold">
-                  <h4 class="text-600 me-2 text-decoration-line-through">INR{{ $items[1]->price }}</h4>
-                  <h4 class="pink-color">INR{{ $items[1]->price }}</h4>
+                  <h4 class="text-600 me-2 text-decoration-line-through"><i class="fas fa-rupee-sign"></i> {{ $items[1]->price }}</h4>
+                  <h4 class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $items[1]->sale_price }}</h4>
                 </div>
                 {{-- <button id="add-{{ $item->id }}" class="bttn" type="button" style=" border: 0; background: transparent;" onclick="add_cart({{ $item->id }})"><i class="fas fa-cart-arrow-down" style=" color: #ae0151; font-size: 20px; "></i></button> --}}
               </div>
@@ -231,7 +238,7 @@
               @endforeach
               
               {{-- <button class="nav-link" id="nav-men-tab" data-bs-toggle="tab" data-bs-target="#nav-men" type="button" role="tab" aria-controls="nav-men" aria-selected="false">For Men</button> --}}
-            </div>
+            </div><script></script>
             
                 <div class="tab-content">
                   <div class="tab-pane fade show active" id="pills-wshoes" role="tabpanel" aria-labelledby="pills-wshoes-tab">
@@ -248,18 +255,19 @@
                                 <div class="card-img-overlay "> </div>
                                 <div class="card-body  bg-200  bttn">
                                   <div class="d-flex">
-                                  <div class="col-8">
+                                  <div class="col-12">
                                     <h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">{{ $item->name }}</h5>
                                   
                                   </div>
-                                  <div class="col-4">
+                                  
+                                </div>
+                                <div class="col-12">
                                     <div class="fw-bold">
-                                    <span class="pink-color">Rs.{{ $item->price }}</span>
+                                    <span class="pink-color"><i class="fas fa-rupee-sign"></i> {{ $item->price }}</span>
                                   </div>
                                 </div>
-                                </div>
 
-                                <div class="d-flex">
+                                {{-- <div class="d-flex">
                                 
                                 <div class="col-8">
                                 <div class="ssw-stars ssw-stars-large">  
@@ -270,8 +278,8 @@
                                 <div class="col-4">
                                <p class="ssw-review-count "><a href="#" class="text-dark"><i class="fas fa-ruler-horizontal"></i>  Size Guide</a></p>
                                 </div>
-                              </div>
-                              <div class="d-flex">
+                              </div> --}}
+                              {{-- <div class="d-flex">
                               <div class="col-2 text-left">
                               <p class="ssw-review-count">Color</p></div>
                               <div class="col-10 text-left">
@@ -281,7 +289,7 @@
                               <a href="#"> <img src="{{ asset('images/5.jpg') }}" width="20" height="20" class="color-vari"> </a>  
                               <a href="#"> <img src="{{ asset('images/4.jpg') }}" width="20" height="20" class="color-vari"> </a>
                             </div>
-                              </div>
+                              </div> --}}
 
                                 </div>
                                 <a class="stretched-link" href="{{ route('item.show', $item) }}"></a>
@@ -358,10 +366,13 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+
+
+
 <script>
 
 $( document ).ready(function() {
-      document.getElementById('nav-1').classList.add('active');
+      // document.getElementById('nav-1').classList.add('active');
 });
 
 function add_cart(id){
@@ -435,7 +446,7 @@ function add_favorite(id){
                         }
                         else{
                             $.each(obj.new.items, function(key,value) {
-                                item.append('<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100"><div class="card card-span h-100 text-white"><div class="img-style-low"><img class="img-fluid h-100" src="https://chittarr.com/storage/' + value.image +'" alt="..."/></div><div class="card-img-overlay "></div><div class="card-body  bg-200  bttn"><div class="d-flex"><div class="col-8"><h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">' + value.name + '</h5></div><div class="col-4"><div class="fw-bold"><span class="pink-color">Rs.' + value.price +'</span></div></div></div><div class="d-flex"><div class="col-8"><div class="ssw-stars ssw-stars-large"><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><i class="fas fa-star fassa"></i><span class="ssw-review-count">75 Reviews</span></div></div><div class="col-4"><p class="ssw-review-count "><a href="#" class="text-dark"><i class="fas fa-ruler-horizontal"></i>  Size Guide</a></p></div></div><div class="d-flex"><div class="col-2 text-left"><p class="ssw-review-count">Color</p></div><div class="col-10 text-left"><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a><a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a>  <a href="#"> <img src="/storage/product_image/000.jpg" width="20" height="20" class="color-vari"> </a></div></div></div><a class="stretched-link" href="http://127.0.0.1:8000/item/'+ value.slug +'"></a></div></div>');
+                                item.append('<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100"><div class="card card-span h-100 text-white"><div class="img-style-low"><img class="img-fluid h-100" src="https://chittarr.com/storage/' + value.image +'" alt="..."/></div><div class="card-img-overlay "></div><div class="card-body  bg-200  bttn"><div class="d-flex"><div class="col-12"><h5 class="fw-bold text-1000 text-truncate" style="text-transform: uppercase;">' + value.name + '</h5></div></div><div class="col-12"><div class="fw-bold"><span class="pink-color">Rs.' + value.price +'</span></div></div></div><a class="stretched-link" href="/item/'+ value.slug +'"></a></div></div>');
                             });
                         }
                          

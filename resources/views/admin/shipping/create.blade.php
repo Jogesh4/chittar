@@ -1,11 +1,11 @@
 @extends('admin.layouts.dashboard')
 
 @php
-  $title = "Add Category";
-  $button_text = "Add Category";
-  if(!empty($category)) {
-    $title = "Edit Category";
-    $button_text = "Update Category";
+  $title = "Add Shipping";
+  $button_text = "Add Shipping";
+  if(!empty($shipping)) {
+    $title = "Edit Shipping";
+    $button_text = "Update Shipping";
   }
 @endphp
 
@@ -22,11 +22,10 @@
           </div>
           <!-- /.card-header --> 
           
-          @if(!empty($category))
-            <form method="POST" action="{{ route('admin.categories.update', $category) }}" enctype="multipart/form-data">
-            @method('put')
+          @if(!empty($shipping))
+            <form method="POST" action="{{ route('shippings.update') }}" enctype="multipart/form-data">
           @else
-              <form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
+              <form method="POST" action="{{ route('shippings.store') }}" enctype="multipart/form-data">
           @endif
           @csrf
 
@@ -42,25 +41,24 @@
                                                             </div>
                                                         @endif 
           <div class="card-body">
-
-            <div class="form-group">
-                <label class="col-form-label" for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ !empty($category->name)? $category->name : "" }}" placeholder="Name" required>
-                @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="col-lg-9 mt-2 mb-2">
-                <input type="file" name="image" id="imgInp" accept="image/*" class="file-box"/>
-              </div>
-
-            <div class="form-group py-2">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" id="is_active" name="is_active" value="1" @if(!empty($category->is_active)) @if($category->is_active == 1) checked @endif @endif>
-                  Active?
-                </label>
+               <input type="hidden" name="shipping_id" value="{{ !empty($shipping->id)? $shipping->id : "" }}"
+            <div class="col-6">
+              <div class="form-group">
+                  <label class="col-form-label" for="name"><b>Pincode</b></label>
+                  <input type="text" class="form-control" id="name" name="pincode" value="{{ !empty($shipping->pincode)? $shipping->pincode : "" }}" placeholder="Pincode" required>
               </div>
             </div>
+
+            <div class="col-6">
+              <div class="form-group">
+                  <label class="col-form-label" for="name"><b>Price</b></label>
+                  <input type="text" class="form-control" id="name" name="price" value="{{ !empty($shipping->price)? $shipping->price : "" }}" placeholder="Price" required>
+              </div>
+            </div>
+
+            
+
+            
 
           </div>
           <!-- /.card-body -->

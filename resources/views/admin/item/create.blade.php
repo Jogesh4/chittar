@@ -288,24 +288,28 @@
         </div>
 
 <div class="row mt-3">
-    <div class="col-md-12 col-lg-3 form-outline p-2">
+    <div class="col-md-12 col-lg-4 form-outline p-2">
     <label>Minimum Purchase Quantity<span style="color:red;">*</span></label>
         <input type="number" name="min_purchase" id="" placeholder="Minimum Purchase Quantity *" class="form-control2" value="{{ !empty($item->min_purchase_qty) ? $item->min_purchase_qty : "" }}">
     </div>
 
-    <div class="col-md-12 col-lg-3 form-outline p-2">
+    <div class="col-md-12 col-lg-4 form-outline p-2">
     <label>Maximum Purchase Quantity<span style="color:red;">*</span></label>
         <input type="number" name="max_purchase" id="" placeholder="Maximum Purchase Quantity *" class="form-control2" value="{{ !empty($item->max_purchase_qty) ? $item->max_purchase_qty : "" }}">
     </div>
 
-    <div class="col-md-12 col-lg-3 form-outline p-2">
+    <div class="col-md-12 col-lg-4 form-outline p-2">
     <label>Stock Alert Quantity<span style="color:red;">*</span></label>
         <input type="number" name="stock_alert" id="" placeholder="Stock Alert Quantity *" class="form-control2" value="{{ !empty($item->stock_alert_qty) ? $item->stock_alert_qty : "" }}">
     </div>
 
-    <div class="col-md-12 col-lg-3 form-outline p-2">
-    <label>Cost Price <span style="color:red;">*</span></label>
-        <input type="number" name="cost_price" id="" placeholder="Cost Price *" class="form-control2" value="{{ !empty($item->price) ? $item->price : "" }}">
+    <div class="col-md-12 col-lg-4 form-outline p-2">
+      <label>Cost Price <span style="color:red;">*</span></label>
+          <input type="number" name="cost_price" id="" placeholder="Cost Price *" class="form-control2" value="{{ !empty($item->price) ? $item->price : "" }}">
+    </div>
+    <div class="col-md-12 col-lg-4 form-outline p-2">
+      <label>Sale Price <span style="color:red;">*</span></label>
+          <input type="number" name="sale_price" id="" placeholder="Sale Price *" class="form-control2" value="{{ !empty($item->sale_price) ? $item->sale_price : "" }}">
     </div>
 
 </div>
@@ -370,8 +374,8 @@
               <table class="table mt-3">
                 <thead>
                   <tr>
-                    <th>Type</th>
-                    <th>Variant</th>
+                    <th>Variant Size</th>
+                    <th>Variant Color</th>
                     <th>Price(excl. tax)</th>
                     <th>Quantity</th>
                     <th>SKU</th>
@@ -383,13 +387,9 @@
                     @foreach($variants as $variant)
                      <tr>
                       <td class="variant">
-                          <select class="form-control" name="type[]" style="width: 120%;">
-                              <option value="" selected hidden>Type</option>
-                              <option value="size" @if(!empty($variant->type)) @if($variant->type == 'size') selected @endif  @endif>Size</option>
-                              <option value="color" @if(!empty($variant->type)) @if($variant->type == 'color') selected @endif  @endif>Color</option>
-                          </select>
+                          <input type="text" name="type[]" class="form-control" value="{{ $variant->type }}" placeholder="Enter Size" />
                           </td>
-                          <td><input type="text" name="variant[]" class="form-control" value="{{ $variant->variant_name }}" placeholder="Enter Variant" /></td>
+                          <td><input type="text" name="variant[]" class="form-control" value="{{ $variant->variant_name }}" placeholder="Enter Color" /></td>
                           <td><input type="text" name="price[]" class="form-control" value="{{ $variant->price }}" placeholder="Enter price" /></td>
                           <td><input type="text" name="qty[]" class="form-control" value="{{ $variant->qty }}" placeholder="Enter qty" /></td>
                           <td><input type="text" name="sku[]" class="form-control" value="{{ $variant->sku }}" placeholder="Enter sku" /></td>
@@ -405,13 +405,9 @@
                   @else
                       <tr>
                          <td class="variant">
-                        <select class="form-control" name="type[]" style="width: 120%;">
-                            <option value="" selected hidden>Type</option>
-                            <option value="size">Size</option>
-                            <option value="color">Color</option>
-                        </select>
+                            <input type="text" name="type[]" class="form-control" placeholder="Enter Size" />
                         </td>
-                        <td><input type="text" name="variant[]" class="form-control" placeholder="Enter Variant" /></td>
+                        <td><input type="text" name="variant[]" class="form-control" placeholder="Enter Color" /></td>
                         <td><input type="text" name="price[]" class="form-control" placeholder="Enter price" /></td>
                         <td><input type="text" name="qty[]" class="form-control" placeholder="Enter qty" /></td>
                         <td><input type="text" name="sku[]" class="form-control" placeholder="Enter sku" /></td>
@@ -1036,10 +1032,7 @@ $("#icon3").click(function(){
             // $(this).hide();
             $("#tbody").append(`<tr>
                 <td class="variant">
-                  <select class="form-control" name="type[]">
-                    <option value="size">Size</option>
-                    <option value="color">Color</option>
-                  </select>
+                  <input type="text" name="type[]" class="form-control" placeholder="Enter Size" />
                 </td>
                 <td><input type="text" name="variant[]" class="form-control" placeholder="Enter Variant" /></td>
                 <td><input type="text" name="price[]" class="form-control" placeholder="Enter price" /></td>

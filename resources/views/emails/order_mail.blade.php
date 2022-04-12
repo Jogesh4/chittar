@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-</head>\
+</head>
 <style>
 table {
     display: table;
@@ -68,7 +68,7 @@ tbody {
     <div>
     <h4 >Total Item : <span style="font-size:25px;">{{ $order->items }}</span></h4>    
     <h4 >Item Subtotal: <span style="font-size:25px;">INR. {{ $order->amount }}</span></h4>
-    <h4 >Shipping & Handling: <span style="font-size:25px;"> INR. 00</span></h4>
+    <h4 >Shipping & Handling: <span style="font-size:25px;"> INR. {{ $order->shipping_price }}</span></h4>
     @if($order->status == 'COD')
        <h4 >Payment Method:<span> COD</span></h4> 
     @else

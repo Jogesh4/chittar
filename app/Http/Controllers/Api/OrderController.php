@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
+use App\Models\Address;
 
 class OrderController extends Controller
 {
@@ -51,4 +52,52 @@ class OrderController extends Controller
 
     return response()->json(['success' => false, 'message' => 'User does not exist']);
   }
+
+   public function add_address(Request $request){
+
+         $user_id = $request->user_id;
+
+      if(!empty($request->address_id)){
+          $address = Address::where('id',$request->address_id)->first();
+      }
+      else{
+            $address = new Address;
+      }
+      
+      $address->user_id = $user_id;
+      $address->phone = !empty($request->phone) ? $request->phone : Null;
+      $address->firstname = !empty($request->first_name) ? $request->first_name : Null;
+      $address->lastname = !empty($request->last_name) ? $request->last_name : Null;
+      $address->address = !empty($request->address) ? $request->address : Null;
+      $address->city = !empty($request->city) ? $request->city : Null;
+      $address->state = !empty($request->state) ? $request->state : Null;
+      $address->country = !empty($request->country) ? $request->country : Null;
+      $address->pincode = !empty($request->pincode) ? $request->pincode : Null;
+      $address->locality = !empty($request->locality) ? $request->locality : Null;
+      $address->save();
+
+      if($address->save()){
+            return response(['success' => true, 'address' => $address]);
+      }
+      else{
+            return response()->json(['success' => false,'message' => 'address not save']);
+      }
+      
+   }
+
+   public function view_address(Request $request){
+        
+         $user_id = $request->user_id;
+
+         $address = Address::where('user_id',$user_id)->get();
+
+          if($address){
+            return response(['success' => true, 'address' => $address]);
+          }
+          else{
+                return response()->json(['success' => false,'message' => 'address not Found','address' => []]);
+          }
+   }
+
+
 }

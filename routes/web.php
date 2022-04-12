@@ -27,8 +27,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('change_status/{type}{id}{status}', [App\Http\Controllers\Admin\ItemController::class, 'change_status'])->name('change_status');
-
+Route::get('autocomplete', [App\Http\Controllers\ItemController::class, 'autocomplete'])->name('autocomplete');
 Route::get('/manage-reviews', [App\Http\Controllers\Admin\ItemController::class, 'manage_reviews'])->name('manage-reviews');
+Route::get('/manage-shippings', [App\Http\Controllers\Admin\HomeController::class, 'manage_shippings'])->name('manage-shippings');
+Route::get('/shippings/{id}/edit', [App\Http\Controllers\Admin\HomeController::class, 'edit_shippings'])->name('shippings.edit');
+Route::post('/shippings/store', [App\Http\Controllers\Admin\HomeController::class, 'store_shippings'])->name('shippings.store');
+Route::post('/shippings/update', [App\Http\Controllers\Admin\HomeController::class, 'update_shippings'])->name('shippings.update');
+Route::view('/shippings/create', 'admin.shipping.create')->name('shippings.create');
 Route::view('/report', 'admin.report.sale-report');
 Route::view('/customer-report', 'admin.report.customer-report');
 Route::view('/special-price', 'admin.price.special-price');

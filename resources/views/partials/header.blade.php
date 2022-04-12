@@ -2,13 +2,14 @@
   <div class="container">
     <a class="navbar-brand d-inline-flex" href="{{ url('/') }}"><img class="d-inline-block" src="{{ asset('images/logo3.png') }}" alt="logo" /></a>
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-      <form action="{{ route('search.index') }}">
-        <div class="input-group">
+    <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0 justify-content-end" id="navbarSupportedContent">
+      <form action="{{ route('search.index') }}" class="me-3 w-75 mb-2">
+        <div class="position-relative">
           <div class="form-outline">
-            <input type="search" class="form-control" name="name" placeholder="search product name..." />
+            <input type="search" class="typeahead form-control" id="product_search" name="name" placeholder="search product name..." />
+               {{-- <input type="text" id='productid' readonly> --}}
           </div>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary search ">
             <i class="fas fa-search"></i>
           </button>
         </div>
@@ -19,18 +20,18 @@
               $cartItems = CartItem::where(['user_id' => auth()->user()->id,'status' => 1])->get();
             }
           @endphp
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      {{-- <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="/">Home</a></li>
         <li class="nav-item px-2"><a class="nav-link fw-medium" href="{{ route('about') }}">About Us</a></li>
         <li class="nav-item px-2"><a class="nav-link fw-medium" href="/search">Categories</a></li>
         <li class="nav-item px-2"><a class="nav-link fw-medium" href="{{ route('contact') }}">Contact Us</a></li>
-      </ul>
+      </ul> --}}
       {{-- <form class="d-flex"> --}}
-        <a class="text-1000" href="#!">
+        {{-- <a class="text-1000" href="#!">
           <svg class="feather feather-phone me-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
           </svg>
-        </a>
+        </a> --}}
         <a class="text-1000" href="{{ route('cart.index') }}">
           <div class="me-3">
           <svg class="feather feather-shopping-cart" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -84,3 +85,40 @@
     </div>
   </div>
 </nav>
+
+<!-- Script -->
+
+<script type="text/javascript">
+
+    // CSRF Token
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $(document).ready(function(){
+
+      $( "#product_search" ).autocomplete({
+        source: function( request, response ) {
+          // Fetch data
+          $.ajax({
+            url:"{{route('autocomplete')}}",
+            type: 'get',
+            dataType: "json",
+            data: {
+               _token: CSRF_TOKEN,
+               search: request.term
+            },
+            success: function( data ) {
+               response( data );
+            }
+          });
+        },
+        select: function (event, ui) {
+           // Set selection
+              // console.log(ui.item.label);
+           $('#product_search').val(ui.item.label); // display the selected text
+          //  $('#productid').val(ui.item.value); // save selected id to input
+           return false;
+        }
+      });
+
+    });
+    </script>
+    

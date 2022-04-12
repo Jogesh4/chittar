@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Item;
 use App\Models\CartItem;
+use App\Models\Variant;
 
 class CartController extends Controller
 {
@@ -32,24 +33,39 @@ class CartController extends Controller
     public function add_to_cart(Request $request)
     {  
         $userID = auth()->user()->id;
-
+        
         $item = Item::where('id',$request->item_id)->first();
 
         $cart = CartItem::where(['item_id'=>$item->id,'user_id'=>auth()->user()->id,'status' => 1])->first();
+
+        if(!empty($request->variant_id)){
+            $variant = Variant::where('id',$request->variant_id)->first();
+            $price = $variant->price;
+            $size = $variant->type;
+            $color = $variant->variant_name;
+        }
+        else{
+            $price = $item->price;
+            $size = "";
+            $color = "";
+        }
 
         if(!$cart){
             $cartItem = new CartItem;
             if(!empty($request->quantity)){
                $cartItem->qty = $request->quantity;
-               $cartItem->total = $item->price * $request->quantity;
+               $cartItem->total = $price * $request->quantity;
             }
             else{
                 $cartItem->qty = 1;
-                $cartItem->total = $item->price;
+                $cartItem->total = $price;
             }
             $cartItem->name = $item->name;
             $cartItem->image = $item->image;
-            $cartItem->price = $item->price;
+            $cartItem->price = $price;
+            $cartItem->size = $size;
+            $cartItem->color = $color;
+            $cartItem->variant_id = $request->variant_id;
             $cartItem->item_id = $item->id;
             $cartItem->user_id = $userID;
             $cartItem->status = 1;
