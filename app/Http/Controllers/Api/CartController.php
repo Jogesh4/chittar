@@ -51,7 +51,13 @@ class CartController extends Controller
             return response()->json(['success' => true,'message' => 'added to cart','cart' => $final_out]);
         }
         else{
+            
+            $cart->qty = $request->quantity;
+            $cart->total = $item->price * $request->quantity;
+            $cart->save();
+
             $final_out[] = $cart;
+
             return response()->json(['success' => false,'message' => 'already added to cart','cart' => $final_out]);
         }
 

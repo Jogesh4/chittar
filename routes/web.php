@@ -26,7 +26,7 @@ Route::get('/contact', function() {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('change_status/{type}{id}{status}', [App\Http\Controllers\Admin\ItemController::class, 'change_status'])->name('change_status');
+Route::get('change_status/{type}/{id}/{status}', [App\Http\Controllers\Admin\ItemController::class, 'change_status'])->name('change_status');
 Route::get('autocomplete', [App\Http\Controllers\ItemController::class, 'autocomplete'])->name('autocomplete');
 Route::get('/manage-reviews', [App\Http\Controllers\Admin\ItemController::class, 'manage_reviews'])->name('manage-reviews');
 Route::get('/manage-shippings', [App\Http\Controllers\Admin\HomeController::class, 'manage_shippings'])->name('manage-shippings');

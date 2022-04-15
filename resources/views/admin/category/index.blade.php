@@ -32,10 +32,10 @@
                                       <td>{{ $category->name }}</td>
                                       <td>
                                                       @if($category->is_active)
-                                                              @php $statusBtn = '<a title="Deactivate" href="'. route('change_status', ['type' => 'category', 'id' => $category->id, 'status' => '0']) .'" class="btn btn-danger btn-sm"><i class="fa fa-user-times" aria-hidden="true"></i></a>' @endphp
+                                                              @php $statusBtn = '<a title="Deactivate" href="'. url('change_status/category/' .  $category->id . '/0') .'" class="btn btn-danger btn-sm"><i class="fa fa-user-times" aria-hidden="true"></i></a>' @endphp
                                                                   Active
                                                               @else
-                                                                  @php $statusBtn = '<a title="Activate" href="'. route('change_status', ['type' => 'category', 'id' => $category->id, 'status' => '1']) .'" class="btn btn-success btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i></a>' @endphp
+                                                                  @php $statusBtn = '<a title="Activate" href="'. url('change_status/category/' .  $category->id  . '/1') .'" class="btn btn-success btn-sm"><i class="fa fa-user-plus" aria-hidden="true"></i></a>' @endphp
                                                                   Deactive
                                                               @endif
                                       </td>
