@@ -77,6 +77,23 @@ class CartController extends Controller
 
     }
 
+    public function update_cart(Request $request){
+
+         $cart = CartItem::where(['id'=>$request->cart_id])->first();
+
+         if($cart){
+             $cart->qty = $request->quantity;
+             $cart->total = $cart->price * $request->quantity;
+             $cart->save();
+
+             return response()->json(['success' => true,'message' => 'Update Cart','cart' => $cart]);
+         }
+         else{
+             return response()->json(['success' => false,'message' => 'Cart is Empty','cart' => []]);
+         }
+
+    }
+
     public function delete_cart(Request $request){
         $userID = $request->user_id;
         // \Cart::session($userID)->clear();

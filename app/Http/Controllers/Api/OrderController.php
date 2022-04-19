@@ -53,6 +53,22 @@ class OrderController extends Controller
     return response()->json(['success' => false, 'message' => 'User does not exist']);
   }
 
+   public function order_details(Request $request){
+         $order = Order::where('id',$request->order_id)->first();
+
+         if($order){
+               $details = OrderItem::where('order_id',$request->order_id)->get();
+             return response([
+                      'success' => true,
+                       'orders' => $order,
+                       'details' => $details,
+              ]);
+         }
+         else{
+             return response()->json(['success' => false, 'message' => 'Order does not exist']);
+         }
+   }
+
    public function add_address(Request $request){
 
          $user_id = $request->user_id;

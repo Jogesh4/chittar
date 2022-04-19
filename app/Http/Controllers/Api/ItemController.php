@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Item;
 use App\Models\Variant;
+use App\Models\Favorite;
 
 class ItemController extends Controller
 {
@@ -27,12 +28,47 @@ class ItemController extends Controller
             $item = Item::where('id',$request->id)->get();
 
             if($item) {
-                return response()->json(['success' => true, 'item' => $item]);
+                 $variant = Variant::where('item_id',$request->id)->get();
+
+                return response()->json(['success' => true, 'item' => $item, 'variant' => $variant]);
             }
             return response()->json(['success' => false, 'message' => 'Item not found']);
         } else {
             return response()->json(['success' => false, 'message' => 'Item ID is required']);
         }
+    }
+
+    public function add_wishlist(Request $request){
+
+    
+            $fav = Favorite::where(['item_id' => $request->item_id,'user_id' => $request->user_id])->first();
+
+            if(!$fav){
+                $favorite = new Favorite();
+                $favorite->item_id = $request->item_id;
+                $favorite->user_id = $request->user_id;
+                $favorite->save();
+
+                $wishlist = Favorite::where(['user_id' => $request->user_id])->get();
+
+                return response()->json(['success' => true, 'wishlist' => $wishlist]);
+            }
+            else{
+                 return response()->json(['success' => false, 'message' => 'already exit in wishlist']);
+            }
+    }
+
+    public function get_wishlist(Request $request){
+
+    
+            $fav = Favorite::where(['user_id' => $request->user_id])->get();
+
+            if(!empty($fav)){
+                return response()->json(['success' => true, 'wishlist' => $fav]);
+            }
+            else{
+                 return response()->json(['success' => false, 'message' => 'No item in wishlist']);
+            }
     }
 
     public function get_variant(Request $request)

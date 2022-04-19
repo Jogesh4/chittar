@@ -27,12 +27,15 @@ use App\Http\Controllers\Api\CartController;
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('items-by-category', [ItemController::class, 'itemsByCategory']);
 Route::get('item-by-id', [ItemController::class, 'itemByID']);
+Route::post('add-wishlist', [ItemController::class, 'add_wishlist']);
+Route::get('get-wishlist', [ItemController::class, 'get_wishlist']);
 
 Route::get('get-variant', [ItemController::class, 'get_variant']);
 
 
 Route::post('add-cart', [CartController::class, 'add_to_cart']);
 Route::get('view-cart', [CartController::class, 'view_cart']);
+Route::post('update-cart', [CartController::class, 'update_cart']);
 Route::get('delete-cart', [CartController::class, 'delete_cart']);
 Route::get('remove-item-from-cart', [CartController::class, 'remove_item_from_cart']);
 
@@ -41,5 +44,7 @@ Route::get('view-address', [OrderController::class, 'view_address']);
 
 Route::post('place-order', [OrderController::class, 'place']);
 Route::get('user-orders', [OrderController::class, 'userOrders']);
+Route::get('order-details', [OrderController::class, 'order_details']);
+
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
