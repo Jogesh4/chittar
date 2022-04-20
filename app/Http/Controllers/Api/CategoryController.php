@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
+use App\Models\Banner;
 
 class CategoryController extends Controller
 {
@@ -14,5 +15,12 @@ class CategoryController extends Controller
         $categories = Category::all();
 
         return response()->json(['success' => true, 'categories' => $categories]);
+    }
+
+    public function banner(Request $request)
+    {
+        $banners = Banner::all();
+
+        return response()->json(['success' => true, 'banner' => $banners]);
     }
 }

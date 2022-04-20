@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\CartController;
 // });
 
 Route::get('categories', [CategoryController::class, 'index']);
+Route::get('banners', [CategoryController::class, 'banner']);
 Route::get('items-by-category', [ItemController::class, 'itemsByCategory']);
 Route::get('item-by-id', [ItemController::class, 'itemByID']);
 Route::post('add-wishlist', [ItemController::class, 'add_wishlist']);

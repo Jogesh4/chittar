@@ -86,7 +86,9 @@ class CartController extends Controller
              $cart->total = $cart->price * $request->quantity;
              $cart->save();
 
-             return response()->json(['success' => true,'message' => 'Update Cart','cart' => $cart]);
+             $cartarray = CartItem::where(['id'=>$request->cart_id])->get();
+
+             return response()->json(['success' => true,'message' => 'Update Cart','cart' => $cartarray]);
          }
          else{
              return response()->json(['success' => false,'message' => 'Cart is Empty','cart' => []]);
