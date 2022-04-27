@@ -30,10 +30,15 @@ Route::get('change_status/{type}/{id}/{status}', [App\Http\Controllers\Admin\Ite
 Route::get('autocomplete', [App\Http\Controllers\ItemController::class, 'autocomplete'])->name('autocomplete');
 Route::get('/manage-reviews', [App\Http\Controllers\Admin\ItemController::class, 'manage_reviews'])->name('manage-reviews');
 Route::get('/manage-shippings', [App\Http\Controllers\Admin\HomeController::class, 'manage_shippings'])->name('manage-shippings');
+Route::get('/manage-banners', [App\Http\Controllers\Admin\HomeController::class, 'manage_banners'])->name('manage-banners');
 Route::get('/shippings/{id}/edit', [App\Http\Controllers\Admin\HomeController::class, 'edit_shippings'])->name('shippings.edit');
 Route::post('/shippings/store', [App\Http\Controllers\Admin\HomeController::class, 'store_shippings'])->name('shippings.store');
 Route::post('/shippings/update', [App\Http\Controllers\Admin\HomeController::class, 'update_shippings'])->name('shippings.update');
 Route::view('/shippings/create', 'admin.shipping.create')->name('shippings.create');
+Route::view('/banners/create', 'admin.banner.create')->name('banners.create');
+Route::get('/banners/{id}/edit', [App\Http\Controllers\Admin\HomeController::class, 'edit_banners'])->name('banners.edit');
+Route::post('/banners/store', [App\Http\Controllers\Admin\HomeController::class, 'store_banners'])->name('banners.store');
+Route::post('/banners/update', [App\Http\Controllers\Admin\HomeController::class, 'update_banners'])->name('banners.update');
 Route::view('/report', 'admin.report.sale-report');
 Route::view('/customer-report', 'admin.report.customer-report');
 Route::view('/special-price', 'admin.price.special-price');

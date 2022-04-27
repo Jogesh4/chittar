@@ -24,7 +24,13 @@ class UserController extends Controller
        if(!empty(auth()->user()->id)){
            $user = User::where('id',auth()->user()->id)->first();
            $order = Order::where('user_id',auth()->user()->id)->orderBy('id', 'DESC')->first();
-           $orderitems = OrderItem::where('order_id',$order->id)->get();
+           if($order){
+               $orderitems = OrderItem::where('order_id',$order->id)->get();
+           }
+           else{
+                $orderitems = [];
+           }
+           
 
            return view('user.dashboard',compact('user','order','orderitems'));
        }
@@ -71,8 +77,8 @@ class UserController extends Controller
     {
       $order = Order::where('user_id',auth()->user()->id)->latest();
       $orderitems = OrderItem::where('order_id',$order->id)->get();
-
-        return view('user.last_order',compact('order','orderitems'));
+      $user = User::where('id',auth()->user()->id)->first();
+        return view('user.last_order',compact('order','orderitems','user'));
     }
 
     public function cart(Request $request)

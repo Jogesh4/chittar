@@ -27,7 +27,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @if(!empty($orders))
+                        @if($orders->count() > 0)
                           @foreach($orders as $order)
                             <tr>
                               <td>{{date('d-m-Y H:m:s', strtotime($order->created_at))}}</td>
@@ -39,6 +39,12 @@
                             
                             </tr>
                           @endforeach
+                        @else
+                        <tr>
+                             <div class="text-center mt-2">
+                                    <h3>No Order to Display.</h3>
+                            </div>
+                            </tr>
                         @endif
                       </tbody>
                     </table>

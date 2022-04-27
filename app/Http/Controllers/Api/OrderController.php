@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
+use App\Models\Item;
 use App\Models\Address;
 
 class OrderController extends Controller
@@ -25,7 +26,11 @@ class OrderController extends Controller
     if($order->save()){
       $cartCollection = $request->cartCollection;
       foreach($cartCollection as $row){
+        $item = Item::where('id',$row['item_id'])->first();
+
         $orderItem = new OrderItem;
+        $orderItem->name = $item->name;
+        $orderItem->image = $item->image;
         $orderItem->price = $row['price'];
         $orderItem->qty = $row['quantity'];
         $orderItem->item_id = $row['item_id'];

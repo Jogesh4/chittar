@@ -132,6 +132,12 @@
       <span>Manage Shippings</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/manage-banners">
+       <i class="fas fa-shoe-prints navbar-picons"></i>
+      <span>Manage Banners</span>
+    </a>
+  </li>
   <!-- Sidebar Toggler (Sidebar) -->
   <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>

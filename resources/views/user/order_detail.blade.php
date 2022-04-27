@@ -3,6 +3,7 @@
 
 <div class="container-fluid">
 
+    @if(!empty($order))
           <div class="row">
                         <div class="col-xl-12 col-lg-12">
  <div class="card card-1">
@@ -83,7 +84,7 @@
                             <p class="mb-1"> <b>Discount</b></p>
                         </div>
                         <div class="flex-sm-col col-auto">
-                            <p class="mb-1">150</p>
+                            <p class="mb-1">0</p>
                         </div>
                     </div>
                     <div class="row justify-content-between">
@@ -91,7 +92,7 @@
                             <p class="mb-1"><b>GST 18%</b></p>
                         </div>
                         <div class="flex-sm-col col-auto">
-                            <p class="mb-1">843</p>
+                            <p class="mb-1">0</p>
                         </div>
                     </div>
                     <div class="row justify-content-between">
@@ -134,6 +135,14 @@
 					
 </div>
                     </div>
+
+    @else
+
+           <div class="text-center mt-5">
+                  <h3>No Order to Display.</h3>
+           </div>
+
+    @endif                
 
                     <!-- Content Row -->
                 </div>

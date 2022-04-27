@@ -3,6 +3,7 @@
 
 <div class="container-fluid">
 
+    @if(!empty($order))
           <div class="row">
                         <div class="col-xl-12 col-lg-12">
  <div class="card card-1">
@@ -135,6 +136,18 @@
 					
 </div>
                     </div>
+
+                    <div class="row">
+                         <button type="button" id="cancel" class="checkout-btn text-center">Cancel Order</button>
+                    </div>
+
+    @else
+
+           <div class="text-center mt-5">
+                  <h3>No Order to Display.</h3>
+           </div>
+
+    @endif 
 
                     <!-- Content Row -->
                 </div>

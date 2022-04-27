@@ -233,6 +233,11 @@ class ItemController extends Controller
              $shipping->status = $status;
              $shipping->save();
         }
+        else if($type == 'banner'){
+             $banner = Banner::where('id',$id)->first();
+             $banner->status = $status;
+             $banner->save();
+        }
 
         return back();
     }
